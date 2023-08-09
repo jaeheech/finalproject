@@ -39,16 +39,20 @@ html {
   width: 100%;
   height: 100%;
   background-color: #989898;
+  display: flex;
+  flex-direction: column;
 }
-header {
-  height: 50%;
-}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  flex: 1; /* 남은 세로 공간을 채우기 위해 flex 사용 */
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: auto; /* 헤더가 내용에 맞게 높이를 조정할 수 있도록 함 */
+  padding: 20px 0;
   text-align: center;
-  color: #2c3e50;
 }
 
 .main-nav {
@@ -95,4 +99,22 @@ header {
   margin-left: auto;
   margin-right: 0;
 }
+
+.main-content {
+  flex: 1; /* 주요 콘텐츠가 남은 세로 공간을 차지하도록 함 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70%; /* 필요에 따라 이 값을 조정하세요 */
+  margin: 20px 0;
+}
+
+footer {
+  background-color: #d9d9d9;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* 푸터 콘텐츠나 다른 요소에 대한 추가 스타일은 여기에 추가할 수 있습니다 */
 </style>
