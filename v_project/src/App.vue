@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <header>
+  <div id="app">
+    <header style="margin: 20px 0">
       <img src="../public/logo.jpg" alt="logo" />
     </header>
-    <nav class="main-nav">
-      <router-link to="/" class="nav-link">메인</router-link>
-      <router-link to="/about" class="nav-link">부위별 운동</router-link>
-      <router-link to="/routine" class="nav-link">나만의 루틴</router-link>
-      <router-link to="/gyms" class="nav-link">집근처 헬스장</router-link>
-      <router-link to="/purchases" class="nav-link">각종 구매처</router-link>
-      <router-link to="/board" class="nav-link">자유게시판</router-link>
-      <router-link to="/login" class="nav-link right-link">로그인</router-link>
-      <router-link to="/mypage" class="nav-link">마이페이지</router-link>
+    <nav>
+      <router-link to="/">메인</router-link>
+      <router-link to="/about">부위별 운동</router-link>
+      <router-link to="/A">나만의 루틴</router-link>
+      <router-link to="/B">집근처 헬스장</router-link>
+      <router-link to="/C">각종 구매처</router-link>
+      <router-link to="/D">자유게시판</router-link>
+      <router-link to="/E">로그인</router-link>
+      <router-link to="/F">마이페이지</router-link>
     </nav>
-    <router-view style="height: 60%" />
+    <router-view class="main-content" />
     <Footer>
       <div id="footer_container">
         <div id="footer_up">
@@ -21,10 +21,10 @@
           <div id="Adv"></div>
         </div>
         <div id="footer_down">
-          <small>
-            Copyright ⓒ Ministry of Patriots and Veterans Affairs. All Rights
-            Reserved
-          </small>
+          <small
+            >Copyright ⓒ Ministry of Patriots and Veterans Affairs. All Rights
+            Reserved</small
+          >
         </div>
       </div>
     </Footer>
@@ -55,49 +55,26 @@ header {
   text-align: center;
 }
 
-.main-nav {
+nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 20px;
   color: #585656;
   background-color: #d9d9d9;
-  padding: 10px 20px;
 }
 
-.nav-link {
-  text-decoration: none;
-  color: #2c3e50;
+nav a {
+  text-align: center;
+  flex: 1;
+  font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-  margin: 10px 0;
+  color: #2c3e50;
+  display: inline-block; /* 링크가 너비를 내용에 맞게 조정하도록 설정 */
+  padding: 10px 20px; /* 링크 내용 주위에 패딩 추가 */
 }
 
-.nav-link:hover {
+nav a.router-link-active {
   background-color: #585656;
   color: white;
-}
-
-.right-link {
-  margin-left: auto;
-}
-.main-nav .nav-link {
-  text-decoration: none;
-  color: #2c3e50;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
-  margin: 10px; /* 위아래 10px, 좌우 10px로 수정 */
-  padding: 5px 10px; /* 좌우 패딩 추가 */
-}
-
-.main-nav .nav-link:hover {
-  background-color: #585656;
-  color: white;
-}
-
-.main-nav .right-link {
-  margin-left: auto;
-  margin-right: 0;
 }
 
 .main-content {
