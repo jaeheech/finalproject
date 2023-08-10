@@ -45,7 +45,7 @@ export default {
   background-color: #d9d9d9;
   margin: 30px 0 0 30px;
   width: 12%;
-  height: 45%;
+  height: 50%;
 }
 #neargym_sidebar li {
   color: lightslategray;
