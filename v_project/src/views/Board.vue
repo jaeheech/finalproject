@@ -22,7 +22,9 @@
         <li>나만의 루틴</li>
         <li>집근처 헬스장</li>
         <li>각종 구매처</li>
-        <li style="color: black; font-weight: bold">자유게시판</li>
+        <li style="color: black; font-weight: bold; font-size: 20px">
+          자유게시판
+        </li>
         <li>메인페이지</li>
       </ul>
     </div>
