@@ -5,10 +5,10 @@
     </header>
     <nav>
       <router-link to="/">메인</router-link>
-      <router-link to="/about">부위별 운동</router-link>
-      <router-link to="/A">나만의 루틴</router-link>
+      <router-link to="/part">부위별 운동</router-link>
+      <router-link to="/mylutin">나만의 루틴</router-link>
       <router-link to="/neargym">집근처 헬스장</router-link>
-      <router-link to="/C">각종 구매처</router-link>
+      <router-link to="/buy">각종 구매처</router-link>
       <router-link to="/Board">자유게시판</router-link>
       <router-link to="/E">로그인</router-link>
       <router-link to="/F">마이페이지</router-link>
