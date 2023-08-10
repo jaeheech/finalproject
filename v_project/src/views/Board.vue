@@ -22,7 +22,7 @@
         <li>나만의 루틴</li>
         <li>집근처 헬스장</li>
         <li>각종 구매처</li>
-        <li>자유게시판</li>
+        <li style="color: black; font-weight: bold">자유게시판</li>
         <li>메인페이지</li>
       </ul>
     </div>
@@ -112,19 +112,21 @@ img {
   display: flex;
 }
 #side_bar {
-  border: 1px solid #d9d9d9;
-  width: 15%;
-  height: 30%;
-  margin: 20px 10px 10px 10px;
   background-color: #d9d9d9;
+  margin: 30px 0 0 30px;
+  width: 12%;
+  height: 45%;
   color: #898787;
 }
+li {
+  color: lightslategray;
+  margin: 20px 0 10px 20px;
+}
 #main {
-  margin: 20px 10px 10px 10px;
-  width: 80%;
-  height: 90%;
   background-color: #d9d9d9;
-  border: 1px solid #d9d9d9;
+  margin: 30px;
+  width: 85%;
+  height: 92%;
 }
 #board {
   height: 5%;
