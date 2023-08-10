@@ -10,7 +10,7 @@
       <router-link to="/neargym">집근처 헬스장</router-link>
       <router-link to="/buy">각종 구매처</router-link>
       <router-link to="/Board">자유게시판</router-link>
-      <router-link to="/E">로그인</router-link>
+      <router-link to="/login">로그인</router-link>
       <router-link to="/mypage">마이페이지</router-link>
     </nav>
     <router-view class="main-content" />
