@@ -9,7 +9,7 @@
       <router-link to="/A">나만의 루틴</router-link>
       <router-link to="/B">집근처 헬스장</router-link>
       <router-link to="/C">각종 구매처</router-link>
-      <router-link to="/D">자유게시판</router-link>
+      <router-link to="/Board">자유게시판</router-link>
       <router-link to="/E">로그인</router-link>
       <router-link to="/F">마이페이지</router-link>
     </nav>
@@ -75,16 +75,6 @@ nav a {
 nav a.router-link-active {
   background-color: #585656;
   color: white;
-}
-
-.main-content {
-  flex: 1; /* 주요 콘텐츠가 남은 세로 공간을 차지하도록 함 */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 70%; /* 필요에 따라 이 값을 조정하세요 */
-  margin: 20px 0;
 }
 
 footer {
