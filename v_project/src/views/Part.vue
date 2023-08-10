@@ -53,6 +53,7 @@ export default {
 }
 #neargym_sidebar li:nth-child(2) {
   color: black;
+  font-size: 20px;
   font-weight: bold;
 }
 #neargym_content {
