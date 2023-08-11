@@ -10,22 +10,16 @@
         >내용:</label
       >
       <textarea id="board_content"></textarea>
-      <button id="modal_click" @click="showModal = false">작성</button>
+      <button id="modal_click" @click=";[(showModal = false), saveData()]">
+        작성
+      </button>
       <button id="modal_end" @click="showModal = false">취소</button>
     </div>
   </div>
   <div id="container">
     <div id="side_bar">
       <ul>
-        <li>메인</li>
-        <li>부위별 운동</li>
-        <li>나만의 루틴</li>
-        <li>집근처 헬스장</li>
-        <li>각종 구매처</li>
-        <li style="color: black; font-weight: bold; font-size: 20px">
-          자유게시판
-        </li>
-        <li>메인페이지</li>
+        <li v-for="v in sideBar" :key="v">{{ v }}</li>
       </ul>
     </div>
     <div id="main">
@@ -38,9 +32,9 @@
         <table>
           <tr>
             <th>글번호</th>
-            <th>글제목</th>
+            <th>작성자</th>
             <th>날짜</th>
-            <th>조회수</th>
+            <th>내용</th>
           </tr>
         </table>
       </div>
@@ -53,7 +47,32 @@
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      sideBar: [
+        '메인',
+        '부위별 운동',
+        '나만의 루틴',
+        '집근처 헬스장',
+        '각종 구매처',
+        '자유게시판',
+        '마이페이지'
+      ]
+    }
+  },
+  methods: {
+    saveData() {
+      const arr = []
+      let ct = 1
+      const input = document.getElementById('author').value
+      const content = document.getElementById('board_content').value
+      const date = new Date()
+      const data = {
+        count: ct++,
+        author: input,
+        date: date,
+        content: content
+      }
+      arr.push(data)
     }
   }
 }
@@ -123,6 +142,11 @@ img {
 li {
   color: lightslategray;
   margin: 20px 0 10px 20px;
+}
+li:nth-child(6) {
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
 }
 #main {
   background-color: #d9d9d9;
