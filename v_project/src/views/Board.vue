@@ -4,12 +4,12 @@
       <img src="../../public/logo.jpg" alt="" />
       <br />
       <label for="author">작성자:</label>
-      <input type="text" id="author" />
+      <input type="text" id="author" v-model="author" />
       <br />
       <label for="board_content" style="position: relative; bottom: 20%"
         >내용:</label
       >
-      <textarea id="board_content"></textarea>
+      <textarea id="board_content" v-model="content"></textarea>
       <button id="modal_click" @click=";[(showModal = false), saveData()]">
         작성
       </button>
@@ -34,7 +34,7 @@
             <th>글번호</th>
             <th>작성자</th>
             <th>날짜</th>
-            <th>내용</th>
+            <th>조회수</th>
           </tr>
         </table>
       </div>
@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -56,23 +57,24 @@ export default {
         '각종 구매처',
         '자유게시판',
         '마이페이지'
-      ]
+      ],
+      author: '',
+      content: '',
+      date: new Date(),
+      count: 0,
+      no: 1
     }
   },
   methods: {
-    saveData() {
-      const arr = []
-      let ct = 1
-      const input = document.getElementById('author').value
-      const content = document.getElementById('board_content').value
-      const date = new Date()
-      const data = {
-        count: ct++,
-        author: input,
-        date: date,
-        content: content
-      }
-      arr.push(data)
+    saveData: function () {
+      axios
+        .post('/create', {
+          no: this.no,
+          author: this.author,
+          date: this.date,
+          count: this.count
+        })
+        .then((res) => console.log(res))
     }
   }
 }
