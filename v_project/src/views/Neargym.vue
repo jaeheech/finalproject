@@ -15,13 +15,13 @@
       <h1>집근처 헬스장</h1>
       <div id="neargym_content_select">
         우리집 근처 역은?
-        <select name="" id="" v-model="station">
+        <select name="" id="" v-model="station" @change="updateMapLocation">
           <option value="동대신동역">동대신동역</option>
           <option value="토성역">토성역</option>
           <option value="부산진역">부산진역</option>
           <option value="서면역">서면역</option>
         </select>
-        <button @click="displayMarker">이동</button>
+        <!-- <button @click="displayMarker">이동</button> -->
       </div>
       <div id="map" class="map-container"></div>
     </div>
@@ -31,12 +31,14 @@
 export default {
   data() {
     return {
-      station: ''
+      station: '',
+      gpsx: 35.1578,
+      gpsy: 129.0578
     }
   },
   mounted() {
-    const gpsx = 129.0578
-    const gpsy = 35.1578
+    const gpsx = 35.1578
+    const gpsy = 129.0578
     const mapContainer = document.getElementById('map')
 
     const script = document.createElement('script')
@@ -71,6 +73,29 @@ export default {
   },
 
   methods: {
+    updateMapLocation() {
+      switch (this.station) {
+        case '동대신동역':
+          this.gpsx = 35.1098
+          this.gpsy = 129.0179
+          break
+        case '토성역':
+          this.gpsx = 35.0995
+          this.gpsy = 129.0196
+          break
+        case '부산진역':
+          this.gpsx = 35.1278
+          this.gpsy = 129.0477
+          break
+        case '서면역':
+          this.gpsx = 35.1571
+          this.gpsy = 129.0591
+          break
+        default:
+          // Handle default case
+          break
+      }
+    },
     displayMarker(map, locPosition, message) {
       const marker = new window.kakao.maps.Marker({
         map: map,
