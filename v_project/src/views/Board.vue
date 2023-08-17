@@ -36,6 +36,12 @@
             <th>날짜</th>
             <th>조회수</th>
           </tr>
+          <tr v-for="post in posts" :key="post._id">
+            <td>{{ post.no }}</td>
+            <td>{{ post.author }}</td>
+            <td>{{ post.date }}</td>
+            <td>{{ post.count }}</td>
+          </tr>
         </table>
       </div>
       <button id="in" @click="showModal = true">등록</button>
@@ -62,8 +68,12 @@ export default {
       content: '',
       date: new Date(),
       count: 0,
-      no: 1
+      no: 1,
+      posts: [] // 가져온 게시물을 저장하는 속성 추가
     }
+  },
+  mounted() {
+    this.fetchPosts() // 컴포넌트가 마운트되면 fetchPosts 메서드 호출
   },
   methods: {
     saveData: function () {
@@ -75,6 +85,16 @@ export default {
           count: this.count
         })
         .then((res) => console.log(res))
+    },
+    fetchPosts() {
+      axios
+        .get('/get-posts') // 백엔드 API에 맞게 엔드포인트 수정
+        .then((response) => {
+          this.posts = response.data
+        })
+        .catch((error) => {
+          console.error('게시물 가져오기 오류:', error)
+        })
     }
   }
 }
