@@ -1,8 +1,10 @@
 const express = require('express')
+const history = require('connect-history-api-fallback')
 const logger = require('morgan')
 const path = require('path')
 const VSchema = require('./mdb.cjs')
 const app = express()
+app.use(history())
 const _path = path.join(__dirname, './dist')
 // POST를 위한 구문
 app.use(express.json())
