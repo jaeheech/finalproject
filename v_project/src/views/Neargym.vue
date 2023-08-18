@@ -21,7 +21,7 @@
           <option value="부산진역">부산진역</option>
           <option value="서면역">서면역</option>
         </select>
-        <!-- <button @click="displayMarker">이동</button> -->
+        <button @click="displayMarker">이동</button>
       </div>
       <div id="map" class="map-container"></div>
     </div>
