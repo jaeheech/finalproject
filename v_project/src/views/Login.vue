@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 로그인 모달 -->
-    <div v-show="showModal" v-if="showModal" class="modal-container">
+    <div v-show="showModal" class="modal-container">
       <div class="modal-content">
         <!-- 닫기 버튼 -->
         <button class="close-button" @click="closeModal">X</button>
@@ -65,14 +65,12 @@
         </form>
       </div>
     </div>
+
     <!-- 배경 오버레이 -->
     <div v-show="showModal || showSignupModal" class="overlay"></div>
+
     <!-- 회원가입 모달 -->
-    <div
-      v-show="showSignupModal"
-      v-if="showSignupModal"
-      class="modal-container"
-    >
+    <div v-show="showSignupModal" class="modal-container">
       <div class="modal-content">
         <!-- 닫기 버튼 -->
         <button class="close-button" @click="closeSignupModal">X</button>
@@ -125,50 +123,120 @@
           <!-- ... (추가 회원가입 필드) -->
           <div class="button-container">
             <!-- 회원가입 버튼 -->
-            <button type="submit" class="signup-button">
+            <button
+              type="submit"
+              class="signup-button"
+              @click="openSignupModal"
+            >
               <span>계정생성</span>
             </button>
           </div>
         </form>
       </div>
     </div>
+    <!-- 팝업 -->
+    <div v-show="showSignupSuccess" class="popup">
+      <div class="popup-content">
+        <p>회원가입이 완료되었습니다!</p>
+        <button @click="closeSignupSuccessPopup">닫기</button>
+      </div>
+    </div>
+    <!-- 팝업 -->
+    <div v-show="showLoginSuccess" class="popup">
+      <div class="popup-content">
+        <p>로그인이 성공되었습니다!</p>
+        <button @click="closeLoginSuccessPopup">닫기</button>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       showModal: true,
       showSignupModal: false,
+      showSignupSuccess: false,
       username: '',
       password: '',
       signupUsername: '',
-      signupPassword: ''
+      signupPassword: '',
+      showLoginSuccess: false,
+      loggedIn: false
     }
   },
   methods: {
-    login() {
-      console.log('로그인 시도:', this.username, this.password)
+    async signup() {
+      try {
+        const response = await axios.post('/signup', {
+          username: this.signupUsername,
+          password: this.signupPassword,
+          tell: this.signupTell,
+          email: this.signupEmail
+        })
+
+        console.log(response.data)
+        this.showSignupSuccess = true // 회원가입 완료 팝업 표시
+        this.closeSignupModal() // 회원가입 모달 닫기
+      } catch (error) {
+        console.error('회원가입 실패:', error)
+        // 회원가입 실패 처리
+      }
+    },
+    async login() {
+      try {
+        await axios.post('/login', {
+          username: this.username,
+          password: this.password
+        })
+
+        // 로그인 성공 시 처리
+        this.$store.commit('login') // Vuex 상태 업데이트
+        this.showLoginSuccess = true // 로그인 성공 팝업 표시
+        this.closeModal() // 모달 닫기
+        this.$router.push('/') // 기존에 있던 메인 화면으로 이동
+      } catch (error) {
+        console.error('로그인 실패:', error)
+        // 로그인 실패 처리
+      }
     },
     closeModal() {
       console.log('모달 닫기')
       this.showModal = false
+      this.$router.push('/')
     },
     openSignupModal() {
       this.showSignupModal = true
     },
     closeSignupModal() {
       this.showSignupModal = false
+      this.resetSignupForm()
     },
-    signup() {
-      console.log('회원가입 시도:', this.signupUsername, this.signupPassword)
+    closeSignupSuccessPopup() {
+      this.showSignupSuccess = false // 회원가입 완료 팝업 닫기
+      this.showModal = true // 로그인 모달로 다시 돌아가기
+    },
+    resetSignupForm() {
+      this.signupUsername = ''
+      this.signupPassword = ''
+      this.signupTell = ''
+      this.signupEmail = ''
+    },
+    closeLoginSuccessPopup() {
+      this.showLoginSuccess = false
+      this.showModal = false
+      this.$router.push('/')
+    },
+    logout() {
+      // 로그아웃 동작 수행 (토큰 제거, 데이터 초기화 등)
+      this.loggedIn = false // 로그아웃 시 loggedIn 상태를 업데이트
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .social-button-container {
   display: flex;
   justify-content: space-between;
@@ -297,15 +365,15 @@ input::placeholder {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  gap: 10px; /* Adjust the gap between buttons */
+  gap: 10px;
 }
 
 .login-button,
 .signup-button {
   flex: 1;
   margin: 0;
-  font-size: 12px; /* Adjust the font size */
-  padding: 8px 0; /* Adjust the padding */
+  font-size: 12px;
+  padding: 8px 0;
   border-radius: 4px;
 }
 #signup-username {
@@ -316,5 +384,19 @@ input::placeholder {
 }
 #signup-email {
   margin-left: 40px;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 15; /* 오버레이보다 위에 표시 */
+}
+
+.popup-content {
+  text-align: center;
 }
 </style>
