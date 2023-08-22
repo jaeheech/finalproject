@@ -11,6 +11,7 @@
         <router-link v-else to="/Login">로그인</router-link>
       </div>
     </header>
+
     <nav>
       <router-link to="/">메인</router-link>
       <router-link to="/part">부위별 운동</router-link>
@@ -20,11 +21,53 @@
       <router-link to="/Board">자유게시판</router-link>
     </nav>
     <router-view class="main-content" />
+
+    <!-- 20230822 병오 수정파트 -->
     <Footer>
       <div id="footer_container">
         <div id="footer_up">
-          <div id="Inf"></div>
-          <div id="Adv"></div>
+          <!-- 문의란 -->
+          <div id="Inf" style="text-align: left">
+            이용안내 | 이용약관 | 고객센터 | 기타문의
+            <br /><br />
+            후원계좌: 국민은행) 000000-00-000000
+            <br />
+            이용약관
+            <br />
+            고객센터: 070-0000-0000
+            <br />
+            기타문의: dongsgym23@naver.com
+          </div>
+
+          <!-- 광고란 -->
+          <div id="Adv">
+            <div id="Adv_allbox">
+              <div id="col_01">
+                <div id="Adv_box_01">
+                  <img src="../public/adv01.png" alt="광고1" />
+                </div>
+                <div id="Adv_box_02">
+                  <img src="../public/adv02.png" alt="광고2" />
+                </div>
+              </div>
+              <div id="col_02">
+                <div id="Adv_box_03">
+                  <img src="../public/adv03.png" alt="광고3" />
+                </div>
+                <div id="Adv_box_04">
+                  <img src="../public/adv04.png" alt="광고4" />
+                </div>
+              </div>
+              <div id="col_03">
+                <div id="Adv_box_05">
+                  <img src="../public/adv05.png" alt="광고5" />
+                </div>
+                <div id="Adv_box_06">
+                  <img src="../public/adv06.png" alt="광고6" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="footer_down">
           <small
@@ -34,6 +77,7 @@
         </div>
       </div>
     </Footer>
+    <!-- // 20230822 병오 수정파트 -->
   </div>
 </template>
 <script>
@@ -60,7 +104,7 @@ html {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  height: 1600px;
   background-color: #989898;
   display: flex;
   flex-direction: column;
@@ -73,8 +117,8 @@ html {
 }
 
 header {
-  height: auto; /* 헤더가 내용에 맞게 높이를 조정할 수 있도록 함 */
-  padding: 20px 0;
+  height: 150px; /* 헤더가 내용에 맞게 높이를 조정할 수 있도록 함 */
+  padding: 0;
   text-align: center;
 }
 .header-right-links {
@@ -123,11 +167,45 @@ footer {
   background-color: #d9d9d9;
   padding: 10px 0;
   text-align: center;
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
 }
 
-/* 푸터 콘텐츠나 다른 요소에 대한 추가 스타일은 여기에 추가할 수 있습니다 */
+/* 20230822 병오 수정파트 */
+#footer_up {
+  display: flex;
+  justify-content: space-between;
+}
+
+#Inf {
+  margin: 20px 0 0 50px;
+}
+#Adv {
+  margin: 30px 50px 0 0;
+}
+
+#footer_down {
+  margin-top: 50px;
+}
+
+:is(#col_01, #col_02, #col_03) {
+  display: flex;
+  justify-content: space-around;
+}
+
+:is(
+    #Adv_box_01,
+    #Adv_box_02,
+    #Adv_box_03,
+    #Adv_box_04,
+    #Adv_box_05,
+    #Adv_box_06
+  )
+  img {
+  width: 350px;
+  height: 70px;
+  margin: 5px;
+}
+/* // 20230822 병오 수정파트 */
 </style>
