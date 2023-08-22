@@ -44,23 +44,28 @@ export default {
     }
   },
   mounted() {
-    this.initMap()
+    this.loadKakaoMapScript().then(() => {
+      this.initMap()
+    })
   },
   methods: {
+    async loadKakaoMapScript() {
+      return new Promise((resolve) => {
+        const script = document.createElement('script')
+        script.src =
+          'https://dapi.kakao.com/v2/maps/sdk.js?appkey=e139f221a53ae8e1de064297bd6fbdd1&libraries=services,drawing&autoload=false'
+        script.onload = resolve
+        document.body.appendChild(script)
+      })
+    },
     initMap() {
-      const script = document.createElement('script')
-      script.src =
-        'https://dapi.kakao.com/v2/maps/sdk.js?appkey=e139f221a53ae8e1de064297bd6fbdd1&libraries=services,drawing&autoload=false'
-      script.onload = () => {
-        window.kakao.maps.load(() => {
-          this.map = new window.kakao.maps.Map(document.getElementById('map'), {
-            center: new window.kakao.maps.LatLng(35.1578, 129.0578),
-            level: 4
-          })
-          this.loadGymsMarkers()
+      window.kakao.maps.load(() => {
+        this.map = new window.kakao.maps.Map(document.getElementById('map'), {
+          center: new window.kakao.maps.LatLng(35.1578, 129.0578),
+          level: 4
         })
-      }
-      document.body.appendChild(script)
+        this.loadGymsMarkers()
+      })
     },
     loadGymsMarkers() {
       for (const gymName in this.gyms) {
