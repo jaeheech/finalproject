@@ -44,7 +44,7 @@
           <div id="Adv">
             <div id="Adv_allbox">
               <div id="col_01">
-                <div id="Adv_box_01">
+                <div id="Adv_box_01" style="margin-right: 15px">
                   <a href="https://www.naver.com/"
                     ><img src="../public/adv01.png" alt="광고1"
                   /></a>
@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div id="col_02">
-                <div id="Adv_box_03">
+                <div id="Adv_box_03" style="margin-right: 15px">
                   <img src="../public/adv03.png" alt="광고3" />
                 </div>
                 <div id="Adv_box_04">
@@ -62,7 +62,7 @@
                 </div>
               </div>
               <div id="col_03">
-                <div id="Adv_box_05">
+                <div id="Adv_box_05" style="margin-right: 15px">
                   <img src="../public/adv05.png" alt="광고5" />
                 </div>
                 <div id="Adv_box_06">
