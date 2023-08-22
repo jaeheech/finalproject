@@ -37,7 +37,7 @@
             <th>조회수</th>
           </tr>
           <tr v-for="post in posts" :key="post._id">
-            <td>{{ post.no }}</td>
+            <td @click="openDetailModal(post)">{{ post.no }}</td>
             <td>{{ post.author }}</td>
             <td>{{ post.date }}</td>
             <td>{{ post.count }}</td>
@@ -46,6 +46,13 @@
       </div>
       <button id="in" @click="showModal = true">등록</button>
       <button id="out">삭제</button>
+    </div>
+  </div>
+  <div v-if="showDetailModal" id="detail_modal">
+    <div id="detail_modal_content">
+      <h2>{{ selectedPost.author }}님의 글</h2>
+      <p>{{ selectedPostContent }}</p>
+      <button @click="showDetailModal = false">닫기</button>
     </div>
   </div>
 </template>
@@ -69,7 +76,10 @@ export default {
       date: new Date(),
       count: 0,
       no: 1,
-      posts: [] // 가져온 게시물을 저장하는 속성 추가
+      posts: [], // 가져온 게시물을 저장하는 속성 추가
+      showDetailModal: false,
+      selectedPost: {},
+      selectedPostContent: ''
     }
   },
   mounted() {
@@ -82,7 +92,8 @@ export default {
           no: this.no,
           author: this.author,
           date: this.date,
-          count: this.count
+          count: this.count,
+          content: this.content
         })
         .then((res) => console.log(res))
     },
@@ -95,6 +106,16 @@ export default {
         .catch((error) => {
           console.error('게시물 가져오기 오류:', error)
         })
+    },
+    async openDetailModal(post) {
+      try {
+        const response = await axios.get(`/get-post/${post._id}`)
+        this.selectedPost = response.data
+        this.selectedPostContent = response.data.content
+        this.showDetailModal = true
+      } catch (error) {
+        console.error('게시물 가져오기 오류:', error)
+      }
     }
   }
 }
@@ -202,5 +223,50 @@ td {
   position: absolute;
   bottom: 85px;
   left: 22%;
+}
+#detail_modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+#detail_modal_content {
+  /* Different ID */
+  background-color: white;
+  width: 550px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: auto;
+  height: 550px;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+#detail_modal_content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#detail_modal_content p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+#detail_modal_content button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>

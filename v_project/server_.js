@@ -108,13 +108,14 @@ app.post('/create', (req, res) => {
     .limit(1)
     .then((lastPost) => {
       const newNo = lastPost ? lastPost.no + 1 : 1 // If there are no posts, start from 1
-      const { author, date, count } = req.body
+      const { author, date, count, content } = req.body
 
       const newPost = new VSchema({
         no: newNo,
         author,
         date,
-        count
+        count,
+        content
       })
 
       newPost
@@ -142,6 +143,18 @@ app.get('/get-posts', (req, res) => {
     .catch((error) => {
       console.error('데이터베이스에서 게시물 가져오기 오류:', error)
       res.status(500).send('게시물 가져오기 오류')
+    })
+})
+app.get('/get-post/:postId', (req, res) => {
+  const postId = req.params.postId
+
+  VSchema.findById(postId)
+    .then((post) => {
+      res.json(post)
+    })
+    .catch((error) => {
+      console.error('게시물 조회 오류:', error)
+      res.status(500).send('게시물 조회 오류')
     })
 })
 
