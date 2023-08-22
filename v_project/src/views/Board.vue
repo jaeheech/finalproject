@@ -3,8 +3,11 @@
     <div id="modal_content">
       <img src="../../public/logo.jpg" alt="" />
       <br />
-      <label for="author">작성자:</label>
+      <label for="author">닉네임:</label>
       <input type="text" id="author" v-model="author" />
+      <br />
+      <label for="title">제목:</label>
+      <input type="text" id="title" v-model="title" />
       <br />
       <label for="board_content" style="position: relative; bottom: 20%"
         >내용:</label
@@ -32,27 +35,42 @@
         <table>
           <tr>
             <th>글번호</th>
+            <th>제목</th>
             <th>작성자</th>
-            <th>날짜</th>
+            <th>시간</th>
             <th>조회수</th>
           </tr>
           <tr v-for="post in posts" :key="post._id">
-            <td @click="openDetailModal(post)">{{ post.no }}</td>
+            <td @click="openDetailModal(post)" style="cursor: pointer">
+              {{ post.no }}
+            </td>
+            <td>{{ post.title }}</td>
             <td>{{ post.author }}</td>
-            <td>{{ post.date }}</td>
+            <td>{{ formatDate(post.date) }}</td>
             <td>{{ post.count }}</td>
           </tr>
         </table>
       </div>
       <button id="in" @click="showModal = true">등록</button>
-      <button id="out">삭제</button>
     </div>
   </div>
   <div v-if="showDetailModal" id="detail_modal">
     <div id="detail_modal_content">
-      <h2>{{ selectedPost.author }}님의 글</h2>
-      <p>{{ selectedPostContent }}</p>
-      <button @click="showDetailModal = false">닫기</button>
+      <h2 class="modal-title">{{ selectedPost.author }}님의 글</h2>
+      <div class="modal-section">
+        <p class="modal-section-label">제목:</p>
+        <p class="modal-section-content1">{{ selectedPostTitle }}</p>
+      </div>
+      <div class="modal-section">
+        <p class="modal-section-label">내용:</p>
+        <p class="modal-section-content2">{{ selectedPostContent }}</p>
+      </div>
+      <button class="modal-button" @click="showDetailModal = false">
+        닫기
+      </button>
+      <button class="modal-button-del" @click="showDetailModal = false">
+        삭제
+      </button>
     </div>
   </div>
 </template>
@@ -73,12 +91,14 @@ export default {
       ],
       author: '',
       content: '',
+      title: '',
       date: new Date(),
       count: 0,
       no: 1,
       posts: [], // 가져온 게시물을 저장하는 속성 추가
       showDetailModal: false,
       selectedPost: {},
+      selectedPostTitle: '',
       selectedPostContent: ''
     }
   },
@@ -90,6 +110,7 @@ export default {
       axios
         .post('/create', {
           no: this.no,
+          title: this.title,
           author: this.author,
           date: this.date,
           count: this.count,
@@ -107,10 +128,18 @@ export default {
           console.error('게시물 가져오기 오류:', error)
         })
     },
+    formatDate(dateTime) {
+      const dateObject = new Date(dateTime)
+      const hours = dateObject.getHours()
+      const minutes = dateObject.getMinutes()
+      const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`
+      return formattedTime
+    },
     async openDetailModal(post) {
       try {
         const response = await axios.get(`/get-post/${post._id}`)
         this.selectedPost = response.data
+        this.selectedPostTitle = response.data.title
         this.selectedPostContent = response.data.content
         this.showDetailModal = true
       } catch (error) {
@@ -144,7 +173,7 @@ img {
   position: relative;
   margin: auto;
   width: 450px;
-  height: 550px;
+  height: 600px;
   top: 20%;
   background: #d9d9d9;
   border-radius: 8px;
@@ -152,18 +181,23 @@ img {
 }
 #modal_click {
   position: absolute;
-  bottom: 5%;
+  bottom: 0%;
   left: 10%;
 }
 #modal_end {
   position: absolute;
-  bottom: 5%;
+  bottom: 0%;
   left: 20%;
 }
 #author {
   width: 50%;
-  height: 10%;
+  height: 5%;
   margin: 10px;
+}
+#title {
+  width: 50%;
+  height: 5%;
+  margin: 10px 10px 10px 20px;
 }
 #board_content {
   width: 70%;
@@ -216,13 +250,7 @@ td {
   text-align: center;
 }
 #in {
-  position: absolute;
-  bottom: 85px;
-}
-#out {
-  position: absolute;
-  bottom: 85px;
-  left: 22%;
+  margin-top: 10px;
 }
 #detail_modal {
   display: flex;
@@ -249,24 +277,63 @@ td {
   border-radius: 8px;
   padding: 20px;
 }
-
-#detail_modal_content h2 {
+.modal-title {
   font-size: 24px;
-  margin-bottom: 10px;
-}
-
-#detail_modal_content p {
-  font-size: 16px;
-  line-height: 1.5;
   margin-bottom: 20px;
 }
 
-#detail_modal_content button {
+.modal-section {
+  margin-top: 15px;
+}
+
+.modal-section-label {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.modal-section-content1 {
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+.modal-section-content2 {
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.modal-button {
   background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 50px;
+}
+.modal-button-del {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-left: 10px;
 }
 </style>
