@@ -4,6 +4,7 @@ const VSchema = new Schema({
   no: Number,
   author: String,
   date: Date,
-  count: Number
+  count: Number,
+  content: String
 })
 module.exports = mongoose.model('board', VSchema, 'board')
