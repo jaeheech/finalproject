@@ -21,8 +21,6 @@
       <router-link to="/Board">자유게시판</router-link>
     </nav>
     <router-view class="main-content" />
-
-    <!-- 20230822 병오 수정파트 -->
     <Footer>
       <div id="footer_container">
         <div id="footer_up">
@@ -43,7 +41,7 @@
           <!-- 광고란 -->
           <div id="Adv">
             <div id="Adv_allbox">
-              <div id="col_01">
+              <div id="row_01">
                 <div id="Adv_box_01" style="margin-right: 15px">
                   <a href="https://www.naver.com/"
                     ><img src="../public/adv01.png" alt="광고1"
@@ -53,7 +51,7 @@
                   <img src="../public/adv02.png" alt="광고2" />
                 </div>
               </div>
-              <div id="col_02">
+              <div id="row_02">
                 <div id="Adv_box_03" style="margin-right: 15px">
                   <img src="../public/adv03.png" alt="광고3" />
                 </div>
@@ -61,7 +59,7 @@
                   <img src="../public/adv04.png" alt="광고4" />
                 </div>
               </div>
-              <div id="col_03">
+              <div id="row_03">
                 <div id="Adv_box_05" style="margin-right: 15px">
                   <img src="../public/adv05.png" alt="광고5" />
                 </div>
@@ -80,7 +78,6 @@
         </div>
       </div>
     </Footer>
-    <!-- // 20230822 병오 수정파트 -->
   </div>
 </template>
 <script>
@@ -176,7 +173,6 @@ footer {
   width: 100%;
 }
 
-/* 20230822 병오 수정파트 */
 #footer_up {
   display: flex;
   justify-content: space-between;
@@ -200,7 +196,7 @@ footer {
   margin-top: 50px;
 }
 
-:is(#col_01, #col_02, #col_03) {
+:is(#row_01, #row_02, #row_03) {
   display: flex;
   justify-content: space-around;
 }
@@ -218,5 +214,4 @@ footer {
   height: 70px;
   margin: 5px;
 }
-/* // 20230822 병오 수정파트 */
 </style>
