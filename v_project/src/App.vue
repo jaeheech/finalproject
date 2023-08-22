@@ -28,15 +28,16 @@
         <div id="footer_up">
           <!-- 문의란 -->
           <div id="Inf" style="text-align: left">
-            이용안내 | 이용약관 | 고객센터 | 기타문의
+            <span
+              style="font-size: 18px; font-weight: bold; letter-spacing: 2px"
+            >
+              이용안내 | 이용약관 | 고객센터 | 기타문의
+            </span>
             <br /><br />
-            후원계좌: 국민은행) 000000-00-000000
-            <br />
-            이용약관
-            <br />
-            고객센터: 070-0000-0000
-            <br />
-            기타문의: dongsgym23@naver.com
+            <div>후원계좌 국민은행) 000000-00-000000</div>
+            <div>이용약관</div>
+            <div>고객센터 070-0000-0000</div>
+            <div>기타문의 dongsgym23@naver.com</div>
           </div>
 
           <!-- 광고란 -->
@@ -44,7 +45,9 @@
             <div id="Adv_allbox">
               <div id="col_01">
                 <div id="Adv_box_01">
-                  <img src="../public/adv01.png" alt="광고1" />
+                  <a href="https://www.naver.com/"
+                    ><img src="../public/adv01.png" alt="광고1"
+                  /></a>
                 </div>
                 <div id="Adv_box_02">
                   <img src="../public/adv02.png" alt="광고2" />
@@ -164,7 +167,8 @@ nav a.router-link-active {
 }
 
 footer {
-  background-color: #d9d9d9;
+  border-top: 3px solid black;
+  background-color: #989898;
   padding: 10px 0;
   text-align: center;
   bottom: 0;
@@ -181,6 +185,13 @@ footer {
 #Inf {
   margin: 20px 0 0 50px;
 }
+
+#Inf div {
+  font-weight: bold;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
 #Adv {
   margin: 30px 50px 0 0;
 }
