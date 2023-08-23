@@ -104,7 +104,7 @@ html {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 1600px;
+  height: 2000px;
   background-color: #989898;
   display: flex;
   flex-direction: column;
@@ -171,6 +171,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 400px;
 }
 
 #footer_up {

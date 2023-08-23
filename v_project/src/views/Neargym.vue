@@ -138,7 +138,7 @@ export default {
 }
 .map-container {
   width: 800px;
-  height: 300px;
+  height: 500px;
   padding: 100px;
 }
 </style>
