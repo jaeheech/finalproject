@@ -52,8 +52,7 @@ export default {
     async loadKakaoMapScript() {
       return new Promise((resolve) => {
         const script = document.createElement('script')
-        script.src =
-          'https://dapi.kakao.com/v2/maps/sdk.js?appkey=e139f221a53ae8e1de064297bd6fbdd1&libraries=services,drawing&autoload=false'
+        script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.VUE_APP_KAKAO_API_KEY}&libraries=services,drawing&autoload=false`
         script.onload = resolve
         document.body.appendChild(script)
       })
