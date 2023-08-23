@@ -88,7 +88,13 @@
               v-model="signupUsername"
               placeholder="아이디를 입력하시오"
               required
+              @input="checkUsernameAvailability"
             />
+          </div>
+          <div>
+            <span v-show="usernameUnavailable"
+              >이미 사용중인 아이디 입니다.</span
+            >
           </div>
           <div id="id_span">
             <label for="signup-password"><span>Password</span></label>
@@ -141,13 +147,6 @@
         <button @click="closeSignupSuccessPopup">닫기</button>
       </div>
     </div>
-    <!-- 팝업 -->
-    <div v-show="showLoginSuccess" class="popup">
-      <div class="popup-content">
-        <p>로그인이 성공되었습니다!</p>
-        <button @click="closeLoginSuccessPopup">닫기</button>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -163,25 +162,60 @@ export default {
       signupUsername: '',
       signupPassword: '',
       showLoginSuccess: false,
-      loggedIn: false
+      loggedIn: false,
+      usernameUnavailable: false
     }
   },
   methods: {
+    // async signup() {
+    //   try {
+    //     const isUsernameAvailable = await this.checkUsernameAvailability()
+
+    //     if (!isUsernameAvailable) {
+    //       // 중복되면 아무런 동작도 하지 않음
+    //       return
+    //     }
+
+    //     const response = await axios.post('/signup', {
+    //       username: this.signupUsername,
+    //       password: this.signupPassword,
+    //       tell: this.signupTell,
+    //       email: this.signupEmail
+    //     })
+
+    //     console.log(response.data)
+    //     this.showSignupSuccess = true // 회원가입 완료 팝업 표시
+    //     this.closeSignupModal() // 회원가입 모달 닫기
+    //   } catch (error) {
+    //     console.error('회원가입 실패:', error)
+    //   }
+    // },
     async signup() {
       try {
-        const response = await axios.post('/signup', {
+        // 1. 사용자 이름의 가용성을 확인합니다.
+        // const isUsernameAvailable = await this.checkUsernameAvailability()
+
+        // // 2. 사용자 이름이 중복되면 아무 동작도 하지 않고 함수를 종료합니다.
+        // if (!isUsernameAvailable) {
+        //   return
+        // }
+        // // 3. 사용자 이름이 중복되지 않으면 회원가입을 시도합니다.
+
+        await axios.post('/signup', {
           username: this.signupUsername,
           password: this.signupPassword,
           tell: this.signupTell,
           email: this.signupEmail
         })
-
-        console.log(response.data)
+        // console.log(response.data)
         this.showSignupSuccess = true // 회원가입 완료 팝업 표시
         this.closeSignupModal() // 회원가입 모달 닫기
       } catch (error) {
+        // 5. 회원가입 요청이 실패하면 에러를 콘솔에 출력합니다.
         console.error('회원가입 실패:', error)
-        // 회원가입 실패 처리
+
+        // 에러 처리에 대한 추가 로직을 여기에 추가할 수 있습니다.
+        // 예를 들어, 사용자에게 회원가입 실패 메시지를 표시하거나 다른 동작을 수행할 수 있습니다.
       }
     },
     async login() {
@@ -190,19 +224,38 @@ export default {
           username: this.username,
           password: this.password
         })
-
         // 로그인 성공 시 처리
-        this.$store.commit('login') // Vuex 상태 업데이트
-        this.showLoginSuccess = true // 로그인 성공 팝업 표시
-        this.closeModal() // 모달 닫기
+        this.$store.commit('login', this.username) // Vuex 상태 업데이트
         this.$router.push('/') // 기존에 있던 메인 화면으로 이동
+        // 로그인 성공 메시지를 표시
+        const message = `${this.username}님 로그인 성공하셨습니다.`
+        alert(message)
+        // console.log(`${this.username}님 로그인!!!`)
+        // 로그인 실패 처리
       } catch (error) {
         console.error('로그인 실패:', error)
-        // 로그인 실패 처리
+      }
+    },
+    /* 아이디 중복체크 메소드 */
+    async checkUsernameAvailability() {
+      try {
+        const response = await axios.post('/checkUsername', {
+          username: this.signupUsername
+        })
+
+        if (response.data.available) {
+          // 아이디 사용 가능
+          this.usernameUnavailable = false
+        } else {
+          // 아이디 중복
+          this.usernameUnavailable = true
+        }
+      } catch (error) {
+        console.error('아이디 중복 확인 실패:', error)
       }
     },
     closeModal() {
-      console.log('모달 닫기')
+      // console.log('모달 닫기')
       this.showModal = false
       this.$router.push('/')
     },

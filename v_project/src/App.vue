@@ -15,7 +15,7 @@
     <nav>
       <router-link to="/">메인</router-link>
       <router-link to="/part">부위별 운동</router-link>
-      <router-link to="/mylutin">나만의 루틴</router-link>
+      <router-link v-if="loggedIn" to="/mylutin">나만의 루틴</router-link>
       <router-link to="/neargym">집근처 헬스장</router-link>
       <router-link to="/buy">각종 구매처</router-link>
       <router-link to="/Board">자유게시판</router-link>
@@ -91,6 +91,8 @@ export default {
   methods: {
     logout() {
       // 로그아웃 처리 후 Vuex 상태를 업데이트합니다
+      this.$store.commit('logout')
+      // 로그아웃 후 쿠키에서 사용자 정보를 제거합니다
       this.$store.commit('logout')
       // 로그아웃 후 메인 페이지로 이동합니다
       this.$router.push('/')

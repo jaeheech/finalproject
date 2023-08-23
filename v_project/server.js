@@ -6,6 +6,7 @@ const VSchema = require('./mdb.cjs')
 const UserSchema = require('./UserSchema.cjs')
 const crypto = require('crypto')
 const bodyParser = require('body-parser')
+const bcrypt = require('bcrypt')
 const app = express()
 app.use(history())
 app.use(bodyParser.json())
@@ -22,28 +23,48 @@ app.use('/', express.static(_path))
 // 로그 INFO
 app.use(logger('tiny'))
 
-/* 로그인 CRUD 비밀번호 암호화 */
+/* 회원가입 코드 시작 */
 app.post('/signup', async (req, res) => {
   const { username, password, tell, email } = req.body
-  const encryptedPassword = encrypt(password)
+
+  // 비밀번호를 bcrypt를 사용하여 해시화
+  const hashedPassword = await bcrypt.hash(password, 10) // 두 번째 매개변수는 해시에 사용할 라운드 수입니다.
   const userData = {
     username,
-    password: encryptedPassword,
+    password: hashedPassword,
     tell,
     email
   }
-
   try {
     const newUser = new UserSchema(userData)
     await newUser.save()
     console.log('회원가입 성공:', newUser)
-    res.send('회원가입 완료')
+    res.json({ message: '로그인 성공' })
   } catch (error) {
     console.error('회원가입 실패:', error)
     res.status(500).send('회원가입 실패')
   }
 })
+/* 아이디 중복확인 코드 */
+app.post('/checkUsername', async (req, res) => {
+  const { username } = req.body
 
+  try {
+    // 데이터베이스에서 해당 아이디로 사용자를 찾아봅니다.
+    const existingUser = await UserSchema.findOne({ username })
+
+    if (existingUser) {
+      // 이미 존재하는 아이디인 경우
+      res.json({ available: false })
+    } else {
+      // 사용 가능한 아이디인 경우
+      res.json({ available: true })
+    }
+  } catch (error) {
+    console.error('아이디 중복 확인 실패:', error)
+    res.status(500).send('아이디 중복 확인 실패')
+  }
+})
 /* 로그인 CRUD R 읽기 저장된 아이디와 패스워드 정보를 읽어와서 로그인 기능 실현 */
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
@@ -57,44 +78,21 @@ app.post('/login', async (req, res) => {
       return
     }
 
-    // 입력된 비밀번호를 복호화하여 비교
-    const decryptedPassword = decrypt(user.password) // 암호화된 비밀번호 복호화
-    if (password !== decryptedPassword) {
+    // 입력된 비밀번호를 bcrypt.compare를 사용하여 비교
+    const passwordMatch = await bcrypt.compare(password, user.password)
+
+    if (!passwordMatch) {
       res.status(400).json({ error: '비밀번호가 일치하지 않습니다.' })
       return
     }
 
     // 인증이 성공하면 로그인 성공 응답 보내기
     res.json({ message: '로그인 성공' })
+    console.log(`${username}님 로그인 하셨습니다.`)
   } catch (error) {
     console.error('로그인 실패:', error)
-    res.status(500).send('로그인 실패')
   }
 })
-
-// 암호화 함수
-function encrypt(text) {
-  const cipher = crypto.createCipheriv(
-    'aes-256-cbc',
-    secretKey,
-    Buffer.alloc(16, 0)
-  )
-  let encrypted = cipher.update(text, 'utf-8', 'hex')
-  encrypted += cipher.final('hex')
-  return encrypted
-}
-
-/* 복호화 함수  */
-function decrypt(encryptedText) {
-  const decipher = crypto.createDecipheriv(
-    'aes-256-cbc',
-    secretKey,
-    Buffer.alloc(16, 0)
-  )
-  let decrypted = decipher.update(encryptedText, 'hex', 'utf-8')
-  decrypted += decipher.final('utf-8')
-  return decrypted
-}
 /* 알림메시지  */
 function showErrorAlert(message) {
   alert(message)
