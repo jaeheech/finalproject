@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const VSchema = new Schema({
   no: Number,
+  title: String,
   author: String,
   date: Date,
   count: Number,

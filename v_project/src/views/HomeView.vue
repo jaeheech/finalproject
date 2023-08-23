@@ -1,10 +1,199 @@
 <template>
-  <div>home</div>
+  <div id="Homeview">
+    <!-- 사진, 명언집, 노래 or 게시글들 -->
+    <div id="main_row_01">
+      <div class="left">
+        <!-- 사진들 오토레이어 -->
+        <div id="row_01_imgs">
+          <img
+            src="../../public/health1.jpg"
+            alt="main_health_01"
+            width="680px"
+            height="350px"
+          />
+        </div>
+      </div>
+      <div class="right">
+        <!-- 명언집, 노래 등 -->
+        <div
+          id="row_01_content_01"
+          style="
+            width: 750px;
+            height: 100px;
+            margin-bottom: 20px;
+            background-color: beige;
+          "
+        >
+          <span>오늘의 명언</span>
+          <ul>
+            <li style="list-style: none">
+              간단하다. 흔들리는 것은 지방이다 - 아놀드슈워제네거
+            </li>
+          </ul>
+        </div>
+        <div
+          id="row_01_content_02"
+          style="width: 750px; height: 230px; background-color: beige"
+        >
+          <span>실시간 핫한 글</span>
+          <ul>
+            <li>3대 670 질문 받는다</li>
+            <li>3대 670 질문 받는다</li>
+            <li>3대 670 질문 받는다</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- // 사진, 명언집, 노래 or 게시글들 -->
+
+    <!-- 오늘의 건강뉴스 -->
+    <p
+      style="
+        font-weight: bold;
+        color: white;
+        letter-spacing: 1px;
+        margin: 80px 0 0 80px;
+      "
+    >
+      〈오늘의 건강 뉴스〉
+    </p>
+    <div id="main_row_02">
+      <div class="left" style="margin-top: -30px; margin-right: 43px">
+        <div id="row_02_imgs_01" style="margin-right: 20px">
+          <img
+            src="../../public/health2.jpg"
+            alt="#"
+            width="400px"
+            height="285px"
+          />
+        </div>
+        <div id="row_02_content_01">
+          <span style="font-size: 20px; font-weight: 700"
+            >프로틴은 사실 여성 다이어트 <br />제품이다?!</span
+          ><br />
+          <span style="display: inline-block; margin-top: 20px"
+            >근육 형성과 유지 등을 위해 운동하는<br />사람이 주로 섭취하는
+            단백질 보충제<br />가 다이어트 및 근감소증 예방에도 효<br />과가
+            있는 것으로 알려지면서 소비층<br />이 여성과 중장년층으로 확대되고
+            있<br />다.</span
+          >
+        </div>
+      </div>
+      <div class="right" style="margin-top: -30px">
+        <div id="right_row_01" style="display: flex">
+          <div id="row_02_imgs_01" style="margin-right: 20px">
+            <img
+              src="../../public/health3.jpg"
+              alt="#"
+              width="120px"
+              height="90px"
+            />
+          </div>
+          <div id="row_02_content_01">
+            <span style="font-size: 18px; font-weight: 700"
+              >프로틴은 사실 여성 다이어트 제품이다?!</span
+            ><br />
+            <span
+              style="font-size: 15px; display: inline-block; margin-top: 10px"
+              >근육 형성과 유지 등을 위해 운동하는사람이 주로 섭취하는 단백질
+              보충제가 다이어트 및<br />근감소증 예방에도 효과가 있는 것으로
+              알려지면서 소비층이 여성과 중장년층으로 확대됨</span
+            >
+          </div>
+        </div>
+        <div id="right_row_02" style="display: flex">
+          <div id="row_02_imgs_02" style="margin-right: 20px">
+            <img
+              src="../../public/health3.jpg"
+              alt="#"
+              width="120px"
+              height="90px"
+            />
+          </div>
+          <div id="row_02_content_02">
+            <span style="font-size: 18px; font-weight: 700"
+              >프로틴은 사실 여성 다이어트 제품이다?!</span
+            ><br />
+            <span
+              style="font-size: 15px; display: inline-block; margin-top: 10px"
+              >근육 형성과 유지 등을 위해 운동하는사람이 주로 섭취하는 단백질
+              보충제가 다이어트 및<br />근감소증 예방에도 효과가 있는 것으로
+              알려지면서 소비층이 여성과 중장년층으로 확대됨</span
+            >
+          </div>
+        </div>
+        <div id="right_row_03" style="display: flex">
+          <div id="row_02_imgs_03" style="margin-right: 20px">
+            <img
+              src="../../public/health3.jpg"
+              alt="#"
+              width="120px"
+              height="90px"
+            />
+          </div>
+          <div id="row_02_content_03">
+            <span style="font-size: 18px; font-weight: 700"
+              >프로틴은 사실 여성 다이어트 제품이다?!</span
+            ><br />
+            <span
+              style="font-size: 15px; display: inline-block; margin-top: 10px"
+              >근육 형성과 유지 등을 위해 운동하는사람이 주로 섭취하는 단백질
+              보충제가 다이어트 및<br />근감소증 예방에도 효과가 있는 것으로
+              알려지면서 소비층이 여성과 중장년층으로 확대됨</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- // 오늘의 건강뉴스 -->
+
+    <!-- 오늘의 최저가 -->
+    <div id="main_row_03">
+      <div id="contents">
+        <div id="content_01"></div>
+        <div id="content_02"></div>
+        <div id="content_03"></div>
+        <div id="content_04"></div>
+        <div id="content_05"></div>
+        <div id="content_06"></div>
+      </div>
+    </div>
+    <!-- // 오늘의 최저가 -->
+  </div>
 </template>
 <script></script>
 <style scoped>
-div {
+#Homeview {
   height: 100%;
   background-color: #585656;
 }
+
+/* main_row_01 */
+#main_row_01 {
+  display: flex;
+  margin-top: 60px;
+}
+#main_row_01 .left {
+  margin-left: 80px;
+  margin-right: 50px;
+}
+
+/* main_row_02 */
+#main_row_02 {
+  display: flex;
+  margin-top: 50px;
+  margin-left: 80px;
+}
+#main_row_02 .left {
+  display: flex;
+  color: white;
+}
+#main_row_02 .right span {
+  color: white;
+}
+:is(#right_row_01, #right_row_02) {
+  margin-bottom: 5px;
+}
+
+/* main_row_03 */
 </style>
