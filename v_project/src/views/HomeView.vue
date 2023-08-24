@@ -147,21 +147,44 @@
     </div>
     <!-- // 오늘의 건강뉴스 -->
 
-    <!-- 오늘의 최저가 -->
+    <!-- 오늘의 핫딜 상품들(24.금에 slick-slide 넣기 ) -->
+    <p
+      style="
+        font-weight: bold;
+        color: white;
+        letter-spacing: 1px;
+        margin: 80px 0 0 80px;
+      "
+    >
+      〈오늘의 핫딜 상품들〉
+    </p>
     <div id="main_row_03">
       <div id="contents">
-        <div id="content_01"></div>
-        <div id="content_02"></div>
-        <div id="content_03"></div>
-        <div id="content_04"></div>
-        <div id="content_05"></div>
-        <div id="content_06"></div>
+        <div
+          v-for="(product, index) in products"
+          :key="index"
+          class="slick-slide"
+        >
+          <img :src="product.image" />
+          <div class="product-name">{{ product.name }}</div>
+          <div class="product-price">{{ product.price }}</div>
+        </div>
       </div>
     </div>
-    <!-- // 오늘의 최저가 -->
+    <!-- // 오늘의 핫딜 상품들 -->
   </div>
 </template>
-<script></script>
+<script>
+import productsData from '../../public/products.js'
+
+export default {
+  data() {
+    return {
+      products: productsData
+    }
+  }
+}
+</script>
 <style scoped>
 #Homeview {
   height: 100%;
@@ -196,4 +219,19 @@
 }
 
 /* main_row_03 */
+#contents {
+  margin: 30px 0 0 80px;
+  display: flex;
+}
+#contents .slick-slide {
+  margin-right: 30px;
+}
+
+#contents img {
+  width: 210px;
+}
+#contents div {
+  color: white;
+  font-weight: bold;
+}
 </style>
