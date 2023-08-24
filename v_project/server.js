@@ -144,17 +144,27 @@ app.get('/get-posts', (req, res) => {
       res.status(500).send('게시물 가져오기 오류')
     })
 })
-app.get('/get-post/:postId', (req, res) => {
+// 게시물 조회 엔드포인트 수정
+app.get('/get-post/:postId', async (req, res) => {
   const postId = req.params.postId
 
-  VSchema.findById(postId)
-    .then((post) => {
-      res.json(post)
-    })
-    .catch((error) => {
-      console.error('게시물 조회 오류:', error)
-      res.status(500).send('게시물 조회 오류')
-    })
+  try {
+    // 게시물 조회
+    const post = await VSchema.findById(postId)
+
+    if (!post) {
+      return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' })
+    }
+
+    // 조회수 증가
+    post.count++ // 조회수 1 증가
+    await post.save() // 변경된 조회수를 저장
+
+    res.json(post)
+  } catch (error) {
+    console.error('게시물 조회 오류:', error)
+    res.status(500).send('게시물 조회 오류')
+  }
 })
 
 app.listen(3000, () => {
