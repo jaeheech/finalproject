@@ -204,6 +204,7 @@ img {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   padding: 20px;
+  z-index: 10;
 }
 #modal_content {
   position: relative;
@@ -268,10 +269,10 @@ li:nth-child(6) {
   height: 92%;
 }
 #board {
-  height: 5%;
+  height: 4%;
   border-bottom: 3px solid #898787;
-  margin-bottom: 15px;
-  color: black;
+  margin-bottom: 5px;
+  color: #000;
 }
 table {
   border-collapse: collapse;
@@ -290,8 +291,8 @@ td {
 }
 #pagination {
   margin-top: 10px;
-  position: absolute;
-  left: 50%;
+  position: relative;
+  left: 42%;
 }
 #detail_modal {
   display: flex;
