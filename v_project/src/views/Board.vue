@@ -52,6 +52,15 @@
         </table>
       </div>
       <button id="in" @click="showModal = true">등록</button>
+      <div id="pagination">
+        <button @click="changePage(-1)" :disabled="currentPage === 1">
+          이전
+        </button>
+        <span>페이지 {{ currentPage }} / {{ totalPages }}</span>
+        <button @click="changePage(1)" :disabled="currentPage === totalPages">
+          다음
+        </button>
+      </div>
     </div>
   </div>
   <div v-if="showDetailModal" id="detail_modal">
@@ -75,13 +84,6 @@
         삭제
       </button>
     </div>
-  </div>
-  <div id="pagination">
-    <button @click="changePage(-1)" :disabled="currentPage === 1">이전</button>
-    <span>페이지 {{ currentPage }} / {{ totalPages }}</span>
-    <button @click="changePage(1)" :disabled="currentPage === totalPages">
-      다음
-    </button>
   </div>
 </template>
 <script>
@@ -285,6 +287,11 @@ td {
 }
 #in {
   margin-top: 10px;
+}
+#pagination {
+  margin-top: 10px;
+  position: absolute;
+  left: 50%;
 }
 #detail_modal {
   display: flex;
