@@ -106,8 +106,8 @@ app.post('/create', (req, res) => {
     .limit(1)
     .then((lastPost) => {
       const newNo = lastPost ? lastPost.no + 1 : 1 // If there are no posts, start from 1
-      const { title, author, date, count, content } = req.body
-
+      const { title, date, count, content } = req.body
+      const author = req.body.username
       const newPost = new VSchema({
         no: newNo,
         title,

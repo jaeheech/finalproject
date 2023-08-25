@@ -5,7 +5,7 @@
       <img src="../../public/logo.jpg" alt="" />
       <br />
       <label for="author">닉네임:</label>
-      <input type="text" id="author" v-model="author" />
+      <input type="text" id="author" v-model="loggedInUserId" />
       <br />
       <label for="title">제목:</label>
       <input type="text" id="title" v-model="title" />
@@ -97,6 +97,7 @@ export default {
   data() {
     return {
       showModal: false,
+      loggedInUserId: '',
       sideBar: [
         '메인',
         '부위별 운동',
@@ -124,6 +125,7 @@ export default {
   },
   mounted() {
     this.fetchPosts() // 컴포넌트가 마운트되면 fetchPosts 메서드 호출
+    this.loggedInUserId = this.$store.state.username
   },
   methods: {
     saveData: function () {
