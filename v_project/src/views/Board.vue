@@ -1,5 +1,6 @@
 <template>
   <div v-if="showModal" id="modal">
+    <!-- 모달 창 -->
     <div id="modal_content">
       <img src="../../public/logo.jpg" alt="" />
       <br />
@@ -20,6 +21,7 @@
     </div>
   </div>
   <div id="container">
+    <!-- 사이드바 및 메인 컨텐츠 -->
     <div id="side_bar">
       <ul>
         <li v-for="v in sideBar" :key="v">{{ v }}</li>
@@ -33,6 +35,7 @@
       </div>
       <div id="content">
         <table>
+          <!-- 게시물 목록 테이블 -->
           <tr>
             <th>글번호</th>
             <th>제목</th>
@@ -53,6 +56,7 @@
       </div>
       <button id="in" @click="showModal = true">등록</button>
       <div id="pagination">
+        <!-- 페이지 네비게이션 -->
         <button @click="changePage(-1)" :disabled="currentPage === 1">
           이전
         </button>
@@ -64,6 +68,7 @@
     </div>
   </div>
   <div v-if="showDetailModal" id="detail_modal">
+    <!-- 상세 모달 창 -->
     <div id="detail_modal_content">
       <h2 class="modal-title">{{ selectedPost.author }}님의 글</h2>
       <div class="modal-section">
@@ -122,6 +127,14 @@ export default {
   },
   methods: {
     saveData: function () {
+      if (!this.$store.state.isLoggedIn) {
+        // 사용자가 로그인하지 않은 경우
+        alert('로그인 후에 글을 작성할 수 있습니다.')
+        // 로그인 페이지로 이동
+        this.$router.push('/Login')
+        return
+      }
+
       axios
         .post('/create', {
           no: this.no,
@@ -131,7 +144,14 @@ export default {
           count: this.count,
           content: this.content
         })
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res)
+          // 데이터 제출 성공적으로 처리
+        })
+        .catch((error) => {
+          console.error('데이터 저장 오류:', error)
+          // 오류 처리
+        })
     },
     fetchPosts() {
       axios
