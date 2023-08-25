@@ -4,7 +4,7 @@
     <header style="margin: 20px 0">
       <img src="../public/logo.jpg" alt="logo" />
       <div class="header-right-links">
-        <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시합니다 -->
+        <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시-->
         <router-link v-if="loggedIn" to="/" @click="logout"
           >로그아웃</router-link
         >
