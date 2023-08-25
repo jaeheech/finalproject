@@ -133,17 +133,30 @@ app.post('/create', (req, res) => {
     })
 })
 
-// 서버 코드를 수정하여 게시물을 가져오는 새로운 엔드포인트 추가
-app.get('/get-posts', (req, res) => {
-  VSchema.find()
-    .then((posts) => {
-      res.json(posts)
+// 서버 코드에서 /get-posts 엔드포인트 수정
+app.get('/get-posts', async (req, res) => {
+  const page = parseInt(req.query.page) || 1 // 페이지 번호를 쿼리 파라미터로 받음
+  const itemsPerPage = parseInt(req.query.limit) || 20 // 페이지당 아이템 수를 쿼리 파라미터로 받음
+
+  try {
+    const totalPosts = await VSchema.countDocuments() // 전체 게시물 수 조회
+    const totalPages = Math.ceil(totalPosts / itemsPerPage) // 총 페이지 수 계산
+
+    const posts = await VSchema.find()
+      .skip((page - 1) * itemsPerPage) // 스킵할 게시물 수 계산
+      .limit(itemsPerPage) // 페이지당 보여줄 게시물 수 설정
+
+    res.json({
+      posts,
+      totalPages,
+      currentPage: page
     })
-    .catch((error) => {
-      console.error('데이터베이스에서 게시물 가져오기 오류:', error)
-      res.status(500).send('게시물 가져오기 오류')
-    })
+  } catch (error) {
+    console.error('데이터베이스에서 게시물 가져오기 오류:', error)
+    res.status(500).send('게시물 가져오기 오류')
+  }
 })
+
 // 게시물 조회 엔드포인트 수정
 app.get('/get-post/:postId', async (req, res) => {
   const postId = req.params.postId
@@ -164,6 +177,29 @@ app.get('/get-post/:postId', async (req, res) => {
   } catch (error) {
     console.error('게시물 조회 오류:', error)
     res.status(500).send('게시물 조회 오류')
+  }
+})
+
+// 게시글 삭제 엔드포인트 추가
+app.delete('/delete-post/:postId', async (req, res) => {
+  const postId = req.params.postId
+
+  try {
+    const deletedPost = await VSchema.findByIdAndDelete(postId)
+    if (!deletedPost) {
+      return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' })
+    }
+
+    // 삭제된 게시글 이후의 게시글들의 글 번호 업데이트
+    await VSchema.updateMany(
+      { no: { $gt: deletedPost.no } },
+      { $inc: { no: -1 } }
+    )
+
+    res.json({ message: '게시물이 삭제되었습니다.' })
+  } catch (error) {
+    console.error('게시물 삭제 오류:', error)
+    res.status(500).send('게시물 삭제 오류')
   }
 })
 

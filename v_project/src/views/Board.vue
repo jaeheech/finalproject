@@ -68,10 +68,20 @@
       <button class="modal-button" @click="showDetailModal = false">
         닫기
       </button>
-      <button class="modal-button-del" @click="showDetailModal = false">
+      <button
+        class="modal-button-del"
+        @click=";[(showDetailModal = false), deletePost(selectedPost._id)]"
+      >
         삭제
       </button>
     </div>
+  </div>
+  <div id="pagination">
+    <button @click="changePage(-1)" :disabled="currentPage === 1">이전</button>
+    <span>페이지 {{ currentPage }} / {{ totalPages }}</span>
+    <button @click="changePage(1)" :disabled="currentPage === totalPages">
+      다음
+    </button>
   </div>
 </template>
 <script>
@@ -99,7 +109,10 @@ export default {
       showDetailModal: false,
       selectedPost: {},
       selectedPostTitle: '',
-      selectedPostContent: ''
+      selectedPostContent: '',
+      currentPage: 1, // 현재 페이지 번호
+      itemsPerPage: 50, // 페이지당 아이템 수를 50으로 설정
+      totalPages: 0 // 총 페이지 수
     }
   },
   mounted() {
@@ -120,13 +133,23 @@ export default {
     },
     fetchPosts() {
       axios
-        .get('/get-posts') // 백엔드 API에 맞게 엔드포인트 수정
+        .get('/get-posts', {
+          params: {
+            page: this.currentPage,
+            limit: this.itemsPerPage
+          }
+        })
         .then((response) => {
-          this.posts = response.data
+          this.posts = response.data.posts
+          this.totalPages = response.data.totalPages // 총 페이지 수 저장
         })
         .catch((error) => {
           console.error('게시물 가져오기 오류:', error)
         })
+    },
+    changePage(offset) {
+      this.currentPage += offset
+      this.fetchPosts() // 페이지 변경 시 게시물 다시 가져오기
     },
     formatDate(dateTime) {
       const dateObject = new Date(dateTime)
@@ -145,6 +168,17 @@ export default {
       } catch (error) {
         console.error('게시물 가져오기 오류:', error)
       }
+    },
+    deletePost(postId) {
+      axios
+        .delete(`/delete-post/${postId}`)
+        .then(() => {
+          this.showDetailModal = false // 모달 창 닫기
+          this.fetchPosts() // 게시물 목록을 다시 가져옴
+        })
+        .catch((error) => {
+          console.error('게시물 삭제 오류:', error)
+        })
     }
   }
 }
