@@ -96,7 +96,6 @@ export default {
       this.$store.commit('logout')
       // 로그아웃 후 메인 페이지로 이동합니다
       this.$router.push('/')
-      alert('로그아웃되었습니다.')
     }
   }
 }
