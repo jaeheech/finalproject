@@ -13,9 +13,36 @@
       </ul>
     </div>
     <div id="neargym_content">
-      <h2 style="margin-left: 2%">집근처 헬스장</h2>
-      우리집 근처 역은?
-      <select v-model="station" @change="moveToSelectedStation">
+      <div id="neargym_content_title" style="border-bottom: 3px solid #989898">
+        <h1 style="margin-left: 1%; text-align: center; letter-spacing: 2px">
+          집근처 헬스장
+        </h1>
+      </div>
+      <p
+        style="
+          font-size: 20px;
+          font-weight: bold;
+          letter-spacing: 1px;
+          text-align: center;
+          margin-top: 5%;
+        "
+      >
+        우리집 근처 역은?
+      </p>
+      <select
+        v-model="station"
+        @change="moveToSelectedStation"
+        style="
+          width: 500px;
+          height: 30px;
+          border-radius: 10px;
+          margin-left: 32%;
+          background-color: #b1b1b1;
+          color: black;
+          font-weight: bold;
+          letter-spacing: 1px;
+        "
+      >
         <option value="">역을 선택하세요</option>
         <option value="동대신동역">동대신동역</option>
         <option value="토성역">토성역</option>
@@ -136,9 +163,19 @@ export default {
   width: 85%;
   height: 92%;
 }
+#neargym_content select:hover {
+  box-shadow: inset 3px 3px 3px black;
+  cursor: pointer;
+}
+#neargym_content select option {
+  text-align: center;
+  color: black;
+  background-color: white;
+}
 .map-container {
-  width: 800px;
-  height: 500px;
-  padding: 100px;
+  width: 1000px;
+  height: 700px;
+  border-radius: 20px;
+  margin: 2% 0 0 14%;
 }
 </style>
