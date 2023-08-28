@@ -24,7 +24,7 @@
           font-weight: bold;
           letter-spacing: 1px;
           text-align: center;
-          margin-top: 5%;
+          margin-top: 3%;
         "
       >
         우리집 근처 역은?
