@@ -98,15 +98,7 @@ export default {
     return {
       showModal: false,
       loggedInUserId: '',
-      sideBar: [
-        '메인',
-        '부위별 운동',
-        '나만의 루틴',
-        '집근처 헬스장',
-        '각종 구매처',
-        '자유게시판',
-        '마이페이지'
-      ],
+      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판'],
       author: '',
       content: '',
       title: '',
@@ -119,7 +111,7 @@ export default {
       selectedPostTitle: '',
       selectedPostContent: '',
       currentPage: 1, // 현재 페이지 번호
-      itemsPerPage: 50, // 페이지당 아이템 수를 50으로 설정
+      itemsPerPage: 5, // 페이지당 아이템 수를 50으로 설정
       totalPages: 0 // 총 페이지 수
     }
   },
@@ -288,15 +280,15 @@ img {
 #side_bar {
   background-color: #d9d9d9;
   margin: 30px 0 0 30px;
-  width: 12%;
-  height: 50%;
+  width: 13%;
+  height: 20%;
   color: #898787;
 }
 li {
   color: lightslategray;
-  margin: 20px 0 10px 20px;
+  margin: 30px 0 10px 20px;
 }
-li:nth-child(6) {
+li:nth-child(4) {
   color: black;
   font-weight: bold;
   font-size: 20px;

@@ -1,5 +1,21 @@
 <template>
   <div id="Homeview">
+    <!-- 쳇봇 -->
+    <div
+      id="chat_bot"
+      style="width: 60px; height: 60px; position: fixed; top: 90%; left: 95%"
+    >
+      <div
+        style="
+          background-color: aqua;
+          width: 100%;
+          height: 100%;
+          /* position: fixed; */
+        "
+      ></div>
+    </div>
+    <!-- // 쳇봇 -->
+
     <!-- 사진, 명언집, 노래 or 게시글들 -->
     <div id="main_row_01">
       <div class="left">
@@ -189,6 +205,11 @@ export default {
 #Homeview {
   height: 100%;
   background-color: #585656;
+}
+
+/* chat_bot */
+#chat_bot:hover {
+  cursor: pointer;
 }
 
 /* main_row_01 */

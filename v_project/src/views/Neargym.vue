@@ -1,15 +1,8 @@
 <template>
   <div id="neargym_all">
     <div id="neargym_sidebar">
-      <!-- 사이드바 내용 -->
       <ul>
-        <li>메인</li>
-        <li>부위별 운동</li>
-        <li>나만의 루틴</li>
-        <li>집근처 헬스장</li>
-        <li>각종 구매처</li>
-        <li>자유게시판</li>
-        <li>마이페이지</li>
+        <li v-for="v in sideBar" :key="v">{{ v }}</li>
       </ul>
     </div>
     <div id="neargym_content">
@@ -67,7 +60,8 @@ export default {
         서면역: { gpsx: 35.1571, gpsy: 129.0591 }
       },
       gyms,
-      map: null
+      map: null,
+      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판']
     }
   },
   mounted() {
@@ -145,14 +139,14 @@ export default {
 #neargym_sidebar {
   background-color: #d9d9d9;
   margin: 30px 0 0 30px;
-  width: 12%;
-  height: 50%;
+  width: 13%;
+  height: 20%;
 }
 #neargym_sidebar li {
   color: lightslategray;
-  margin: 20px 0 10px 20px;
+  margin: 30px 0 10px 20px;
 }
-#neargym_sidebar li:nth-child(4) {
+#neargym_sidebar li:nth-child(3) {
   color: black;
   font-size: 20px;
   font-weight: bold;
