@@ -34,9 +34,9 @@
         @change="moveToSelectedStation"
         style="
           width: 500px;
-          height: 30px;
+          height: 35px;
           border-radius: 10px;
-          margin-left: 32%;
+          margin: 0 0 5% 32%;
           background-color: #b1b1b1;
           color: black;
           font-weight: bold;
