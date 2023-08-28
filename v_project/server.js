@@ -182,6 +182,26 @@ app.get('/get-post/:postId', async (req, res) => {
   }
 })
 
+// 게시글 조회수 업데이트 엔드포인트 추가
+app.post('/update-count/:postId', async (req, res) => {
+  const postId = req.params.postId
+
+  try {
+    const post = await VSchema.findById(postId)
+    if (!post) {
+      return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' })
+    }
+
+    post.count++ // 조회수 1 증가
+    await post.save() // 변경된 조회수를 저장
+
+    res.json({ message: '조회수가 업데이트되었습니다.' })
+  } catch (error) {
+    console.error('조회수 업데이트 오류:', error)
+    res.status(500).send('조회수 업데이트 오류')
+  }
+})
+
 // 게시글 삭제 엔드포인트 추가
 app.delete('/delete-post/:postId', async (req, res) => {
   const postId = req.params.postId

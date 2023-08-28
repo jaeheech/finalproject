@@ -139,16 +139,16 @@ export default {
 
       axios
         .post('/create', {
-          no: this.no,
           title: this.title,
-          author: this.author,
           date: this.date,
           count: this.count,
-          content: this.content
+          content: this.content,
+          username: this.loggedInUserId // 작성자 정보를 전달
         })
         .then((res) => {
           console.log(res)
           // 데이터 제출 성공적으로 처리
+          this.fetchPosts() // 새로운 게시글이 작성되면 목록을 다시 가져옴
         })
         .catch((error) => {
           console.error('데이터 저장 오류:', error)
@@ -189,6 +189,23 @@ export default {
         this.selectedPostTitle = response.data.title
         this.selectedPostContent = response.data.content
         this.showDetailModal = true
+        axios
+          .post(`/update-count/${post._id}`)
+          .then(() => {
+            // 조회수 업데이트 성공
+            // 이후에 해당 게시글의 조회수를 클라이언트 측에서도 업데이트하는 로직 추가
+            const updatedPostIndex = this.posts.findIndex(
+              (p) => p._id === post._id
+            )
+            if (updatedPostIndex !== -1) {
+              // 해당 게시글이 목록에 존재하는 경우
+              this.posts[updatedPostIndex].count++ // 조회수 업데이트
+            }
+            // 다른 로직을 추가할 수 있습니다.
+          })
+          .catch((error) => {
+            console.error('조회수 업데이트 오류:', error)
+          })
       } catch (error) {
         console.error('게시물 가져오기 오류:', error)
       }
