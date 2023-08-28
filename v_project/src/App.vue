@@ -15,6 +15,7 @@
     <nav>
       <router-link to="/">메인</router-link>
       <router-link to="/part">부위별 운동</router-link>
+      <!-- 로그인 했을때만 나오게 함  -->
       <router-link v-if="loggedIn" to="/mylutin">나만의 루틴</router-link>
       <router-link to="/neargym">집근처 헬스장</router-link>
       <router-link to="/buy">각종 구매처</router-link>
@@ -81,22 +82,31 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   computed: {
     loggedIn() {
-      // Vuex 상태에서 로그인 상태를 가져옵니다
+      // 로그인 상태를 가져옴
       return this.$store.state.isLoggedIn
     }
   },
   methods: {
     logout() {
-      // 로그아웃 처리 후 Vuex 상태를 업데이트합니다
-      this.$store.commit('logout')
-      // 로그아웃 후 쿠키에서 사용자 정보를 제거합니다
-      this.$store.commit('logout')
-      // 로그아웃 후 메인 페이지로 이동합니다
-      this.$router.push('/')
-      alert('로그아웃 되었습니다.')
+      const username = this.$store.state.username
+      axios
+        .post('/logout', { username })
+        .then((response) => {
+          console.log(response.data.message)
+
+          // 로그아웃 후 클라이언트 상태를 업데이트
+          this.$store.commit('logout')
+          // 로그아웃 후 메인 페이지로 이동
+          this.$router.push('/')
+          alert('로그아웃되었습니다.')
+        })
+        .catch((error) => {
+          console.error('로그아웃 요청 오류:', error)
+        })
     }
   }
 }
@@ -114,13 +124,13 @@ html {
 }
 
 #app {
-  flex: 1; /* 남은 세로 공간을 채우기 위해 flex 사용 */
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 header {
-  height: 150px; /* 헤더가 내용에 맞게 높이를 조정할 수 있도록 함 */
+  height: 150px;
   padding: 0;
   text-align: center;
 }

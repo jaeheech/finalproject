@@ -3,10 +3,10 @@ const history = require('connect-history-api-fallback')
 const logger = require('morgan')
 const path = require('path')
 const VSchema = require('./mdb.cjs')
-const UserSchema = require('./UserSchema.cjs')
-const crypto = require('crypto')
+const UserSchema = require('./UserSchema.cjs') /* 로그인 스키마  */
+const crypto = require('crypto') /* 암호화 모듈 */
 const bodyParser = require('body-parser')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt') /* 비밀번호 해시화를 위한 모듈 */
 const app = express()
 app.use(history())
 app.use(bodyParser.json())
@@ -28,7 +28,7 @@ app.post('/signup', async (req, res) => {
   const { username, password, tell, email } = req.body
 
   // 비밀번호를 bcrypt를 사용하여 해시화
-  const hashedPassword = await bcrypt.hash(password, 10) // 두 번째 매개변수는 해시에 사용할 라운드 수입니다.
+  const hashedPassword = await bcrypt.hash(password, 10) // 두 번째 매개변수는 해시에 사용할 라운드 수
   const userData = {
     username,
     password: hashedPassword,
@@ -88,15 +88,17 @@ app.post('/login', async (req, res) => {
 
     // 인증이 성공하면 로그인 성공 응답 보내기
     res.json({ message: '로그인 성공' })
-    console.log(`${username}님 로그인 하셨습니다.`)
+    console.log(`${username}님 ${new Date()}에 로그인 하셨습니다.`)
   } catch (error) {
     console.error('로그인 실패:', error)
   }
 })
-/* 알림메시지  */
-function showErrorAlert(message) {
-  alert(message)
-}
+app.post('/logout', (req, res) => {
+  const { username } = req.body
+
+  console.log(`${username}님  ${new Date()}에 로그아웃 하셨습니다.`)
+  res.json({ message: '로그아웃 성공' })
+})
 
 // ====게시판 MongoDB ====
 // CRUD에서 Create
