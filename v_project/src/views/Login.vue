@@ -167,6 +167,7 @@ export default {
     }
   },
   methods: {
+    /* 회원가입 메소드  */
     async signup() {
       try {
         await axios.post('/signup', {
@@ -182,6 +183,7 @@ export default {
         console.error('회원가입 실패:', error)
       }
     },
+    /* 로그인 메소드 */
     async login() {
       try {
         await axios.post('/login', {
@@ -189,12 +191,11 @@ export default {
           password: this.password
         })
         // 로그인 성공 시 처리
-        this.$store.commit('login', this.username) // Vuex 상태 업데이트
+        this.$store.commit('login', this.username)
         this.$router.push('/') // 기존에 있던 메인 화면으로 이동
         // 로그인 성공 메시지를 표시
         const message = `${this.username}님 로그인 성공하셨습니다.`
         alert(message)
-        // console.log(`${this.username}님 로그인!!!`)
         // 로그인 실패 처리
       } catch (error) {
         console.error('로그인 실패:', error)
@@ -211,7 +212,7 @@ export default {
           // 아이디 사용 가능
           this.usernameUnavailable = false
         } else {
-          // 아이디 중복
+          // 아이디 중복 일때 메세지 나옴
           this.usernameUnavailable = true
         }
       } catch (error) {
