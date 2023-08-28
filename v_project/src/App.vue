@@ -96,8 +96,6 @@ export default {
       axios
         .post('/logout', { username })
         .then((response) => {
-          console.log(response.data.message)
-
           // 로그아웃 후 클라이언트 상태를 업데이트
           this.$store.commit('logout')
           // 로그아웃 후 메인 페이지로 이동
