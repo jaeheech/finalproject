@@ -18,7 +18,7 @@
 
     <!-- 사진, 명언집, 노래 or 게시글들 -->
     <div id="main_row_01">
-      <div class="left" style="width: 680px; height: 350px">
+      <div class="left" style="width: 680px; height: 350px; margin-left: 80px">
         <!-- 사진들 오토레이어 -->
         <div id="row_01_imgs" class="slick-slider" ref="slickSliderHealth">
           <div
