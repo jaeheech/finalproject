@@ -181,6 +181,7 @@
             v-for="(product, index) in products"
             :key="index"
             class="slick-slide"
+            style="margin: 20px"
           >
             <img :src="product.image" />
             <div class="product-name">{{ product.name }}</div>
@@ -217,7 +218,7 @@ export default {
         dots: true,
         infinite: true,
         slidesToShow: 6,
-        slidesToScroll: 1
+        slidesToScroll: 2
       }
 
       const sliderElement = this.$refs.slickSlider
@@ -271,7 +272,7 @@ export default {
 
 /* main_row_03 */
 #contents {
-  margin: 30px 0 0 80px;
+  margin: 0 0 0 80px;
   padding: 5px;
   width: 90%;
 }
