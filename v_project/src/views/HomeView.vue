@@ -18,15 +18,17 @@
 
     <!-- 사진, 명언집, 노래 or 게시글들 -->
     <div id="main_row_01">
-      <div class="left">
+      <div class="left" style="width: 680px; height: 350px">
         <!-- 사진들 오토레이어 -->
-        <div id="row_01_imgs">
-          <img
-            src="../../public/health1.jpg"
-            alt="main_health_01"
-            width="680px"
-            height="350px"
-          />
+        <div id="row_01_imgs" class="slick-slider" ref="slickSliderHealth">
+          <div
+            style="margin: 0 20px"
+            v-for="(healthimg, index) in healthimgs"
+            :key="index"
+            class="slick-slide"
+          >
+            <img :src="healthimg.image" />
+          </div>
         </div>
       </div>
       <div class="right">
@@ -41,9 +43,15 @@
           "
         >
           <span>오늘의 명언</span>
-          <ul>
-            <li style="list-style: none">
-              간단하다. 흔들리는 것은 지방이다 - 아놀드슈워제네거
+          <ul ref="slickSliderMaxim">
+            <li
+              v-for="(maxim, index) in maxims"
+              :key="index"
+              class="slick-slider"
+              style="list-style: none"
+            >
+              <span class="maxim-content">{{ maxim.content }}</span> -
+              <span class="maxim-name">{{ maxim.name }}</span>
             </li>
           </ul>
         </div>
@@ -195,6 +203,8 @@
 </template>
 <script>
 import productsData from '../../public/products.js'
+import maximData from '../../public/maxim.js'
+import healthimgs from '../../public/healthimg.js'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import $ from 'jquery'
@@ -204,7 +214,11 @@ export default {
   data() {
     return {
       products: productsData,
-      slickSlider: null
+      maxims: maximData,
+      healthimgs,
+      slickSlider: null,
+      slickSliderMaxim: null,
+      slickSliderHealth: null
     }
   },
   mounted() {
@@ -216,18 +230,49 @@ export default {
     initSlickSlider() {
       const sliderOptions = {
         dots: true,
+        arrows: true,
         infinite: true,
         slidesToShow: 6,
-        slidesToScroll: 2
+        slidesToScroll: 2,
+        autoplay: true,
+        autoplaySpeed: 2000
+      }
+      const sliderOptionsMaxim = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000
+      }
+      const sliderOptionsHealth = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000
       }
 
       const sliderElement = this.$refs.slickSlider
+      const sliderElementMaxim = this.$refs.slickSliderMaxim
+      const sliderElementHealth = this.$refs.slickSliderHealth
       this.slickSlider = $(sliderElement).slick(sliderOptions)
+      this.slickSliderMaxim = $(sliderElementMaxim).slick(sliderOptionsMaxim)
+      this.slickSliderHealth = $(sliderElementHealth).slick(sliderOptionsHealth)
     }
   },
   beforeUnmount() {
     if (this.slickSlider) {
       this.slickSlider.slick('unslick')
+    }
+    if (this.slickSliderMaxim) {
+      this.slickSliderMaxim.slick('unslick')
+    }
+    if (this.slickSliderHealth) {
+      this.slickSliderHealth.slick('unslick')
     }
   }
 }
@@ -249,8 +294,13 @@ export default {
   margin-top: 60px;
 }
 #main_row_01 .left {
-  margin-left: 80px;
+  margin-left: 60px;
   margin-right: 50px;
+}
+#main_row_01 div img {
+  width: 680px;
+  height: 350px;
+  margin-left: -20px;
 }
 
 /* main_row_02 */
@@ -279,6 +329,10 @@ export default {
 #contents #slick-slide {
   display: flex;
   margin-right: 30px;
+}
+
+#contents #slick-slide:hover {
+  cursor: pointer;
 }
 
 #contents img {
