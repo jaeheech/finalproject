@@ -145,6 +145,7 @@ app.get('/get-posts', async (req, res) => {
     const totalPages = Math.ceil(totalPosts / itemsPerPage) // 총 페이지 수 계산
 
     const posts = await VSchema.find()
+      .sort({ _id: -1 }) // _id 필드를 내림차순으로 정렬하여 최신 게시물부터 가져오기
       .skip((page - 1) * itemsPerPage) // 스킵할 게시물 수 계산
       .limit(itemsPerPage) // 페이지당 보여줄 게시물 수 설정
 
