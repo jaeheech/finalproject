@@ -163,7 +163,7 @@
     </div>
     <!-- // 오늘의 건강뉴스 -->
 
-    <!-- 오늘의 핫딜 상품들(24.금에 slick-slide 넣기 ) -->
+    <!-- 오늘의 핫딜 상품들 -->
     <p
       style="
         font-weight: bold;
@@ -176,14 +176,16 @@
     </p>
     <div id="main_row_03">
       <div id="contents">
-        <div
-          v-for="(product, index) in products"
-          :key="index"
-          class="slick-slide"
-        >
-          <img :src="product.image" />
-          <div class="product-name">{{ product.name }}</div>
-          <div class="product-price">{{ product.price }}</div>
+        <div id="slick-slider" ref="slickSlider">
+          <div
+            v-for="(product, index) in products"
+            :key="index"
+            class="slick-slide"
+          >
+            <img :src="product.image" />
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-price">{{ product.price }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -192,11 +194,39 @@
 </template>
 <script>
 import productsData from '../../public/products.js'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import $ from 'jquery'
+import 'slick-carousel'
 
 export default {
   data() {
     return {
-      products: productsData
+      products: productsData,
+      slickSlider: null
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.initSlickSlider()
+    })
+  },
+  methods: {
+    initSlickSlider() {
+      const sliderOptions = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 1
+      }
+
+      const sliderElement = this.$refs.slickSlider
+      this.slickSlider = $(sliderElement).slick(sliderOptions)
+    }
+  },
+  beforeUnmount() {
+    if (this.slickSlider) {
+      this.slickSlider.slick('unslick')
     }
   }
 }
@@ -242,9 +272,11 @@ export default {
 /* main_row_03 */
 #contents {
   margin: 30px 0 0 80px;
-  display: flex;
+  padding: 5px;
+  width: 90%;
 }
-#contents .slick-slide {
+#contents #slick-slide {
+  display: flex;
   margin-right: 30px;
 }
 
