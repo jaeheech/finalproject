@@ -78,15 +78,19 @@
       <h2 class="modal-title">{{ selectedPost.author }}님의 글</h2>
       <div class="modal-section">
         <p class="modal-section-label">제목:</p>
-        <p class="modal-section-content1">{{ selectedPostTitle }}</p>
+        <input class="modal-section-content1" v-model="selectedPostTitle" />
       </div>
       <div class="modal-section">
         <p class="modal-section-label">내용:</p>
-        <p class="modal-section-content2">{{ selectedPostContent }}</p>
+        <textarea
+          class="modal-section-content2"
+          v-model="selectedPostContent"
+        ></textarea>
       </div>
       <button class="modal-button" @click="showDetailModal = false">
         닫기
       </button>
+      <button class="modal-button-upd" @click="updatePost()">수정</button>
       <button
         class="modal-button-del"
         @click=";[(showDetailModal = false), deletePost(selectedPost._id)]"
@@ -216,6 +220,23 @@ export default {
           })
       } catch (error) {
         console.error('게시물 가져오기 오류:', error)
+      }
+    },
+    async updatePost() {
+      try {
+        const updatedPost = {
+          _id: this.selectedPost._id,
+          title: this.selectedPostTitle,
+          content: this.selectedPostContent
+        }
+
+        await axios.put(`/update-post/${updatedPost._id}`, updatedPost)
+
+        // 게시글 수정이 성공하면 모달을 닫고 게시글 목록을 갱신합니다.
+        this.showDetailModal = false
+        this.fetchPosts()
+      } catch (error) {
+        console.error('게시글 수정 오류:', error)
       }
     },
     deletePost(postId) {
@@ -423,6 +444,14 @@ td {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 50px;
-  margin-left: 10px;
+}
+.modal-button-upd {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 50px;
 }
 </style>

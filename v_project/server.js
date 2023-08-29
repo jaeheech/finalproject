@@ -203,6 +203,29 @@ app.post('/update-count/:postId', async (req, res) => {
   }
 })
 
+// 게시글 수정 엔드포인트 추가
+app.put('/update-post/:postId', async (req, res) => {
+  const postId = req.params.postId
+  const { title, content } = req.body
+
+  try {
+    const updatedPost = await VSchema.findByIdAndUpdate(
+      postId,
+      { title, content },
+      { new: true } // 업데이트 후의 데이터 반환
+    )
+
+    if (!updatedPost) {
+      return res.status(404).json({ error: '게시물을 찾을 수 없습니다.' })
+    }
+
+    res.json({ message: '게시물이 수정되었습니다.' })
+  } catch (error) {
+    console.error('게시물 수정 오류:', error)
+    res.status(500).send('게시물 수정 오류')
+  }
+})
+
 // 게시글 삭제 엔드포인트 추가
 app.delete('/delete-post/:postId', async (req, res) => {
   const postId = req.params.postId
