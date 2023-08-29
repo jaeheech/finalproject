@@ -2,6 +2,7 @@
   <div id="Homeview">
     <!-- 쳇봇 -->
     <div
+      @click="showModal = true"
       id="chat_bot"
       style="width: 60px; height: 60px; position: fixed; top: 90%; left: 95%"
     >
@@ -12,9 +13,21 @@
           height: 100%;
           /* position: fixed; */
         "
+        @click="showModal = true"
       ></div>
     </div>
     <!-- // 쳇봇 -->
+    <div v-if="showModal" id="modal">
+      <!-- 모달 창 -->
+      <div id="modal_content">
+        <img src="../../public/logo.jpg" alt="" />
+        <br />
+        <input id="question" v-model="question" />
+        <textarea id="response" v-model="response"></textarea>
+        <button id="modal_click" @click="gpt3()">질문</button>
+        <button id="modal_end" @click="showModal = false">취소</button>
+      </div>
+    </div>
 
     <!-- 사진, 명언집, 노래 or 게시글들 -->
     <div id="main_row_01">
@@ -50,8 +63,7 @@
               class="slick-slider"
               style="list-style: none"
             >
-              <span class="maxim-content">{{ maxim.content }}</span> -
-              <span class="maxim-name">{{ maxim.name }}</span>
+              <span class="maxim-content">{{ maxim.content }}</span>
             </li>
           </ul>
         </div>
@@ -209,6 +221,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import $ from 'jquery'
 import 'slick-carousel'
+import { gpt3 } from '../../gpt3.js'
 
 export default {
   data() {
@@ -218,7 +231,10 @@ export default {
       healthimgs,
       slickSlider: null,
       slickSliderMaxim: null,
-      slickSliderHealth: null
+      slickSliderHealth: null,
+      showModal: false,
+      question: '',
+      response: ''
     }
   },
   mounted() {
@@ -262,6 +278,17 @@ export default {
       this.slickSlider = $(sliderElement).slick(sliderOptions)
       this.slickSliderMaxim = $(sliderElementMaxim).slick(sliderOptionsMaxim)
       this.slickSliderHealth = $(sliderElementHealth).slick(sliderOptionsHealth)
+    },
+    gpt3: async function () {
+      this.response = '타이핑중'
+      const start = this.question
+      const answer = await gpt3(start)
+      this.response = answer
+      // this.init + this.history +  // 현재 입력 + 기본 정보 + 이전 대화 기록
+      // this.history += `인간: ${this.inData}\nAI: ${answer}\n` // 이전 대화 기록에 새로운 대화를 추가합니다.
+      // if (this.history.length > 4000) {
+      //   this.history = ''
+      // }
     }
   },
   beforeUnmount() {
@@ -341,5 +368,46 @@ export default {
 #contents div {
   color: white;
   font-weight: bold;
+}
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+#modal_content {
+  width: 500px;
+  height: 500px;
+  background-color: #d9d9d9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+#modal_click {
+  position: absolute;
+  bottom: 0%;
+  left: 10%;
+}
+#modal_end {
+  position: absolute;
+  bottom: 0%;
+  left: 20%;
+}
+#question {
+  width: 50%;
+  height: 5%;
+  margin: 10px;
+}
+#response {
+  width: 90%;
+  height: 60%;
+  margin: 25px;
 }
 </style>
