@@ -43,8 +43,13 @@
             <th>시간</th>
             <th>조회수</th>
           </tr>
-          <tr v-for="post in posts" :key="post._id">
-            <td @click="openDetailModal(post)" style="cursor: pointer">
+          <tr
+            @click="openDetailModal(post)"
+            style="cursor: pointer"
+            v-for="post in posts"
+            :key="post._id"
+          >
+            <td>
               {{ post.no }}
             </td>
             <td>{{ post.title }}</td>
