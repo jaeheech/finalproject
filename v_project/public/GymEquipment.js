@@ -115,13 +115,13 @@ export default [
   },
   {
     image: './smithmh.jpg',
-    name: '',
+    name: '레그익스프레스',
     part: '하체',
     disciption: '12 ~ 15회 / 4 ~ 5세트'
   },
   {
     image: './smithmh.jpg',
-    name: '',
+    name: '레그 익스텐션',
     part: '하체',
     disciption: '12 ~ 15회 / 4 ~ 5세트'
   }
