@@ -4,17 +4,13 @@
     <div
       @click="showModal = true"
       id="chat_bot"
-      style="width: 60px; height: 60px; position: fixed; top: 90%; left: 95%"
+      style="width: 85px; height: 85px; position: fixed; top: 90%; left: 94%"
     >
-      <div
-        style="
-          background-color: aqua;
-          width: 100%;
-          height: 100%;
-          /* position: fixed; */
-        "
+      <img
+        src="../../public/chatbot.png"
+        style="width: 100%; height: 100%; /* position: fixed; */"
         @click="showModal = true"
-      ></div>
+      />
     </div>
     <!-- // 쳇봇 -->
     <div v-if="showModal" id="modal">
