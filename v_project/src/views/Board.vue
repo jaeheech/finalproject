@@ -49,7 +49,7 @@
             </td>
             <td>{{ post.title }}</td>
             <td>{{ post.author }}</td>
-            <td>{{ formatDate(post.date) }}</td>
+            <td>{{ formatDateTime(post.date) }}</td>
             <td>{{ post.count }}</td>
           </tr>
         </table>
@@ -111,7 +111,7 @@ export default {
       selectedPostTitle: '',
       selectedPostContent: '',
       currentPage: 1, // 현재 페이지 번호
-      itemsPerPage: 5, // 페이지당 아이템 수를 50으로 설정
+      itemsPerPage: 40, // 페이지당 아이템 수를 50으로 설정
       totalPages: 0 // 총 페이지 수
     }
   },
@@ -167,12 +167,23 @@ export default {
       this.currentPage += offset
       this.fetchPosts() // 페이지 변경 시 게시물 다시 가져오기
     },
-    formatDate(dateTime) {
+    formatDateTime(dateTime) {
       const dateObject = new Date(dateTime)
+
+      const year = dateObject.getFullYear()
+      const month = dateObject.getMonth() + 1
+      const day = dateObject.getDate()
       const hours = dateObject.getHours()
       const minutes = dateObject.getMinutes()
-      const formattedTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`
-      return formattedTime
+      const seconds = dateObject.getSeconds()
+
+      const formattedDateTime = `${year}년 ${month < 10 ? '0' : ''}${month}월 ${
+        day < 10 ? '0' : ''
+      }${day}일 ${hours < 10 ? '0' : ''}${hours}:${
+        minutes < 10 ? '0' : ''
+      }${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+
+      return formattedDateTime
     },
     async openDetailModal(post) {
       try {
