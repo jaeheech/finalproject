@@ -7,9 +7,7 @@
     </div>
     <div id="neargym_content">
       <div id="neargym_content_title" style="border-bottom: 3px solid #989898">
-        <h1 style="margin-left: 1%; text-align: center; letter-spacing: 2px">
-          집근처 헬스장
-        </h1>
+        <h1 style="text-align: center; letter-spacing: 2px">집근처 헬스장</h1>
       </div>
       <p
         style="
