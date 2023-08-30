@@ -29,9 +29,7 @@
     </div>
     <div id="main">
       <div id="board">
-        <div id="head">
-          <h2>자유게시판</h2>
-        </div>
+        <h1 style="text-align: center; letter-spacing: 2px">자유게시판</h1>
       </div>
       <div id="content">
         <table>
@@ -337,7 +335,6 @@ li:nth-child(4) {
   height: 92%;
 }
 #board {
-  height: 4%;
   border-bottom: 3px solid #898787;
   margin-bottom: 5px;
   color: #000;
