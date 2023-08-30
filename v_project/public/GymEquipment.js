@@ -97,7 +97,7 @@ export default [
   },
   {
     image: './lieingTricepce.jpg',
-    name: '라잉 트라이셉스 익스텐션',
+    name: '트라이셉스 익스텐션',
     part: '삼두',
     disciption: '12 ~ 15회 / 4 ~ 5세트'
   },
@@ -118,12 +118,12 @@ export default [
     name: '레그익스프레스',
     part: '하체',
     disciption: '12 ~ 15회 / 4 ~ 5세트'
-  },
-  {
-    image: './legExtention.jpg',
-    name: '레그 익스텐션',
-    part: '하체',
-    disciption: '12 ~ 15회 / 4 ~ 5세트'
   }
+  // {
+  //   image: './legExtention.jpg',
+  //   name: '레그 익스텐션',
+  //   part: '하체',
+  //   disciption: '12 ~ 15회 / 4 ~ 5세트'
+  // }
   // 나머지 상품 데이터도 추가
 ]
