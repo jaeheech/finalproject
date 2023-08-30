@@ -111,6 +111,20 @@ app.get('/get-post/:postId', async (req, res) => {
   }
 })
 
+// 서버 코드에서 /get-hot-posts 엔드포인트 추가
+app.get('/get-hot-posts', async (req, res) => {
+  try {
+    const hotPosts = await VSchema.find()
+      .sort({ count: -1 }) // 조회수가 높은 순으로 정렬하여 가져옴
+      .limit(3) // 상위 3개 게시물 가져옴
+
+    res.json(hotPosts)
+  } catch (error) {
+    console.error('게시물 조회 오류:', error)
+    res.status(500).send('게시물 조회 오류')
+  }
+})
+
 // 게시글 조회수 업데이트 엔드포인트 추가
 app.post('/update-count/:postId', async (req, res) => {
   const postId = req.params.postId

@@ -69,9 +69,9 @@
         >
           <span>실시간 핫한 글</span>
           <ul>
-            <li>3대 670 질문 받는다</li>
-            <li>3대 670 질문 받는다</li>
-            <li>3대 670 질문 받는다</li>
+            <li v-for="(post, index) in hotPosts" :key="index">
+              {{ post.title }}
+            </li>
           </ul>
         </div>
       </div>
@@ -210,6 +210,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
 import productsData from '../../public/products.js'
 import maximData from '../../public/maxim.js'
 import healthimgs from '../../public/healthimg.js'
@@ -230,13 +231,15 @@ export default {
       slickSliderHealth: null,
       showModal: false,
       question: '',
-      response: ''
+      response: '',
+      hotPosts: []
     }
   },
   mounted() {
     this.$nextTick(() => {
       this.initSlickSlider()
     })
+    this.fetchHotPosts()
   },
   methods: {
     initSlickSlider() {
@@ -285,6 +288,16 @@ export default {
       // if (this.history.length > 4000) {
       //   this.history = ''
       // }
+    },
+    fetchHotPosts() {
+      axios
+        .get('/get-hot-posts')
+        .then((response) => {
+          this.hotPosts = response.data
+        })
+        .catch((error) => {
+          console.error('실시간 핫한 글 가져오기 오류:', error)
+        })
     }
   },
   beforeUnmount() {
