@@ -42,7 +42,20 @@
       <div class="routine-inputs" v-if="showInputs">
         <h2>{{ routineMessage }}</h2>
         <input type="text" v-model="newExercise" />
-        <button @click="saveRoutine">저장</button>
+        <button @click="addExerciseToRoutine" v-if="!routineExists">
+          추가
+        </button>
+        <button @click="saveRoutine" v-if="routineExists">저장</button>
+      </div>
+      <div class="routine-list">
+        <h2>루틴 목록</h2>
+        <ul>
+          <li v-for="routine in routines" :key="routine._id">
+            <p>
+              {{ routine.day }}요일 루틴: {{ routine.exercises.join(', ') }}
+            </p>
+          </li>
+        </ul>
       </div>
       <div class="youtube">
         <div>
@@ -96,7 +109,9 @@ export default {
         exercise2: ''
       },
       newExercise: '',
-      routineMessage: ''
+      routineMessage: '',
+      routines: [],
+      routineExists: false
     }
   },
   created() {
@@ -104,6 +119,7 @@ export default {
     if (this.username) {
       this.fetchUserInfo(this.username)
     }
+    this.fetchRoutines()
   },
   methods: {
     async fetchUserInfo(username) {
@@ -118,6 +134,11 @@ export default {
     showRoutineInputs(day) {
       this.routineData.day = day //
       this.showInputs = true //
+
+      // 해당 요일에 루틴이 이미 존재하는지 확인
+      this.routineExists = !!this.routines.find(
+        (routine) => routine.day === day
+      )
       if (day === '월') {
         this.routineMessage = '월요일 루틴 작성'
       } else if (day === '화') {
@@ -142,7 +163,6 @@ export default {
 
         // 루틴 데이터 생성
         const routineData = {
-          // user: user._id, // 사용자 ID를 사용자와 연결
           username: user.username,
           day: this.routineData.day,
           exercises: this.newExercise
@@ -155,9 +175,42 @@ export default {
         this.newExercise = ''
         // 루틴 입력 폼 숨기기
         this.showInputs = false
+        // 루틴 저장 후에 목록 다시 불러오기
+        this.fetchRoutines()
       } catch (error) {
         console.error('루틴을 저장하는 중 오류 발생:', error)
       }
+    },
+    async fetchRoutines() {
+      try {
+        // 서버에서 루틴 데이터를 가져오기
+        const response = await axios.get(`/get-routines/${this.username}`)
+        this.routines = response.data.routines
+      } catch (error) {
+        console.error('루틴을 불러오는 중 오류 발생:', error)
+      }
+    },
+    async addExerciseToRoutine() {
+      // 사용자가 선택한 요일에 대한 루틴 찾기
+      const day = this.routineData.day
+      const existingRoutine = this.routines.find(
+        (routine) => routine.day === day
+      )
+
+      if (existingRoutine) {
+        // 이미 해당 요일에 루틴이 있는 경우, 새로운 운동을 추가
+        existingRoutine.exercises.push(this.newExercise)
+      } else {
+        // 해당 요일에 루틴이 없는 경우, 새로운 루틴 생성
+        const newRoutine = {
+          day: day,
+          exercises: [this.newExercise]
+        }
+        this.routines.push(newRoutine)
+      }
+
+      // 입력 폼 초기화
+      this.newExercise = ''
     }
   }
 }

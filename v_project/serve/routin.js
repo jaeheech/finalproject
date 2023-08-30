@@ -25,4 +25,21 @@ router.post('/save-routine', async (req, res) => {
     })
   }
 })
+/* 저장된 루틴 불러오기 */
+router.get('/get-routines/:username', async (req, res) => {
+  try {
+    const username = req.params.username
+
+    // 해당 사용자의 모든 루틴을 불러옵니다.
+    const routines = await RoutineSchema.find({ username })
+
+    res.json({ success: true, routines })
+  } catch (error) {
+    console.error('루틴을 불러오는 중 오류 발생:', error)
+    res.status(500).json({
+      success: false,
+      message: '루틴을 불러오는 중 오류 발생했습니다.'
+    })
+  }
+})
 module.exports = router
