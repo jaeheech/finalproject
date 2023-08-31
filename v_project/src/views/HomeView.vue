@@ -199,9 +199,11 @@
             class="slick-slide"
             style="margin: 20px"
           >
-            <img :src="product.image" />
-            <div class="product-name">{{ product.name }}</div>
-            <div class="product-price">{{ product.price }}</div>
+            <a :href="product.url">
+              <img :src="product.image" />
+              <div class="product-name">{{ product.name }}</div>
+              <div class="product-price">{{ product.price }}</div>
+            </a>
           </div>
         </div>
       </div>
