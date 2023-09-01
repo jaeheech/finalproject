@@ -154,16 +154,16 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      showModal: true,
-      showSignupModal: false,
-      showSignupSuccess: false,
+      showModal: true, //모달창
+      showSignupModal: false, // 회원가입 모달창 처음엔 안나옴
+      showSignupSuccess: false, // 회원가입성공시 닫힘
       username: '',
       password: '',
       signupUsername: '',
       signupPassword: '',
       showLoginSuccess: false,
-      loggedIn: false,
-      usernameUnavailable: false
+      loggedIn: false, // 로그인 상태
+      usernameUnavailable: false //아이디 중복 메세지
     }
   },
   methods: {
@@ -209,7 +209,7 @@ export default {
         })
 
         if (response.data.available) {
-          // 아이디 사용 가능
+          // 아이디 사용 가능하면 메시지 안나옴
           this.usernameUnavailable = false
         } else {
           // 아이디 중복 일때 메세지 나옴
@@ -219,14 +219,17 @@ export default {
         console.error('아이디 중복 확인 실패:', error)
       }
     },
+    //모달 열기
     closeModal() {
       // console.log('모달 닫기')
       this.showModal = false
       this.$router.push('/')
     },
+    //회원가입 모달열기
     openSignupModal() {
       this.showSignupModal = true
     },
+    //회원가입 모달 닫기
     closeSignupModal() {
       this.showSignupModal = false
       this.resetSignupForm()
@@ -235,6 +238,7 @@ export default {
       this.showSignupSuccess = false // 회원가입 완료 팝업 닫기
       this.showModal = true // 로그인 모달로 다시 돌아가기
     },
+    //회원가입폼 숨기기
     resetSignupForm() {
       this.signupUsername = ''
       this.signupPassword = ''
@@ -244,8 +248,9 @@ export default {
     closeLoginSuccessPopup() {
       this.showLoginSuccess = false
       this.showModal = false
-      this.$router.push('/')
+      this.$router.push('/') // 메인페이지로 돌아감
     },
+    //로그인 상태
     logout() {
       this.loggedIn = false // 로그아웃 시 loggedIn 상태를 업데이트
     }
