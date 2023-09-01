@@ -17,7 +17,7 @@ export default createStore({
     logout(state) {
       state.isLoggedIn = false
       state.username = null
-      Cookies.remove('isLoggedIn')
+      Cookies.remove('isLoggedIn') // 쿠키에서 상태제거
       Cookies.remove('username') // 쿠키에서 username 제거
     }
   },

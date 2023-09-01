@@ -30,7 +30,7 @@ router.get('/get-routines/:username', async (req, res) => {
   try {
     const username = req.params.username
 
-    // 해당 사용자의 모든 루틴을 불러옵니다.
+    // 해당 사용자의 모든 루틴을 불러옴.
     const routines = await RoutineSchema.find({ username })
 
     res.json({ success: true, routines })

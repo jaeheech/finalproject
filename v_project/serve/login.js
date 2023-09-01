@@ -37,7 +37,7 @@ router.post('/signup', async (req, res) => {
   const { username, password, tell, email } = req.body
 
   // 비밀번호를 bcrypt를 사용하여 해시화
-  const hashedPassword = await bcrypt.hash(password, 10) // 두 번째 매개변수는 해시에 사용할 라운드 수
+  const hashedPassword = await bcrypt.hash(password, 10)
   const userData = {
     username,
     password: hashedPassword,
@@ -59,7 +59,7 @@ router.post('/checkUsername', async (req, res) => {
   const { username } = req.body
 
   try {
-    // 데이터베이스에서 해당 아이디로 사용자를 찾아봅니다.
+    // 데이터베이스에서 해당 아이디로 사용자찾기
     const existingUser = await UserSchema.findOne({ username })
 
     if (existingUser) {
