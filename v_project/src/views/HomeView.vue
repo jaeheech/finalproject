@@ -45,13 +45,16 @@
         <div
           id="row_01_content_01"
           style="
-            width: 750px;
-            height: 100px;
+            width: 730px;
+            height: 85px;
             margin-bottom: 20px;
-            background-color: beige;
+            border-radius: 10px;
+            background-color: #d9d9d9;
+            padding-top: 15px;
+            padding-left: 20px;
           "
         >
-          <span>오늘의 명언</span>
+          <span style="font-weight: bold; font-size: 18px"> 오늘의 띵언 </span>
           <ul ref="slickSliderMaxim">
             <li
               v-for="(maxim, index) in maxims"
@@ -59,17 +62,30 @@
               class="slick-slider"
               style="list-style: none"
             >
-              <span class="maxim-content">{{ maxim.content }}</span>
+              <span class="maxim-content" style="font-weight: bold">{{
+                maxim.content
+              }}</span>
             </li>
           </ul>
         </div>
         <div
           id="row_01_content_02"
-          style="width: 750px; height: 230px; background-color: beige"
+          style="
+            width: 730px;
+            height: 215px;
+            background-color: #d9d9d9;
+            border-radius: 10px;
+            padding-top: 15px;
+            padding-left: 20px;
+          "
         >
-          <span>실시간 핫한 글</span>
+          <span style="font-weight: bold; font-size: 18px">실시간 핫한 글</span>
           <ul>
-            <li v-for="(post, index) in hotPosts" :key="index">
+            <li
+              v-for="(post, index) in hotPosts"
+              :key="index"
+              style="font-weight: bold"
+            >
               {{ post.title }}
             </li>
           </ul>
