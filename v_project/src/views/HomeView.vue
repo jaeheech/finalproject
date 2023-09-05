@@ -27,7 +27,15 @@
 
     <!-- 사진, 명언집, 노래 or 게시글들 -->
     <div id="main_row_01">
-      <div class="left" style="width: 680px; height: 350px; margin-left: 80px">
+      <div
+        class="left"
+        style="
+          width: 680px;
+          height: 350px;
+          margin-left: 80px;
+          border: 5px solid #ffe600;
+        "
+      >
         <!-- 사진들 오토레이어 -->
         <div id="row_01_imgs" class="slick-slider" ref="slickSliderHealth">
           <div
@@ -46,10 +54,10 @@
           id="row_01_content_01"
           style="
             width: 730px;
-            height: 85px;
+            height: 90px;
             margin-bottom: 20px;
             border-radius: 10px;
-            background-color: #d9d9d9;
+            background-color: #ffe600;
             padding-top: 15px;
             padding-left: 20px;
           "
@@ -72,8 +80,8 @@
           id="row_01_content_02"
           style="
             width: 730px;
-            height: 215px;
-            background-color: #d9d9d9;
+            height: 220px;
+            background-color: #ffe600;
             border-radius: 10px;
             padding-top: 15px;
             padding-left: 20px;
@@ -334,7 +342,7 @@ export default {
 <style scoped>
 #Homeview {
   height: 100%;
-  background-color: #585656;
+  background-color: black;
 }
 
 /* chat_bot */

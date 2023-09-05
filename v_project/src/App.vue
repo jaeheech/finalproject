@@ -2,13 +2,27 @@
   <div id="app">
     <!-- ... 헤더 및 기타 내용 ... -->
     <header style="margin: 20px 0">
-      <img src="../public/logo.jpg" alt="logo" />
+      <img
+        src="../public/도르트문트.jpg"
+        alt="logo_01"
+        style="width: 100px; position: absolute; left: 0"
+      />
+      <img src="../public/logo_ver2.png" alt="logo_02" />
       <div class="header-right-links">
         <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시-->
-        <router-link v-if="loggedIn" to="/" @click="logout"
+        <router-link
+          style="color: #ffe600; font-weight: bold"
+          v-if="loggedIn"
+          to="/"
+          @click="logout"
           >로그아웃</router-link
         >
-        <router-link v-else to="/Login">로그인</router-link>
+        <router-link
+          v-else
+          to="/Login"
+          style="color: #ffe600; font-weight: bold"
+          >로그인</router-link
+        >
       </div>
     </header>
 
@@ -115,7 +129,7 @@ html {
   padding: 0;
   width: 100%;
   height: 2000px;
-  background-color: #989898;
+  background-color: black;
   display: flex;
   flex-direction: column;
 }
@@ -147,15 +161,15 @@ header {
   transition: color 0.3s; /* 색상 변화에 애니메이션 효과 추가 */
 }
 /* 링크에 마우스 호버 시 색상 변화 */
-.header-link:hover {
+/* .header-link:hover {
   color: #3498db;
-}
+} */
 
 nav {
   display: flex;
   font-size: 20px;
-  color: #585656;
-  background-color: #d9d9d9;
+  color: black;
+  background-color: #ffe600;
 }
 
 nav a {
@@ -169,19 +183,20 @@ nav a {
 }
 
 nav a.router-link-active {
-  background-color: #585656;
-  color: white;
+  background-color: black;
+  color: #ffe600;
 }
 
 footer {
-  border-top: 3px solid black;
-  background-color: #989898;
+  border-top: 3px solid #ffe600;
+  background-color: black;
   padding: 10px 0;
   text-align: center;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 400px;
+  color: white;
 }
 
 #footer_up {

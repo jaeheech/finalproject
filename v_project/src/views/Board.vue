@@ -309,15 +309,14 @@ img {
 }
 #container {
   height: 100%;
-  background-color: #585656;
+  background-color: black;
   display: flex;
 }
 #side_bar {
-  background-color: #d9d9d9;
+  background-color: #ffe600;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
-  color: #898787;
 }
 li {
   color: lightslategray;
@@ -329,30 +328,37 @@ li:nth-child(4) {
   font-size: 20px;
 }
 #main {
-  background-color: #d9d9d9;
+  background-color: #ffe600;
   margin: 30px;
   width: 85%;
   height: 92%;
 }
 #board {
-  border-bottom: 3px solid #898787;
-  margin-bottom: 5px;
+  border-bottom: 4px solid black;
+  margin-bottom: 40px;
   color: #000;
 }
 table {
   border-collapse: collapse;
-  border: 2px solid #898787;
+  border: 3px solid black;
   width: 100%;
   height: 100%;
 }
 tr,
 th,
 td {
-  border: 1px solid black;
+  border: 3px solid black;
   text-align: center;
 }
 #in {
   margin-top: 10px;
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  background-color: black;
+  color: #ffe600;
 }
 #pagination {
   margin-top: 10px;
