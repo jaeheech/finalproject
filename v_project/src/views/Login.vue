@@ -7,7 +7,7 @@
         <button class="close-button" @click="closeModal">X</button>
         <header style="margin-bottom: 20px">
           <!-- 로고 이미지 -->
-          <img src="../../public/logo.jpg" alt="logo" />
+          <img src="../../public/logo_ver2.png" alt="logo" />
         </header>
         <form @submit.prevent="login">
           <!-- 로그인 폼 -->
@@ -46,7 +46,7 @@
             </button>
           </div>
           <!-- 소셜 로그인 버튼 -->
-          <div class="social-button-container">
+          <!-- <div class="social-button-container">
             <button class="custom-button">
               <img
                 src="../../public/social_login_button.png"
@@ -61,7 +61,7 @@
                 style="width: 230px; height: 45px"
               />
             </button>
-          </div>
+          </div> -->
         </form>
       </div>
     </div>
@@ -76,7 +76,7 @@
         <button class="close-button" @click="closeSignupModal">X</button>
         <header style="margin-bottom: 20px">
           <!-- 로고 이미지 -->
-          <img src="../../public/logo.jpg" alt="logo" />
+          <img src="../../public/logo_ver2.png" alt="logo" />
         </header>
         <form @submit.prevent="signup">
           <!-- 회원가입 폼 -->
@@ -295,7 +295,7 @@ span {
 }
 #id_span {
   padding-left: 10px;
-  background-color: #989898;
+  background-color: #ffe600;
   padding: 20px;
   border-radius: 10px;
 }
@@ -314,7 +314,7 @@ span {
 
 .modal-content {
   width: 500px;
-  background-color: #d9d9d9;
+  background-color: black;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -353,7 +353,7 @@ form {
 }
 
 input {
-  background-color: #989898;
+  background-color: #ffe600;
   width: 80%;
   border: none;
   text-align: center;
@@ -361,7 +361,7 @@ input {
 }
 
 button {
-  background-color: #989898;
+  background-color: #ffe600;
   color: black;
   font-weight: bolder;
   border: none;
