@@ -45,23 +45,6 @@
               <span>회원가입</span>
             </button>
           </div>
-          <!-- 소셜 로그인 버튼 -->
-          <!-- <div class="social-button-container">
-            <button class="custom-button">
-              <img
-                src="../../public/social_login_button.png"
-                alt="Social Login"
-                style="width: 240px; height: 45px"
-              />
-            </button>
-            <button class="naver-button">
-              <img
-                src="../../public/naver.png"
-                alt=""
-                style="width: 230px; height: 45px"
-              />
-            </button>
-          </div> -->
         </form>
       </div>
     </div>
