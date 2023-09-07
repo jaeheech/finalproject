@@ -16,9 +16,13 @@
     <div v-if="showModal" id="modal">
       <!-- 모달 창 -->
       <div id="modal_content">
-        <img src="../../public/logo.jpg" alt="" />
-        <br />
-        <input id="question" v-model="question" />
+        <img
+          src="../../public/logo_ver2.png"
+          alt="logo"
+          style="position: relative; left: 20%"
+        /><br />
+        질문 <input id="question" v-model="question" />
+        <p>답변</p>
         <textarea id="response" v-model="response"></textarea>
         <button id="modal_click" @click="gpt3()">질문</button>
         <button id="modal_end" @click="showModal = false">취소</button>
@@ -417,32 +421,40 @@ export default {
   z-index: 10;
 }
 #modal_content {
+  border: 3px solid #ffe600;
   width: 500px;
   height: 500px;
-  background-color: #d9d9d9;
+  background-color: black;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
+  color: #ffe600;
 }
 #modal_click {
   position: absolute;
-  bottom: 0%;
-  left: 10%;
+  bottom: 2%;
+  left: 12.5%;
+  background-color: #ffe600;
+  font-weight: bold;
 }
 #modal_end {
   position: absolute;
-  bottom: 0%;
-  left: 20%;
+  bottom: 2%;
+  left: 25%;
+  background-color: #ffe600;
+  font-weight: bold;
 }
 #question {
   width: 50%;
   height: 5%;
   margin: 10px;
+  background-color: #ffe600;
 }
 #response {
-  width: 90%;
+  width: 80%;
   height: 60%;
-  margin: 25px;
+  margin: -35px 0 0 47px;
+  background-color: #ffe600;
 }
 </style>

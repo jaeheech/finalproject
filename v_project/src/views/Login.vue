@@ -302,6 +302,7 @@ span {
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
+  border: 3px solid #ffe600;
 }
 .signup-modal {
   z-index: 20; /* 회원가입 모달이 로그인 모달 위에 보이도록 */
@@ -327,6 +328,9 @@ span {
   border: none;
   font-size: 20px;
   cursor: pointer;
+  background-color: #ffe600;
+  height: 40px;
+  width: 40px;
 }
 
 form {

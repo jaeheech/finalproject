@@ -2,22 +2,48 @@
   <div v-if="showModal" id="modal">
     <!-- 모달 창 -->
     <div id="modal_content">
-      <img src="../../public/logo.jpg" alt="" />
+      <img src="../../public/logo_ver2.png" alt="" />
       <br />
-      <label for="author">닉네임:</label>
-      <input type="text" id="author" v-model="loggedInUserId" />
+      <label for="author" style="color: #ffe600">닉네임:</label>
+      <input
+        type="text"
+        id="author"
+        v-model="loggedInUserId"
+        style="background-color: #ffe600"
+      />
       <br />
-      <label for="title">제목:</label>
-      <input type="text" id="title" v-model="title" />
+      <label for="title" style="color: #ffe600">제목:</label>
+      <input
+        type="text"
+        id="title"
+        v-model="title"
+        style="background-color: #ffe600"
+      />
       <br />
-      <label for="board_content" style="position: relative; bottom: 20%"
+      <label
+        for="board_content"
+        style="position: relative; bottom: 20%; color: #ffe600"
         >내용:</label
       >
-      <textarea id="board_content" v-model="content"></textarea>
-      <button id="modal_click" @click=";[(showModal = false), saveData()]">
+      <textarea
+        id="board_content"
+        v-model="content"
+        style="background-color: #ffe600"
+      ></textarea>
+      <button
+        id="modal_click"
+        @click=";[(showModal = false), saveData()]"
+        style="background-color: #ffe600"
+      >
         작성
       </button>
-      <button id="modal_end" @click="showModal = false">취소</button>
+      <button
+        id="modal_end"
+        @click="showModal = false"
+        style="background-color: #ffe600"
+      >
+        취소
+      </button>
     </div>
   </div>
   <div id="container">
@@ -278,7 +304,7 @@ img {
   width: 450px;
   height: 600px;
   top: 20%;
-  background: #d9d9d9;
+  background: black;
   border-radius: 8px;
   padding: 20px;
 }
@@ -286,11 +312,19 @@ img {
   position: absolute;
   bottom: 0%;
   left: 10%;
+  font-weight: bold;
+  width: 45px;
+  height: 30px;
+  border-radius: 10px;
 }
 #modal_end {
   position: absolute;
   bottom: 0%;
   left: 20%;
+  font-weight: bold;
+  width: 45px;
+  height: 30px;
+  border-radius: 10px;
 }
 #author {
   width: 50%;
@@ -380,7 +414,8 @@ td {
 
 #detail_modal_content {
   /* Different ID */
-  background-color: white;
+  background-color: black;
+  color: #ffe600;
   width: 550px;
   text-align: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -406,6 +441,7 @@ td {
 }
 
 .modal-section-content1 {
+  background-color: #ffe600;
   font-size: 16px;
   line-height: 1.5;
   border: 1px solid black;
@@ -418,6 +454,7 @@ td {
   margin: 10px 0;
 }
 .modal-section-content2 {
+  background-color: #ffe600;
   font-size: 16px;
   line-height: 1.5;
   border: 1px solid black;
@@ -431,30 +468,33 @@ td {
 }
 
 .modal-button {
-  background-color: #007bff;
-  color: white;
+  background-color: #ffe600;
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 50px;
+  font-weight: bold;
 }
 .modal-button-del {
-  background-color: #007bff;
-  color: white;
+  background-color: #ffe600;
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 50px;
+  font-weight: bold;
 }
 .modal-button-upd {
-  background-color: #007bff;
-  color: white;
+  background-color: #ffe600;
+  color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   margin: 50px;
+  font-weight: bold;
 }
 </style>

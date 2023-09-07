@@ -64,7 +64,16 @@
               {{ day }}요일 루틴:
               <span v-for="(routine, index) in routines" :key="index">
                 {{ index + 1 }}. {{ routine.exercises.join(', ') }}
-                <button @click="editRoutine(routine)">수정</button>
+                <button
+                  @click="editRoutine(routine)"
+                  style="
+                    background: #ffe600;
+                    font-weight: bold;
+                    margin: 0px 30px 0px 10px;
+                  "
+                >
+                  수정
+                </button>
               </span>
             </p>
           </li>
@@ -111,9 +120,11 @@
           v-model="editedExercise"
           placeholder="수정할 내용 입력"
         />
-        <button @click="saveEditedRoutine">저장</button>
-        <button @click="deleteRoutine">삭제</button>
-        <button @click="closeModal">취소</button>
+        <div id="button_content">
+          <button @click="saveEditedRoutine">저장</button>
+          <button @click="deleteRoutine">삭제</button>
+          <button @click="closeModal">취소</button>
+        </div>
       </div>
     </div>
   </div>
@@ -347,9 +358,20 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: black;
+  color: #ffe600;
   padding: 20px;
   z-index: 9999;
+  border: 3px solid #ffe600;
+}
+#button_content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+#button_content button {
+  background-color: #ffe600;
+  font-weight: bold;
 }
 #mylutin_all {
   display: flex;
@@ -426,7 +448,8 @@ export default {
   padding: 9px;
   width: 50%;
   background-color: #ffe600;
-  margin-left: auto;
+  margin-left: 40px;
+  margin-right: 50px;
 }
 
 .youtube {
@@ -456,7 +479,7 @@ export default {
   color: rgb(255, 230, 0);
   border-radius: 10px;
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 30px;
 }
 .cancel-button {
   margin-top: 10px;
@@ -470,9 +493,6 @@ export default {
   margin-left: auto;
   margin-right: 10px;
 }
-.routine_button {
-  display: flex;
-}
 .routine-list ul {
   list-style: none;
   padding: 0;
@@ -483,11 +503,13 @@ export default {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f2f2f2; /* Alternate background colors */
+  background-color: black; /* Alternate background colors */
+  color: #ffe600;
 }
 
 .routine-list li:nth-child(even) {
-  background-color: #e0e0e0; /* Alternate background colors */
+  background-color: #6d6c6c; /* Alternate background colors */
+  color: #ffe600;
 }
 
 .routine-list p {
