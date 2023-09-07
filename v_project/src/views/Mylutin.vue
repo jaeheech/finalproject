@@ -2,7 +2,9 @@
   <div id="mylutin_all">
     <div id="mylutin_sidebar">
       <ul>
-        <li v-for="v in sideBar" :key="v">{{ v }}</li>
+        <li v-for="item in sideBar" :key="item">
+          <a :href="getLink(item)">{{ item }}</a>
+        </li>
       </ul>
     </div>
     <div id="mylutin_content">
@@ -346,6 +348,20 @@ export default {
         this.routinesByDay[day] = this.routinesByDay[day].filter(
           (routine) => routine._id !== routineId
         )
+      }
+    },
+    getLink(item) {
+      switch (item) {
+        case '부위별 운동':
+          return 'http://localhost:3000/part'
+        case '나만의 루틴':
+          return 'http://localhost:3000/mylutin'
+        case '집근처 헬스장':
+          return 'http://localhost:3000/neargym'
+        case '자유게시판':
+          return 'http://localhost:3000/Board'
+        default:
+          return ''
       }
     }
   }

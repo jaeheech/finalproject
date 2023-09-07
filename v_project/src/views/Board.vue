@@ -50,7 +50,9 @@
     <!-- 사이드바 및 메인 컨텐츠 -->
     <div id="side_bar">
       <ul>
-        <li v-for="v in sideBar" :key="v">{{ v }}</li>
+        <li v-for="item in sideBar" :key="item">
+          <a :href="getLink(item)">{{ item }}</a>
+        </li>
       </ul>
     </div>
     <div id="main">
@@ -131,7 +133,7 @@ export default {
     return {
       showModal: false,
       loggedInUserId: '',
-      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판'],
+      sideBar: ['부위별 운동', '집근처 헬스장', '자유게시판'],
       author: '',
       content: '',
       title: '',
@@ -273,6 +275,18 @@ export default {
         .catch((error) => {
           console.error('게시물 삭제 오류:', error)
         })
+    },
+    getLink(item) {
+      switch (item) {
+        case '부위별 운동':
+          return 'http://localhost:3000/part'
+        case '집근처 헬스장':
+          return 'http://localhost:3000/neargym'
+        case '자유게시판':
+          return 'http://localhost:3000/Board'
+        default:
+          return ''
+      }
     }
   }
 }
@@ -356,7 +370,7 @@ li {
   color: lightslategray;
   margin: 30px 0 10px 20px;
 }
-li:nth-child(4) {
+li:nth-child(3) {
   color: black;
   font-weight: bold;
   font-size: 20px;

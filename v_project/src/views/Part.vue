@@ -3,7 +3,9 @@
     <!-- 좌측 네비 파트 -->
     <div id="part_sidebar">
       <ul>
-        <li v-for="v in sideBar" :key="v">{{ v }}</li>
+        <li v-for="item in sideBar" :key="item">
+          <a :href="getLink(item)">{{ item }}</a>
+        </li>
       </ul>
     </div>
     <!-- // 좌측 네비 파트 -->
@@ -56,7 +58,7 @@ import gymEquipmentData from '../../public/gymEquipment.js'
 export default {
   data() {
     return {
-      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판'],
+      sideBar: ['부위별 운동', '집근처 헬스장', '자유게시판'],
       gymEquipmentData,
       parts: ['어깨', '가슴', '등', '하체', '이두', '삼두'],
       selectedParts: [] // 선택한 부위들을 담을 배열
@@ -71,6 +73,20 @@ export default {
         return this.gymEquipmentData.filter((equipment) =>
           this.selectedParts.includes(equipment.part)
         )
+      }
+    }
+  },
+  methods: {
+    getLink(item) {
+      switch (item) {
+        case '부위별 운동':
+          return 'http://localhost:3000/part'
+        case '집근처 헬스장':
+          return 'http://localhost:3000/neargym'
+        case '자유게시판':
+          return 'http://localhost:3000/Board'
+        default:
+          return ''
       }
     }
   }

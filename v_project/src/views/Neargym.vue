@@ -2,7 +2,9 @@
   <div id="neargym_all">
     <div id="neargym_sidebar">
       <ul>
-        <li v-for="v in sideBar" :key="v">{{ v }}</li>
+        <li v-for="item in sideBar" :key="item">
+          <a :href="getLink(item)">{{ item }}</a>
+        </li>
       </ul>
     </div>
     <div id="neargym_content">
@@ -59,7 +61,11 @@ export default {
       },
       gyms,
       map: null,
-      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판']
+      sideBar: ['부위별 운동', '집근처 헬스장', '자유게시판'].filter(
+        (item, index, self) => {
+          return self.indexOf(item) === index
+        }
+      )
     }
   },
   mounted() {
@@ -121,6 +127,18 @@ export default {
       })
 
       infowindow.open(this.map, marker)
+    },
+    getLink(item) {
+      switch (item) {
+        case '부위별 운동':
+          return 'http://localhost:3000/part'
+        case '집근처 헬스장':
+          return 'http://localhost:3000/neargym'
+        case '자유게시판':
+          return 'http://localhost:3000/Board'
+        default:
+          return ''
+      }
     }
   }
 }
@@ -144,7 +162,7 @@ export default {
   color: lightslategray;
   margin: 30px 0 10px 20px;
 }
-#neargym_sidebar li:nth-child(3) {
+#neargym_sidebar li:nth-child(2) {
   color: black;
   font-size: 20px;
   font-weight: bold;
