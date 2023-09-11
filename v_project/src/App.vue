@@ -31,6 +31,7 @@
       <router-link to="/part">부위별 운동</router-link>
       <!-- 로그인 했을때만 나오게 함  -->
       <router-link v-if="loggedIn" to="/mylutin">나만의 루틴</router-link>
+      <router-link to="/fixed">운동자세 교정</router-link>
       <router-link to="/neargym">집근처 헬스장</router-link>
       <router-link to="/Board">자유게시판</router-link>
     </nav>

@@ -27,6 +27,15 @@ const routes = [
       import(/* webpackChunkName: "mylutin" */ '../views/Mylutin.vue')
   },
   {
+    path: '/fixed',
+    name: 'fixed',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "fixed" */ '../views/Fixed.vue')
+  },
+  {
     path: '/neargym',
     name: 'neargym',
     // route level code-splitting

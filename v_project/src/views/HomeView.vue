@@ -21,7 +21,12 @@
           alt="logo"
           style="position: relative; left: 20%"
         /><br />
-        질문 <input id="question" v-model="question" />
+        질문
+        <input
+          id="question"
+          v-model="question"
+          placeholder="질문할 내용을 입력해주세요"
+        />
         <p>답변</p>
         <textarea id="response" v-model="response"></textarea>
         <button id="modal_click" @click="gpt3()">질문</button>
