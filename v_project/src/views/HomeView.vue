@@ -21,12 +21,7 @@
           alt="logo"
           style="position: relative; left: 20%"
         /><br />
-        질문
-        <input
-          id="question"
-          v-model="question"
-          placeholder="질문할 내용을 입력해주세요"
-        />
+        질문 <input id="question" v-model="question" />
         <p>답변</p>
         <textarea id="response" v-model="response"></textarea>
         <button id="modal_click" @click="gpt3()">질문</button>
@@ -122,94 +117,29 @@
     >
       〈오늘의 건강 뉴스〉
     </p>
-    <div id="main_row_02">
-      <div class="left" style="margin-top: -30px; margin-right: 43px">
-        <div id="row_02_imgs_01" style="margin-right: 20px">
-          <img
-            src="../../public/health2.jpg"
-            alt="#"
-            width="400px"
-            height="285px"
-          />
-        </div>
-        <div id="row_02_content_01">
-          <span style="font-size: 20px; font-weight: 700"
-            >프로틴은 사실 여성 다이어트 <br />제품이다?!</span
-          ><br />
-          <span style="display: inline-block; margin-top: 20px"
-            >근육 형성과 유지 등을 위해 운동하는<br />사람이 주로 섭취하는
-            단백질 보충제<br />가 다이어트 및 근감소증 예방에도 효<br />과가
-            있는 것으로 알려지면서 소비층<br />이 여성과 중장년층으로 확대되고
-            있<br />다.</span
-          >
-        </div>
-      </div>
-      <div class="right" style="margin-top: -30px">
-        <div id="right_row_01" style="display: flex">
-          <div id="row_02_imgs_01" style="margin-right: 20px">
-            <img
-              src="../../public/health3.jpg"
-              alt="#"
-              width="120px"
-              height="90px"
-            />
+    <div>
+      <div
+        v-for="(article, index) in articles"
+        :key="index"
+        class="article"
+        style="margin: 0 0 20px 80px"
+      >
+        <a
+          :href="article.articleLink"
+          target="_blank"
+          style="text-decoration-line: none; color: white"
+        >
+          <h1>{{ article.title }}</h1>
+          <div class="news_low1_content" style="display: flex">
+            <img :src="article.imageUrl" alt="...로딩중" style="width: 300px" />
+            <p style="margin-left: 20px; font-size: 18px; width: 72%">
+              {{ article.summary }}
+            </p>
           </div>
-          <div id="row_02_content_01">
-            <span style="font-size: 18px; font-weight: 700"
-              >프로틴은 사실 여성 다이어트 제품이다?!</span
-            ><br />
-            <span
-              style="font-size: 15px; display: inline-block; margin-top: 10px"
-              >근육 형성과 유지 등을 위해 운동하는사람이 주로 섭취하는 단백질
-              보충제가 다이어트 및<br />근감소증 예방에도 효과가 있는 것으로
-              알려지면서 소비층이 여성과 중장년층으로 확대됨</span
-            >
-          </div>
-        </div>
-        <div id="right_row_02" style="display: flex">
-          <div id="row_02_imgs_02" style="margin-right: 20px">
-            <img
-              src="../../public/health3.jpg"
-              alt="#"
-              width="120px"
-              height="90px"
-            />
-          </div>
-          <div id="row_02_content_02">
-            <span style="font-size: 18px; font-weight: 700"
-              >프로틴은 사실 여성 다이어트 제품이다?!</span
-            ><br />
-            <span
-              style="font-size: 15px; display: inline-block; margin-top: 10px"
-              >근육 형성과 유지 등을 위해 운동하는사람이 주로 섭취하는 단백질
-              보충제가 다이어트 및<br />근감소증 예방에도 효과가 있는 것으로
-              알려지면서 소비층이 여성과 중장년층으로 확대됨</span
-            >
-          </div>
-        </div>
-        <div id="right_row_03" style="display: flex">
-          <div id="row_02_imgs_03" style="margin-right: 20px">
-            <img
-              src="../../public/health3.jpg"
-              alt="#"
-              width="120px"
-              height="90px"
-            />
-          </div>
-          <div id="row_02_content_03">
-            <span style="font-size: 18px; font-weight: 700"
-              >프로틴은 사실 여성 다이어트 제품이다?!</span
-            ><br />
-            <span
-              style="font-size: 15px; display: inline-block; margin-top: 10px"
-              >근육 형성과 유지 등을 위해 운동하는사람이 주로 섭취하는 단백질
-              보충제가 다이어트 및<br />근감소증 예방에도 효과가 있는 것으로
-              알려지면서 소비층이 여성과 중장년층으로 확대됨</span
-            >
-          </div>
-        </div>
+        </a>
       </div>
     </div>
+
     <!-- // 오늘의 건강뉴스 -->
 
     <!-- 오늘의 핫딜 상품들 -->
@@ -267,7 +197,8 @@ export default {
       showModal: false,
       question: '',
       response: '',
-      hotPosts: []
+      hotPosts: [],
+      articles: []
     }
   },
   mounted() {
@@ -275,6 +206,14 @@ export default {
       this.initSlickSlider()
     })
     this.fetchHotPosts()
+    axios
+      .get('/healthnews-data')
+      .then((response) => {
+        this.articles = response.data
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
   },
   methods: {
     initSlickSlider() {
@@ -380,6 +319,9 @@ export default {
   margin-top: 50px;
   margin-left: 80px;
 }
+.article a :is(h1, p):hover {
+  color: #ffe600;
+}
 #main_row_02 .left {
   display: flex;
   color: white;
@@ -461,5 +403,9 @@ export default {
   height: 60%;
   margin: -35px 0 0 47px;
   background-color: #ffe600;
+}
+.left img {
+  width: '400px';
+  height: '285px';
 }
 </style>
