@@ -141,6 +141,10 @@ export default {
   height: 270px;
   margin: 0 20px 20px 0;
 }
+#GEcard:hover {
+  transition: 1s ease-in-out;
+  transform: scale(1.1);
+}
 #GEcard_img img {
   margin: 15px 0 0 15px;
   width: 200px;

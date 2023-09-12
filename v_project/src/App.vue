@@ -58,28 +58,44 @@
             <div id="Adv_allbox">
               <div id="row_01">
                 <div id="Adv_box_01" style="margin-right: 15px">
-                  <a href="https://www.naver.com/"
-                    ><img src="../public/adv01.png" alt="광고1"
+                  <a
+                    href="https://dailygongam.com/product/detail.html?product_no=953&PX2_ECH=trendpick&cafe_mkt=ue_nanot_jjuk_n83&utm_source=naver_pc&utm_medieum=cpm&utm_campagin=not&utm_content=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283&utm_term=jjuk&n_query=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283"
+                    ><img src="../public/생과일쥬스.png" alt="광고1"
                   /></a>
                 </div>
                 <div id="Adv_box_02">
-                  <img src="../public/adv02.png" alt="광고2" />
+                  <a
+                    href="https://dailygongam.com/product/detail.html?product_no=953&PX2_ECH=trendpick&cafe_mkt=ue_nanot_jjuk_n83&utm_source=naver_pc&utm_medieum=cpm&utm_campagin=not&utm_content=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283&utm_term=jjuk&n_query=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283"
+                    ><img src="../public/생과일쥬스.png" alt="광고2"
+                  /></a>
                 </div>
               </div>
               <div id="row_02">
                 <div id="Adv_box_03" style="margin-right: 15px">
-                  <img src="../public/adv03.png" alt="광고3" />
+                  <a
+                    href="https://dailygongam.com/product/detail.html?product_no=953&PX2_ECH=trendpick&cafe_mkt=ue_nanot_jjuk_n83&utm_source=naver_pc&utm_medieum=cpm&utm_campagin=not&utm_content=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283&utm_term=jjuk&n_query=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283"
+                    ><img src="../public/생과일쥬스.png" alt="광고3"
+                  /></a>
                 </div>
                 <div id="Adv_box_04">
-                  <img src="../public/adv04.png" alt="광고4" />
+                  <a
+                    href="https://dailygongam.com/product/detail.html?product_no=953&PX2_ECH=trendpick&cafe_mkt=ue_nanot_jjuk_n83&utm_source=naver_pc&utm_medieum=cpm&utm_campagin=not&utm_content=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283&utm_term=jjuk&n_query=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283"
+                    ><img src="../public/생과일쥬스.png" alt="광고4"
+                  /></a>
                 </div>
               </div>
               <div id="row_03">
                 <div id="Adv_box_05" style="margin-right: 15px">
-                  <img src="../public/adv05.png" alt="광고5" />
+                  <a
+                    href="https://dailygongam.com/product/detail.html?product_no=953&PX2_ECH=trendpick&cafe_mkt=ue_nanot_jjuk_n83&utm_source=naver_pc&utm_medieum=cpm&utm_campagin=not&utm_content=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283&utm_term=jjuk&n_query=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283"
+                    ><img src="../public/생과일쥬스.png" alt="광고5"
+                  /></a>
                 </div>
                 <div id="Adv_box_06">
-                  <img src="../public/adv06.png" alt="광고6" />
+                  <a
+                    href="https://dailygongam.com/product/detail.html?product_no=953&PX2_ECH=trendpick&cafe_mkt=ue_nanot_jjuk_n83&utm_source=naver_pc&utm_medieum=cpm&utm_campagin=not&utm_content=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283&utm_term=jjuk&n_query=NOSP/%ED%83%80%EC%9E%84%EB%B3%B4%EB%93%9C_%EC%AD%89%EC%A7%9C%EB%B3%B4%EA%B2%8C_p1283"
+                    ><img src="../public/생과일쥬스.png" alt="광고6"
+                  /></a>
                 </div>
               </div>
             </div>
