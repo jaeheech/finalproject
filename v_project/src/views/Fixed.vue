@@ -15,7 +15,6 @@
         <div id="cam">
           <video
             ref="video"
-            src=""
             id="video"
             width="640"
             height="480"
@@ -65,7 +64,6 @@ export default {
     }
   },
   mounted() {
-    const button = this.$refs.button // Add ref to button element
     navigator.mediaDevices
       .getUserMedia({
         video: true,
@@ -74,17 +72,15 @@ export default {
       .then((stream) => {
         const video = this.$refs.video
         video.srcObject = stream
-        video.onloadedmetadata = () => {
-          console.log('비디오 스트림이 설정되었습니다.')
+        video.onloadeddata = () => {
+          console.log('비디오 데이터 로드 완료')
+          // 로드된 모델을 사용하여 포즈를 예측합니다.
           this.loadPoseNetModel()
         }
       })
       .catch((error) => {
         console.error('비디오 스트림을 가져오는 중 오류 발생:', error)
       })
-    button.addEventListener('click', () => {
-      this.analyzePose()
-    })
   },
   methods: {
     getLink(item) {
@@ -101,15 +97,15 @@ export default {
           return ''
       }
     },
-
     async loadPoseNetModel() {
       try {
         const loadedModel = await posenet.load()
         this.model = loadedModel
-
+        console.log(this.model)
         console.log('PoseNet 모델이 로드되었습니다.')
 
         const video = document.getElementById('video')
+        console.log(video)
         video.onloadeddata = () => {
           console.log('비디오 데이터 로드 완료')
           // 로드된 모델을 사용하여 포즈를 예측합니다.
@@ -123,35 +119,47 @@ export default {
       const video = document.getElementById('video')
       const canvas = document.getElementById('canvas')
       const context = canvas.getContext('2d')
-
+      console.log(video, canvas, context)
       if (this.model) {
-        const pose = await this.model.estimateSinglePose(video)
-        this.epose = pose // 'epose' 변수를 포즈로 설정합니다.
-
+        console.log(this.model)
+        const pose = await this.model.estimateSinglePose(video) // 'pose' 변수 정의
+        console.log(pose) // 추가: pose 객체 로깅
         if (pose) {
           canvas.width = video.width
           canvas.height = video.height
           this.drawKeypoints(pose.keypoints, 0.6, context)
           this.drawSkeleton(pose.keypoints, 0.6, context)
+
+          // 포즈 추정이 완료되었을 때만 this.epose를 출력
+          console.log(this.epose)
+          this.analyzePose()
         }
       } else {
         console.error('모델이 아직 로드되지 않았습니다.')
       }
-
-      await requestAnimationFrame(this.predictPose)
+      // 다음 프레임 요청
+      requestAnimationFrame(this.predictPose)
     },
     analyzePose() {
       // 포즈 분석 로직을 여기에 추가
       // this.epose를 사용하여 손 위치 분석 등을 수행
-      console.log(this.epose)
-
-      // 분석 결과에 따라 this.poseResult 업데이트
-      // 예: this.poseResult = '왼손을 들었네요!!';
-
+      // console.log(this.epose)
+      if (this.epose) {
+        // 예: 왼손의 y 좌표가 특정 값보다 큰 경우 '왼손을 들었네요!!' 메시지를 생성
+        if (
+          this.epose.keypoints[9].position.y >
+          this.epose.keypoints[10].position.y
+        ) {
+          this.poseResult = '왼손을 들었네요!!'
+        } else {
+          this.poseResult = '왼손을 내렸네요!!'
+        }
+      } else {
+        this.poseResult = '포즈 정보가 없습니다.'
+      }
       // TensorFlow 리소스를 정리 (선택 사항)
       tf.dispose()
     }
-    // drawKeypoints 및 drawSkeleton 함수 정의
   }
 }
 </script>
