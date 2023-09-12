@@ -12,7 +12,20 @@
         <h1 style="text-align: center; letter-spacing: 2px">운동자세 교정</h1>
       </div>
       <div id="fixed_content_cam">
-        <div id="cam">캠</div>
+        <div id="cam">
+          <video
+            src=""
+            id="video"
+            width="640"
+            height="480"
+            autoplay
+            muted
+            playsinline
+            style="position: absolute"
+          ></video>
+          <canvas id="canvas" style="position: absolute"></canvas>
+        </div>
+        <button style="position: absolute; top: 65%">pose</button>
         <p id="rst">결과 출력</p>
       </div>
       <div id="warning_point">
@@ -37,7 +50,31 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      sideBar: ['부위별 운동', '운동자세 교정', '집근처 헬스장', '자유게시판']
+    }
+  },
+  methods: {
+    getLink(item) {
+      switch (item) {
+        case '부위별 운동':
+          return 'http://localhost:3000/part'
+        case '운동자세 교정':
+          return 'http://localhost:3000/fixed'
+        case '집근처 헬스장':
+          return 'http://localhost:3000/neargym'
+        case '자유게시판':
+          return 'http://localhost:3000/Board'
+        default:
+          return ''
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 #fixed_all {

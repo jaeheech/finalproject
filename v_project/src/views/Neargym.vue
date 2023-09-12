@@ -61,11 +61,14 @@ export default {
       },
       gyms,
       map: null,
-      sideBar: ['부위별 운동', '집근처 헬스장', '자유게시판'].filter(
-        (item, index, self) => {
-          return self.indexOf(item) === index
-        }
-      )
+      sideBar: [
+        '부위별 운동',
+        '운동자세 교정',
+        '집근처 헬스장',
+        '자유게시판'
+      ].filter((item, index, self) => {
+        return self.indexOf(item) === index
+      })
     }
   },
   mounted() {
@@ -132,6 +135,8 @@ export default {
       switch (item) {
         case '부위별 운동':
           return 'http://localhost:3000/part'
+        case '운동자세 교정':
+          return 'http://localhost:3000/fixed'
         case '집근처 헬스장':
           return 'http://localhost:3000/neargym'
         case '자유게시판':
@@ -162,7 +167,7 @@ export default {
   color: lightslategray;
   margin: 30px 0 10px 20px;
 }
-#neargym_sidebar li:nth-child(2) {
+#neargym_sidebar li:nth-child(3) {
   color: black;
   font-size: 20px;
   font-weight: bold;

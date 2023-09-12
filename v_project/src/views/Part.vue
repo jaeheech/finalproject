@@ -58,7 +58,7 @@ import gymEquipmentData from '../../public/gymEquipment.js'
 export default {
   data() {
     return {
-      sideBar: ['부위별 운동', '집근처 헬스장', '자유게시판'],
+      sideBar: ['부위별 운동', '운동자세 교정', '집근처 헬스장', '자유게시판'],
       gymEquipmentData,
       parts: ['어깨', '가슴', '등', '하체', '이두', '삼두'],
       selectedParts: [] // 선택한 부위들을 담을 배열
@@ -81,6 +81,8 @@ export default {
       switch (item) {
         case '부위별 운동':
           return 'http://localhost:3000/part'
+        case '운동자세 교정':
+          return 'http://localhost:3000/fixed'
         case '집근처 헬스장':
           return 'http://localhost:3000/neargym'
         case '자유게시판':

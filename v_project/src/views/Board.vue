@@ -133,7 +133,7 @@ export default {
     return {
       showModal: false,
       loggedInUserId: '',
-      sideBar: ['부위별 운동', '집근처 헬스장', '자유게시판'],
+      sideBar: ['부위별 운동', '운동자세 교정', '집근처 헬스장', '자유게시판'],
       author: '',
       content: '',
       title: '',
@@ -280,6 +280,8 @@ export default {
       switch (item) {
         case '부위별 운동':
           return 'http://localhost:3000/part'
+        case '운동자세 교정':
+          return 'http://localhost:3000/fixed'
         case '집근처 헬스장':
           return 'http://localhost:3000/neargym'
         case '자유게시판':
@@ -370,7 +372,7 @@ li {
   color: lightslategray;
   margin: 30px 0 10px 20px;
 }
-li:nth-child(3) {
+li:nth-child(4) {
   color: black;
   font-weight: bold;
   font-size: 20px;

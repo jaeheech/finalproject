@@ -140,7 +140,13 @@ export default {
   },
   data() {
     return {
-      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판'],
+      sideBar: [
+        '부위별 운동',
+        '나만의 루틴',
+        '운동자세 교정',
+        '집근처 헬스장',
+        '자유게시판'
+      ],
       user: null,
       showInputs: false,
       routineData: {
@@ -356,6 +362,8 @@ export default {
           return 'http://localhost:3000/part'
         case '나만의 루틴':
           return 'http://localhost:3000/mylutin'
+        case '운동자세 교정':
+          return 'http://localhost:3000/fixed'
         case '집근처 헬스장':
           return 'http://localhost:3000/neargym'
         case '자유게시판':
