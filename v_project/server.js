@@ -235,7 +235,7 @@ async function scrapeWebsite() {
     return scrapedData
   } catch (error) {
     console.error(error)
-    return { error: 'An error occurred while scraping the website' }
+    return { error: '데이터를 가져오는 도중 오류 발생' }
   } finally {
     await driver.quit()
   }

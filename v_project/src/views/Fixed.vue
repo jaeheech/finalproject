@@ -99,6 +99,8 @@ export default {
     },
     async loadPoseNetModel() {
       try {
+        await tf.ready() // TensorFlow.js 초기화
+        await tf.setBackend('webgl') // 원하는 백엔드 설정
         const loadedModel = await posenet.load()
         this.model = loadedModel
         console.log(this.model)
@@ -106,11 +108,7 @@ export default {
 
         const video = document.getElementById('video')
         console.log(video)
-        video.onloadeddata = () => {
-          console.log('비디오 데이터 로드 완료')
-          // 로드된 모델을 사용하여 포즈를 예측합니다.
-          this.predictPose()
-        }
+        this.predictPose()
       } catch (error) {
         console.error('PoseNet 모델을 로드하는 중 오류 발생:', error)
       }
