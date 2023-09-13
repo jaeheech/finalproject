@@ -197,11 +197,13 @@ nav a {
   color: #2c3e50;
   display: inline-block; /* 링크가 너비를 내용에 맞게 조정하도록 설정 */
   padding: 10px 20px; /* 링크 내용 주위에 패딩 추가 */
+  text-decoration: none;
 }
 
 nav a.router-link-active {
   background-color: black;
   color: #ffe600;
+  text-decoration: none;
 }
 
 footer {

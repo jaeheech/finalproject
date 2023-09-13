@@ -3,7 +3,7 @@
     <div id="neargym_sidebar">
       <ul>
         <li v-for="item in sideBar" :key="item">
-          <a :href="getLink(item)">{{ item }}</a>
+          <a :href="getLink(item)" style="text-decoration: none">{{ item }}</a>
         </li>
       </ul>
     </div>
