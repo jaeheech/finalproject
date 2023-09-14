@@ -2,11 +2,13 @@
   <div id="app">
     <!-- ... 헤더 및 기타 내용 ... -->
     <header style="margin: 20px 0">
-      <img
-        src="../public/도르트문트.jpg"
-        alt="logo_01"
-        style="width: 100px; position: absolute; left: 0"
-      />
+      <a href="https://www.bvbonlineshop.com/">
+        <img
+          src="../public/도르트문트.jpg"
+          alt="logo_01"
+          style="width: 100px; position: absolute; left: 0"
+        />
+      </a>
       <img src="../public/logo_ver2.png" alt="logo_02" />
       <div class="header-right-links">
         <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시-->
