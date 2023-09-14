@@ -53,7 +53,7 @@
 <script>
 import * as posenet from '@tensorflow-models/posenet'
 import * as tf from '@tensorflow/tfjs'
-import '@tensorflow/tfjs-backend-webgl'
+// import '@tensorflow/tfjs-backend-webgl'
 export default {
   data() {
     return {
@@ -64,23 +64,7 @@ export default {
     }
   },
   mounted() {
-    navigator.mediaDevices
-      .getUserMedia({
-        video: true,
-        audio: false
-      })
-      .then((stream) => {
-        const video = this.$refs.video
-        video.srcObject = stream
-        video.onloadeddata = () => {
-          console.log('비디오 데이터 로드 완료')
-          // 로드된 모델을 사용하여 포즈를 예측합니다.
-          this.loadPoseNetModel()
-        }
-      })
-      .catch((error) => {
-        console.error('비디오 스트림을 가져오는 중 오류 발생:', error)
-      })
+    this.initializeCamera()
   },
   methods: {
     getLink(item) {
@@ -97,66 +81,80 @@ export default {
           return ''
       }
     },
-    async loadPoseNetModel() {
-      try {
-        await tf.ready() // TensorFlow.js 초기화
-        await tf.setBackend('webgl') // 원하는 백엔드 설정
-        const loadedModel = await posenet.load()
-        this.model = loadedModel
-        console.log(this.model)
-        console.log('PoseNet 모델이 로드되었습니다.')
-
-        const video = document.getElementById('video')
-        console.log(video)
-        this.predictPose()
-      } catch (error) {
-        console.error('PoseNet 모델을 로드하는 중 오류 발생:', error)
-      }
-    },
-    async predictPose() {
+    async initializeCamera() {
       const video = document.getElementById('video')
       const canvas = document.getElementById('canvas')
       const context = canvas.getContext('2d')
-      console.log(video, canvas, context)
-      if (this.model) {
-        console.log(this.model)
-        const pose = await this.model.estimateSinglePose(video) // 'pose' 변수 정의
-        console.log(pose) // 추가: pose 객체 로깅
-        if (pose) {
-          canvas.width = video.width
-          canvas.height = video.height
-          this.drawKeypoints(pose.keypoints, 0.6, context)
-          this.drawSkeleton(pose.keypoints, 0.6, context)
 
-          // 포즈 추정이 완료되었을 때만 this.epose를 출력
-          console.log(this.epose)
-          this.analyzePose()
-        }
-      } else {
-        console.error('모델이 아직 로드되지 않았습니다.')
+      try {
+        await tf.data.webcam(video)
+        this.loadPoseNetModel(video, canvas, context)
+      } catch (error) {
+        console.error('Error initializing camera:', error)
       }
-      // 다음 프레임 요청
-      requestAnimationFrame(this.predictPose)
     },
-    analyzePose() {
-      // 포즈 분석 로직을 여기에 추가
-      // this.epose를 사용하여 손 위치 분석 등을 수행
-      // console.log(this.epose)
-      if (this.epose) {
-        // 예: 왼손의 y 좌표가 특정 값보다 큰 경우 '왼손을 들었네요!!' 메시지를 생성
-        if (
-          this.epose.keypoints[9].position.y >
-          this.epose.keypoints[10].position.y
-        ) {
-          this.poseResult = '왼손을 들었네요!!'
-        } else {
-          this.poseResult = '왼손을 내렸네요!!'
+    async loadPoseNetModel(video, canvas, context) {
+      try {
+        const model = await posenet.load()
+
+        const predict = () => {
+          model.estimateSinglePose(video).then((pose) => {
+            canvas.width = video.width
+            canvas.height = video.height
+            this.drawKeypoints(pose.keypoints, 0.6, context)
+            this.drawSkeleton(pose.keypoints, 0.6, context)
+          })
+          requestAnimationFrame(predict)
         }
-      } else {
-        this.poseResult = '포즈 정보가 없습니다.'
+        predict()
+      } catch (error) {
+        console.error('Error loading PoseNet model:', error)
       }
-      // TensorFlow 리소스를 정리 (선택 사항)
-      tf.dispose()
+    },
+    toTuple({ y, x }) {
+      return [y, x]
+    },
+    drawPoint(ctx, y, x, r) {
+      ctx.beginPath()
+      ctx.arc(x, y, r, 0, 2 * Math.PI)
+      ctx.fillStyle = 'yellow' // 이미 선언된 color 변수 사용
+      ctx.fill()
+    },
+
+    drawSegment([ay, ax], [by, bx], scale, ctx) {
+      ctx.beginPath()
+      ctx.moveTo(ax * scale, ay * scale)
+      ctx.lineTo(bx * scale, by * scale)
+      ctx.lineWidth = 2 // 이미 선언된 lineWidth 변수 사용
+      ctx.strokeStyle = 'yellow' // 이미 선언된 color 변수 사용
+      ctx.stroke()
+    },
+    drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+      for (let i = 0; i < keypoints.length; i++) {
+        const keypoint = keypoints[i]
+        if (keypoint.score < minConfidence) {
+          continue
+        }
+        const color = 'yellow'
+        const { y, x } = keypoint.position
+        this.drawPoint(ctx, y * scale, x * scale, 3, color)
+      }
+    },
+    drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+      const color = 'yellow'
+      const adjacentKeyPoints = posenet.getAdjacentKeyPoints(
+        keypoints,
+        minConfidence
+      )
+      adjacentKeyPoints.forEach((keypoints) => {
+        this.drawSegment(
+          this.toTuple(keypoints[0].position),
+          this.toTuple(keypoints[1].position),
+          color,
+          scale,
+          ctx
+        )
+      })
     }
   }
 }
