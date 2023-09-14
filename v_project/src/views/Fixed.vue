@@ -11,7 +11,22 @@
       <div id="fixed_content_title" style="border-bottom: 4px solid black">
         <h1 style="text-align: center; letter-spacing: 2px">운동자세 교정</h1>
       </div>
-      <select id="expose" v-model="expose">
+      <select
+        id="expose"
+        v-model="expose"
+        style="
+          width: 500px;
+          height: 35px;
+          border-radius: 10px;
+          margin: 5% 0 0 30%;
+          background-color: black;
+          color: #ffe600;
+          font-weight: bold;
+          letter-spacing: 1px;
+          text-align: center;
+        "
+      >
+        <option value="">운동을 고르시오</option>
         <option value="squart">스쿼트</option>
         <option value="pullUp">풀업</option>
       </select>
@@ -20,8 +35,8 @@
           <video
             ref="video"
             id="video"
-            width="640"
-            height="480"
+            width="700"
+            height="500"
             autoplay
             muted
             playsinline
@@ -29,7 +44,20 @@
           ></video>
           <canvas ref="canvas" id="canvas" style="position: absolute"></canvas>
         </div>
-        <div id="result_label">{{ poseResult }}</div>
+        <div
+          id="result_label"
+          style="
+            background-color: black;
+            color: #ffe600;
+            display: inline-block;
+            letter-spacing: 2px;
+            font-size: 18px;
+            margin-left: 1.5%;
+            padding: 10px 20px;
+          "
+        >
+          {{ poseResult }}
+        </div>
       </div>
       <div id="warning_point">
         <h2>촬영시 주의사항 <small>📢필독</small></h2>
@@ -61,7 +89,7 @@ export default {
   data() {
     return {
       sideBar: ['부위별 운동', '운동자세 교정', '집근처 헬스장', '자유게시판'],
-      poseResult: '',
+      poseResult: '운동 자세를 선택하고 시작해주세요',
       epose: '',
       model: '',
       expose: ''
@@ -231,21 +259,30 @@ export default {
   width: 85%;
   height: 92%;
 }
+#expose option {
+  text-align: center;
+  background-color: black;
+  color: #ffe600;
+}
 #fixed_content_cam {
-  background-color: darkcyan;
   width: 80%;
-  height: 50%;
+  height: 43%;
   margin-top: 5%;
-  margin-left: 10%;
+  margin-left: 22.5%;
 }
 #fixed_content_cam #cam {
-  background-color: azure;
   width: 100%;
   height: 90%;
 }
 #warning_point {
-  margin-top: 6%;
-  margin-left: 10%;
+  background-color: black;
+  display: inline-block;
+  margin: 6% 0 0 18%;
+  padding: 10px 20px;
+}
+#warning_point h2,
+h4 {
+  color: #ffe600;
 }
 #warning_point h4 {
   margin-left: 15px;
