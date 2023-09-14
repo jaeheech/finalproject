@@ -25,7 +25,6 @@
           ></video>
           <canvas ref="canvas" id="canvas" style="position: absolute"></canvas>
         </div>
-        <button ref="button" @click="analyzePose">분석 시작</button>
         <div id="result_label">{{ poseResult }}</div>
       </div>
       <div id="warning_point">
@@ -84,9 +83,11 @@ export default {
     async initializeCamera() {
       const video = document.getElementById('video')
       const canvas = document.getElementById('canvas')
-      const context = canvas.getContext('2d')
-
       try {
+        const context = canvas.getContext('2d')
+        console.log('video element:', video)
+        console.log('canvas element:', canvas)
+        console.log('canvas context:', context)
         await tf.data.webcam(video)
         this.loadPoseNetModel(video, canvas, context)
       } catch (error) {
@@ -96,17 +97,20 @@ export default {
     async loadPoseNetModel(video, canvas, context) {
       try {
         const model = await posenet.load()
+        console.log('PoseNet model:', model)
 
-        const predict = () => {
-          model.estimateSinglePose(video).then((pose) => {
-            canvas.width = video.width
-            canvas.height = video.height
-            this.drawKeypoints(pose.keypoints, 0.6, context)
-            this.drawSkeleton(pose.keypoints, 0.6, context)
-          })
+        const predict = async () => {
+          const pose = await model.estimateSinglePose(video)
+          console.log('Estimated pose:', pose)
+          canvas.width = video.width
+          canvas.height = video.height
+          this.drawKeypoints(pose.keypoints, 0.6, context, 1)
+          this.drawSkeleton(pose.keypoints, 0.6, context, 1)
+          this.analyzePose(pose) // 이 부분 수정
           requestAnimationFrame(predict)
         }
-        predict()
+
+        predict() // 비동기 함수를 호출
       } catch (error) {
         console.error('Error loading PoseNet model:', error)
       }
@@ -120,13 +124,13 @@ export default {
       ctx.fillStyle = 'yellow' // 이미 선언된 color 변수 사용
       ctx.fill()
     },
-
-    drawSegment([ay, ax], [by, bx], scale, ctx) {
+    drawSegment([ay, ax], [by, bx], color, scale, ctx) {
+      // ctx 위치 변경
       ctx.beginPath()
       ctx.moveTo(ax * scale, ay * scale)
       ctx.lineTo(bx * scale, by * scale)
-      ctx.lineWidth = 2 // 이미 선언된 lineWidth 변수 사용
-      ctx.strokeStyle = 'yellow' // 이미 선언된 color 변수 사용
+      ctx.lineWidth = 2
+      ctx.strokeStyle = color
       ctx.stroke()
     },
     drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
@@ -135,9 +139,8 @@ export default {
         if (keypoint.score < minConfidence) {
           continue
         }
-        const color = 'yellow'
         const { y, x } = keypoint.position
-        this.drawPoint(ctx, y * scale, x * scale, 3, color)
+        this.drawPoint(ctx, y * scale, x * scale, 3)
       }
     },
     drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
@@ -152,9 +155,23 @@ export default {
           this.toTuple(keypoints[1].position),
           color,
           scale,
-          ctx
+          ctx // ctx를 마지막 인자로 전달
         )
       })
+    },
+    analyzePose(pose) {
+      const leftHip = pose.keypoints[11].position.y
+      const leftKnee = pose.keypoints[13].position.y
+
+      // 임의의 기준을 설정하여 스쿼트 자세 여부를 판단
+      const threshold = 10 // 이 값은 조절할 수 있음
+
+      if (Math.abs(leftHip - leftKnee) < threshold) {
+        this.poseResult = '올바른 스쿼트 자세입니다.'
+      } else {
+        this.poseResult = '엉덩이를 내리세요.'
+      }
+      tf.dispose()
     }
   }
 }
