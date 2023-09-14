@@ -52,7 +52,6 @@
             display: inline-block;
             letter-spacing: 2px;
             font-size: 18px;
-            margin-left: 1.5%;
             padding: 10px 20px;
           "
         >
@@ -268,7 +267,7 @@ export default {
   width: 80%;
   height: 43%;
   margin-top: 5%;
-  margin-left: 22.5%;
+  margin-left: 22%;
 }
 #fixed_content_cam #cam {
   width: 100%;
