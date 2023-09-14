@@ -11,6 +11,10 @@
       <div id="fixed_content_title" style="border-bottom: 4px solid black">
         <h1 style="text-align: center; letter-spacing: 2px">운동자세 교정</h1>
       </div>
+      <select id="expose" v-model="expose">
+        <option value="squart">스쿼트</option>
+        <option value="pullUp">풀업</option>
+      </select>
       <div id="fixed_content_cam">
         <div id="cam">
           <video
@@ -59,7 +63,8 @@ export default {
       sideBar: ['부위별 운동', '운동자세 교정', '집근처 헬스장', '자유게시판'],
       poseResult: '',
       epose: '',
-      model: ''
+      model: '',
+      expose: ''
     }
   },
   mounted() {
@@ -106,7 +111,13 @@ export default {
           canvas.height = video.height
           this.drawKeypoints(pose.keypoints, 0.6, context, 1)
           this.drawSkeleton(pose.keypoints, 0.6, context, 1)
-          this.analyzePose(pose) // 이 부분 수정
+          if (this.expose === 'squart') {
+            this.analyzePoseSquart(pose)
+          }
+          if (this.expose === 'pullUp') {
+            this.analyzePosePullUp(pose)
+          }
+          // 이 부분 수정
           requestAnimationFrame(predict)
         }
 
@@ -159,7 +170,7 @@ export default {
         )
       })
     },
-    analyzePose(pose) {
+    analyzePoseSquart(pose) {
       const leftHip = pose.keypoints[11].position.y
       const leftKnee = pose.keypoints[13].position.y
 
@@ -170,6 +181,20 @@ export default {
         this.poseResult = '올바른 스쿼트 자세입니다.'
       } else {
         this.poseResult = '엉덩이를 내리세요.'
+      }
+      tf.dispose()
+    },
+    analyzePosePullUp(pose) {
+      const leftelbow = pose.keypoints[7].position.y
+      const leftshoulder = pose.keypoints[5].position.y
+
+      // 임의의 기준을 설정하여 스쿼트 자세 여부를 판단
+      const threshold = 10 // 이 값은 조절할 수 있음
+
+      if (Math.abs(leftshoulder - leftelbow) < threshold) {
+        this.poseResult = '올바른 풀업 자세입니다.'
+      } else {
+        this.poseResult = '좀더 올라가주세요.'
       }
       tf.dispose()
     }
