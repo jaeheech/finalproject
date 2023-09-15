@@ -17,10 +17,11 @@
         style="
           width: 500px;
           height: 35px;
+          border: none;
           border-radius: 10px;
           margin: 5% 0 0 30%;
           background-color: #ffe4e4;
-          color: #ff5b5b;
+          color: black;
           font-weight: bold;
           letter-spacing: 1px;
           text-align: center;
@@ -261,7 +262,7 @@ export default {
 #expose option {
   text-align: center;
   background-color: #ffe4e4;
-  color: #ff5b5b;
+  color: black;
 }
 #fixed_content_cam {
   width: 80%;

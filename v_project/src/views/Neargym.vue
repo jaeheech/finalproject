@@ -28,10 +28,11 @@
         style="
           width: 500px;
           height: 35px;
+          border: none;
           border-radius: 10px;
           margin: 0 0 5% 32%;
           background-color: #ffe4e4;
-          color: #ff5b5b;
+          color: black;
           font-weight: bold;
           letter-spacing: 1px;
         "
@@ -179,13 +180,12 @@ export default {
   height: 92%;
 }
 #neargym_content select:hover {
-  box-shadow: inset 3px 3px 3px black;
   cursor: pointer;
 }
 #neargym_content select option {
   text-align: center;
   background-color: #ffe4e4;
-  color: #ff5b5b;
+  color: black;
 }
 .map-container {
   width: 1000px;
