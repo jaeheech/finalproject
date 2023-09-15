@@ -4,46 +4,36 @@
     <div id="modal_content">
       <img src="../../public/logo_ver2.png" alt="" />
       <br />
-      <label for="author" style="color: #ffe600">닉네임:</label>
+      <label for="author" style="color: black">닉네임:</label>
       <input
         type="text"
         id="author"
         v-model="loggedInUserId"
-        style="background-color: #ffe600"
+        style="background-color: #ffe4e4; border: none; outline: none"
       />
       <br />
-      <label for="title" style="color: #ffe600">제목:</label>
+      <label for="title" style="color: black">제목:</label>
       <input
         type="text"
         id="title"
         v-model="title"
-        style="background-color: #ffe600"
+        style="background-color: #ffe4e4; border: none; outline: none"
       />
       <br />
       <label
         for="board_content"
-        style="position: relative; bottom: 20%; color: #ffe600"
+        style="position: relative; bottom: 20%; color: black"
         >내용:</label
       >
       <textarea
         id="board_content"
         v-model="content"
-        style="background-color: #ffe600"
+        style="background-color: #ffe4e4; border: none; outline: none"
       ></textarea>
-      <button
-        id="modal_click"
-        @click=";[(showModal = false), saveData()]"
-        style="background-color: #ffe600"
-      >
+      <button id="modal_click" @click=";[(showModal = false), saveData()]">
         작성
       </button>
-      <button
-        id="modal_end"
-        @click="showModal = false"
-        style="background-color: #ffe600"
-      >
-        취소
-      </button>
+      <button id="modal_end" @click="showModal = false">취소</button>
     </div>
   </div>
   <div id="container">
@@ -150,7 +140,7 @@ export default {
       selectedPostTitle: '',
       selectedPostContent: '',
       currentPage: 1, // 현재 페이지 번호
-      itemsPerPage: 20, // 페이지당 아이템 수를 50으로 설정
+      itemsPerPage: 40, // 페이지당 아이템 수를 50으로 설정
       totalPages: 0 // 총 페이지 수
     }
   },
@@ -324,27 +314,35 @@ img {
   width: 450px;
   height: 600px;
   top: 20%;
-  background: black;
+  background: #ffbfbf;
   border-radius: 8px;
   padding: 20px;
 }
 #modal_click {
-  position: absolute;
-  bottom: 0%;
-  left: 10%;
-  font-weight: bold;
-  width: 45px;
+  width: 60px;
   height: 30px;
-  border-radius: 10px;
+  text-align: center;
+  margin: 0 5px 0 55px;
+  background-color: #ff5b5b;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  border: none;
 }
 #modal_end {
-  position: absolute;
-  bottom: 0%;
-  left: 20%;
-  font-weight: bold;
-  width: 45px;
+  width: 60px;
+  border: none;
   height: 30px;
-  border-radius: 10px;
+  text-align: center;
+  margin: 0 0 0 10px;
+  background-color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #ff5b5b;
+}
+:is(#modal_click, #modal_end):hover {
+  box-shadow: 2px 2px 2px inset black;
+  cursor: pointer;
 }
 #author {
   width: 50%;
@@ -354,7 +352,7 @@ img {
 #title {
   width: 50%;
   height: 5%;
-  margin: 10px 10px 10px 20px;
+  margin: 10px 10px 0 25px;
 }
 #board_content {
   width: 70%;
@@ -374,19 +372,13 @@ img {
   height: 20%;
 }
 li {
-  color: darkgray;
+  color: lightslategray;
   margin: 30px 0 10px 20px;
-}
-li a:visited {
-  color: darkgray;
 }
 li:nth-child(4) {
   color: black;
   font-weight: bold;
   font-size: 20px;
-}
-li:nth-child(4) a:visited {
-  color: black;
 }
 #main {
   background-color: #ffbfbf;
@@ -480,9 +472,8 @@ td {
 }
 
 #detail_modal_content {
-  /* Different ID */
-  background-color: black;
-  color: #ffe600;
+  background-color: #ffbfbf;
+  color: black;
   width: 550px;
   text-align: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -508,10 +499,11 @@ td {
 }
 
 .modal-section-content1 {
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   font-size: 16px;
   line-height: 1.5;
-  border: 1px solid black;
+  border: none;
+  font-weight: bold;
   border-radius: 5px;
   width: 100%;
   height: 50px;
@@ -521,10 +513,11 @@ td {
   margin: 10px 0;
 }
 .modal-section-content2 {
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   font-size: 16px;
   line-height: 1.5;
-  border: 1px solid black;
+  font-weight: bold;
+  border: none;
   border-radius: 5px;
   width: 100%;
   height: 200px;
@@ -535,33 +528,34 @@ td {
 }
 
 .modal-button {
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
   margin-top: 50px;
   font-weight: bold;
 }
 .modal-button-del {
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
   margin-top: 50px;
   font-weight: bold;
 }
 .modal-button-upd {
-  background-color: #ffe600;
+  background-color: #ff5b5b;
   color: black;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
   margin: 50px;
   font-weight: bold;
+}
+:is(.modal-button, .modal-button-del, .modal-button-upd):hover {
+  box-shadow: 2px 2px 2px inset black;
+  cursor: pointer;
 }
 </style>
