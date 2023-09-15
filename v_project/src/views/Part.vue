@@ -109,15 +109,23 @@ export default {
   width: 13%;
   height: 20%;
 }
+
 #part_sidebar li {
-  color: lightslategray;
   margin: 30px 0 10px 20px;
+  color: darkgray;
+}
+#part_sidebar li a:visited {
+  color: darkgray;
+}
+#part_sidebar li:first-child a:visited {
+  color: black;
 }
 #part_sidebar li:first-child {
   color: black;
   font-size: 20px;
   font-weight: bold;
 }
+
 #part_content {
   background-color: #ffbfbf;
   border-radius: 15px;

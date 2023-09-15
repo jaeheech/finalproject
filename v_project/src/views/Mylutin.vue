@@ -2,7 +2,9 @@
   <div id="mylutin_all">
     <div id="mylutin_sidebar">
       <ul>
-        <li v-for="v in sideBar" :key="v">{{ v }}</li>
+        <li v-for="item in sideBar" :key="item">
+          <a :href="getLink(item)" style="text-decoration: none">{{ item }}</a>
+        </li>
       </ul>
     </div>
     <div id="mylutin_content">
@@ -129,7 +131,13 @@ export default {
   },
   data() {
     return {
-      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판'],
+      sideBar: [
+        '부위별 운동',
+        '나만의 루틴',
+        '운동자세 교정',
+        '집근처 헬스장',
+        '자유게시판'
+      ],
       user: null,
       showInputs: false,
       routineData: {
@@ -161,6 +169,22 @@ export default {
     console.log(this.fetchRoutines)
   },
   methods: {
+    getLink(item) {
+      switch (item) {
+        case '부위별 운동':
+          return 'http://localhost:3000/part'
+        case '나만의 루틴':
+          return 'http://localhost:3000/mylutin'
+        case '운동자세 교정':
+          return 'http://localhost:3000/fixed'
+        case '집근처 헬스장':
+          return 'http://localhost:3000/neargym'
+        case '자유게시판':
+          return 'http://localhost:3000/Board'
+        default:
+          return ''
+      }
+    },
     async fetchUserInfo(username) {
       try {
         // 서버에 사용자 정보를 요청
@@ -365,21 +389,29 @@ export default {
 }
 #mylutin_sidebar {
   background-color: #ffbfbf;
+  border-radius: 15px;
   margin: 30px 0 0 30px;
   width: 13%;
-  height: 20%;
+  height: 23%;
 }
 #mylutin_sidebar li {
-  color: lightslategray;
+  color: darkgray;
   margin: 30px 0 10px 20px;
+}
+#mylutin_sidebar li a:visited {
+  color: darkgray;
 }
 #mylutin_sidebar li:nth-child(2) {
   color: black;
   font-size: 20px;
   font-weight: bold;
 }
+#mylutin_sidebar li:nth-child(2) a:visited {
+  color: black;
+}
 #mylutin_content {
   background-color: #ffbfbf;
+  border-radius: 15px;
   margin: 30px;
   width: 85%;
   height: auto;

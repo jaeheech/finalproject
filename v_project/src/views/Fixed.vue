@@ -246,13 +246,19 @@ export default {
   height: 20%;
 }
 #fixed_sidebar li {
-  color: lightslategray;
+  color: darkgray;
   margin: 30px 0 10px 20px;
+}
+#fixed_sidebar li a:visited {
+  color: darkgray;
 }
 #fixed_sidebar li:nth-child(2) {
   color: black;
   font-size: 20px;
   font-weight: bold;
+}
+#fixed_sidebar li:nth-child(2) a:visited {
+  color: black;
 }
 #fixed_content {
   background-color: #ffbfbf;

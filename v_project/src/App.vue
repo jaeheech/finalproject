@@ -4,12 +4,14 @@
     <header style="margin: 20px 0">
       <!-- <a href="https://www.bvbonlineshop.com/">
         <img
-          src="../public/도르트문트.jpg"
+          src="../public/뚱이.jpg"
           alt="logo_01"
           style="width: 100px; position: absolute; left: 0"
         />
       </a> -->
-      <img src="../public/logo_pink.jpg" alt="logo_pink" />
+      <a href="http://localhost:3000/"
+        ><img src="../public/logo_pink.jpg" alt="logo_pink"
+      /></a>
       <!-- <img src="../public/logo.jpg" alt="logo_black" /> -->
       <div class="header-right-links">
         <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시-->

@@ -166,13 +166,19 @@ export default {
   height: 20%;
 }
 #neargym_sidebar li {
-  color: lightslategray;
+  color: darkgray;
   margin: 30px 0 10px 20px;
+}
+#neargym_sidebar li a:visited {
+  color: darkgray;
 }
 #neargym_sidebar li:nth-child(3) {
   color: black;
   font-size: 20px;
   font-weight: bold;
+}
+#neargym_sidebar li:nth-child(3) a:visited {
+  color: black;
 }
 #neargym_content {
   background-color: #ffbfbf;

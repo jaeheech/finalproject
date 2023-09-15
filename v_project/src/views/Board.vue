@@ -150,7 +150,7 @@ export default {
       selectedPostTitle: '',
       selectedPostContent: '',
       currentPage: 1, // 현재 페이지 번호
-      itemsPerPage: 40, // 페이지당 아이템 수를 50으로 설정
+      itemsPerPage: 20, // 페이지당 아이템 수를 50으로 설정
       totalPages: 0 // 총 페이지 수
     }
   },
@@ -374,13 +374,19 @@ img {
   height: 20%;
 }
 li {
-  color: lightslategray;
+  color: darkgray;
   margin: 30px 0 10px 20px;
+}
+li a:visited {
+  color: darkgray;
 }
 li:nth-child(4) {
   color: black;
   font-weight: bold;
   font-size: 20px;
+}
+li:nth-child(4) a:visited {
+  color: black;
 }
 #main {
   background-color: #ffbfbf;
@@ -396,27 +402,27 @@ li:nth-child(4) {
 }
 table {
   border-collapse: collapse;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   background-color: #ff5b5b;
   margin-left: 2.2%;
   width: 95%;
   height: 100%;
 }
-:is(tr, th, td):nth-child(1) {
-  border: none;
-}
-:is(tr, th, td):nth-child(5) {
-  border-right: none;
-}
 tr,
 th,
 td {
+  background-color: #ffe4e4;
   font-size: 15px;
   color: white;
-  border-left: 3px solid white;
-  border-right: 3px solid white;
+  border: 3px solid white;
   text-align: center;
   padding: 5px;
+}
+th {
+  background-color: #ff5b5b;
+}
+td {
+  color: black;
 }
 #prev {
   width: 60px;
