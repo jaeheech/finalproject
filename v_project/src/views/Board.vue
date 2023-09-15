@@ -68,7 +68,16 @@
             <td>
               {{ post.no }}
             </td>
-            <td>{{ post.title }}</td>
+            <td
+              style="
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 75px;
+              "
+            >
+              {{ post.title }}
+            </td>
             <td>{{ post.author }}</td>
             <td>{{ formatDateTime(post.date) }}</td>
             <td>{{ post.count }}</td>
