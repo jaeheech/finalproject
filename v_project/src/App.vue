@@ -2,18 +2,18 @@
   <div id="app">
     <!-- ... 헤더 및 기타 내용 ... -->
     <header style="margin: 20px 0">
-      <a href="https://www.bvbonlineshop.com/">
+      <!-- <a href="https://www.bvbonlineshop.com/">
         <img
           src="../public/도르트문트.jpg"
           alt="logo_01"
           style="width: 100px; position: absolute; left: 0"
         />
-      </a>
-      <img src="../public/logo_ver2.png" alt="logo_02" />
+      </a> -->
+      <img src="../public/logo.jpg" alt="logo" />
       <div class="header-right-links">
         <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시-->
         <router-link
-          style="color: #ffe600; font-weight: bold"
+          style="color: black; font-weight: bold; text-decoration: none"
           v-if="loggedIn"
           to="/"
           @click="logout"
@@ -22,7 +22,7 @@
         <router-link
           v-else
           to="/Login"
-          style="color: #ffe600; font-weight: bold"
+          style="color: black; font-weight: bold; text-decoration: none"
           >로그인</router-link
         >
       </div>
@@ -148,7 +148,7 @@ html {
   padding: 0;
   width: 100%;
   height: 2000px;
-  background-color: black;
+  background-color: white;
   display: flex;
   flex-direction: column;
 }
@@ -172,23 +172,11 @@ header {
   align-items: center;
 }
 
-.header-link {
-  margin-left: 10px;
-  color: #2c3e50; /* 링크 색상 설정 */
-  font-weight: bold; /* 링크 글꼴 굵기 설정 */
-  text-decoration: none; /* 밑줄 제거 */
-  transition: color 0.3s; /* 색상 변화에 애니메이션 효과 추가 */
-}
-/* 링크에 마우스 호버 시 색상 변화 */
-/* .header-link:hover {
-  color: #3498db;
-} */
-
 nav {
   display: flex;
-  font-size: 20px;
+  font-size: 25px;
   color: black;
-  background-color: #ffe600;
+  background-color: #ffe4e4;
 }
 
 nav a {
@@ -203,21 +191,21 @@ nav a {
 }
 
 nav a.router-link-active {
-  background-color: black;
-  color: #ffe600;
+  background-color: #ffbfbf;
+  color: white;
   text-decoration: none;
 }
 
 footer {
-  border-top: 3px solid #ffe600;
-  background-color: black;
+  border-top: 3px solid #ff5b5b;
+  background-color: white;
   padding: 10px 0;
   text-align: center;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 400px;
-  color: white;
+  color: black;
 }
 
 #footer_up {
@@ -247,7 +235,17 @@ footer {
   display: flex;
   justify-content: space-around;
 }
-
+:is(
+    #Adv_box_01,
+    #Adv_box_02,
+    #Adv_box_03,
+    #Adv_box_04,
+    #Adv_box_05,
+    #Adv_box_06
+  ) {
+  border: 2px solid #ff5b5b;
+  margin: 10px 5px 0 0;
+}
 :is(
     #Adv_box_01,
     #Adv_box_02,
@@ -259,6 +257,5 @@ footer {
   img {
   width: 350px;
   height: 70px;
-  margin: 5px;
 }
 </style>

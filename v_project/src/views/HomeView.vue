@@ -4,7 +4,7 @@
     <div
       @click="showModal = true"
       id="chat_bot"
-      style="width: 85px; height: 85px; position: fixed; top: 90%; left: 94%"
+      style="width: 95px; height: 95px; position: fixed; top: 89%; left: 94%"
     >
       <img
         src="../../public/chatbot.png"
@@ -31,15 +31,7 @@
 
     <!-- 사진, 명언집, 노래 or 게시글들 -->
     <div id="main_row_01">
-      <div
-        class="left"
-        style="
-          width: 680px;
-          height: 350px;
-          margin-left: 80px;
-          border: 5px solid #ffe600;
-        "
-      >
+      <div class="left" style="width: 680px; height: 350px; margin-left: 80px">
         <!-- 사진들 오토레이어 -->
         <div id="row_01_imgs" class="slick-slider" ref="slickSliderHealth">
           <div
@@ -48,7 +40,7 @@
             :key="index"
             class="slick-slide"
           >
-            <img :src="healthimg.image" />
+            <img :src="healthimg.image" style="border-radius: 10px" />
           </div>
         </div>
       </div>
@@ -61,7 +53,7 @@
             height: 90px;
             margin-bottom: 20px;
             border-radius: 10px;
-            background-color: #ffe600;
+            background-color: #ffe4e4;
             padding-top: 15px;
             padding-left: 20px;
           "
@@ -84,8 +76,8 @@
           id="row_01_content_02"
           style="
             width: 730px;
-            height: 220px;
-            background-color: #ffe600;
+            height: 210px;
+            background-color: #ffe4e4;
             border-radius: 10px;
             padding-top: 15px;
             padding-left: 20px;
@@ -110,33 +102,93 @@
     <p
       style="
         font-weight: bold;
-        color: white;
+        color: black;
         letter-spacing: 1px;
         margin: 80px 0 0 80px;
       "
     >
       〈오늘의 건강 뉴스〉
     </p>
-    <div>
-      <div
-        v-for="(article, index) in articles"
-        :key="index"
-        class="article"
-        style="margin: 0 0 20px 80px"
-      >
-        <a
-          :href="article.articleLink"
-          target="_blank"
-          style="text-decoration-line: none; color: white"
-        >
-          <h1>{{ article.title }}</h1>
-          <div class="news_low1_content" style="display: flex">
-            <img :src="article.imageUrl" alt="...로딩중" style="width: 300px" />
-            <p style="margin-left: 20px; font-size: 18px; width: 72%">
-              {{ article.summary }}
-            </p>
-          </div>
-        </a>
+    <div id="main_row_02_news">
+      <div id="main_row_02_left">
+        <div>
+          <a
+            :href="articles[0].articleLink"
+            target="_blank"
+            style="text-decoration-line: none; color: black"
+          >
+            <h1>{{ articles[0].title }}</h1>
+            <div class="news_low1_content" style="display: flex">
+              <img
+                :src="articles[0].imageUrl"
+                alt="...로딩중"
+                style="width: 300px"
+              />
+              <p style="margin-left: 20px; font-size: 18px; width: 72%">
+                {{ articles[0].summary }}
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div id="main_row_02_right">
+        <div>
+          <a
+            :href="articles[1].articleLink"
+            target="_blank"
+            style="text-decoration-line: none; color: black"
+          >
+            <h1>{{ articles[1].title }}</h1>
+            <div class="news_low1_content" style="display: flex">
+              <img
+                :src="articles[1].imageUrl"
+                alt="...로딩중"
+                style="width: 300px"
+              />
+              <p style="margin-left: 20px; font-size: 18px; width: 72%">
+                {{ articles[1].summary }}
+              </p>
+            </div>
+          </a>
+        </div>
+        <div>
+          <a
+            :href="articles[2].articleLink"
+            target="_blank"
+            style="text-decoration-line: none; color: black"
+          >
+            <h1>{{ articles[2].title }}</h1>
+            <div class="news_low1_content" style="display: flex">
+              <img
+                :src="articles[2].imageUrl"
+                alt="...로딩중"
+                style="width: 300px"
+              />
+              <p style="margin-left: 20px; font-size: 18px; width: 72%">
+                {{ articles[2].summary }}
+              </p>
+            </div>
+          </a>
+        </div>
+        <div>
+          <a
+            :href="articles[3].articleLink"
+            target="_blank"
+            style="text-decoration-line: none; color: black"
+          >
+            <h1>{{ articles[3].title }}</h1>
+            <div class="news_low1_content" style="display: flex">
+              <img
+                :src="articles[3].imageUrl"
+                alt="...로딩중"
+                style="width: 300px"
+              />
+              <p style="margin-left: 20px; font-size: 18px; width: 72%">
+                {{ articles[3].summary }}
+              </p>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -146,7 +198,7 @@
     <p
       style="
         font-weight: bold;
-        color: white;
+        color: black;
         letter-spacing: 1px;
         margin: 80px 0 0 80px;
       "
@@ -290,7 +342,7 @@ export default {
 <style scoped>
 #Homeview {
   height: 100%;
-  background-color: black;
+  background-color: white;
 }
 
 /* chat_bot */
@@ -314,25 +366,9 @@ export default {
 }
 
 /* main_row_02 */
-#main_row_02 {
+#main_row_02_news {
   display: flex;
-  margin-top: 50px;
-  margin-left: 80px;
 }
-.article a :is(h1, p):hover {
-  color: #ffe600;
-}
-#main_row_02 .left {
-  display: flex;
-  color: white;
-}
-#main_row_02 .right span {
-  color: white;
-}
-:is(#right_row_01, #right_row_02) {
-  margin-bottom: 5px;
-}
-
 /* main_row_03 */
 #contents {
   margin: 0 0 0 80px;
@@ -352,7 +388,7 @@ export default {
   width: 210px;
 }
 #contents div {
-  color: white;
+  color: black;
   font-weight: bold;
 }
 #modal {
@@ -368,41 +404,50 @@ export default {
   z-index: 10;
 }
 #modal_content {
-  border: 3px solid #ffe600;
   width: 500px;
   height: 500px;
-  background-color: black;
+  background-color: #ffbfbf;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  color: #ffe600;
+  color: black;
+  font-weight: bold;
+}
+:is(#modal_click, #modal_end):hover {
+  box-shadow: inset 2px 2px 2px black;
 }
 #modal_click {
-  position: absolute;
-  bottom: 2%;
-  left: 12.5%;
-  background-color: #ffe600;
+  width: 15%;
+  height: 6%;
+  text-align: center;
+  margin: 1.5% 5% 0 9.5%;
+  background-color: #ff5b5b;
+  border: 1px solid white;
+  border-radius: 5px;
   font-weight: bold;
 }
 #modal_end {
-  position: absolute;
-  bottom: 2%;
-  left: 25%;
-  background-color: #ffe600;
+  width: 15%;
+  height: 6%;
+  text-align: center;
   font-weight: bold;
+  margin: 1.5% 0 0 1%;
+  background-color: white;
+  border: 1px solid #ff5b5b;
+  border-radius: 5px;
 }
 #question {
   width: 50%;
   height: 5%;
   margin: 10px;
-  background-color: #ffe600;
+  background-color: white;
 }
 #response {
   width: 80%;
   height: 60%;
   margin: -35px 0 0 47px;
-  background-color: #ffe600;
+  background-color: white;
 }
 .left img {
   width: '400px';
