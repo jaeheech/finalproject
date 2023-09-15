@@ -12,7 +12,7 @@
 
     <!-- 우측 content 파트 -->
     <div id="part_content">
-      <div id="part_content_title" style="border-bottom: 4px solid black">
+      <div id="part_content_title" style="border-bottom: 4px solid white">
         <h1 style="text-align: center; letter-spacing: 2px">부위별 운동</h1>
       </div>
       <!-- selection 파트 -->
@@ -97,13 +97,13 @@ export default {
 <style scoped>
 #part_all {
   display: flex;
-  background-color: black;
+  background-color: white;
   margin: 0;
   width: 100%;
   height: 100%;
 }
 #part_sidebar {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
@@ -118,7 +118,7 @@ export default {
   font-weight: bold;
 }
 #part_content {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px;
   width: 85%;
   height: 92%;
@@ -136,7 +136,7 @@ export default {
   flex-wrap: wrap;
 }
 #GEcard {
-  background-color: black;
+  background-color: #ffe4e4;
   width: 230px;
   height: 270px;
   margin: 0 20px 20px 0;
@@ -152,7 +152,7 @@ export default {
 }
 #GEcard p {
   text-align: left;
-  color: white;
+  color: black;
   font-weight: bold;
   font-size: 15px;
   margin-left: 15px;

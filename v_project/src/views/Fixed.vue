@@ -8,7 +8,7 @@
       </ul>
     </div>
     <div id="fixed_content">
-      <div id="fixed_content_title" style="border-bottom: 4px solid black">
+      <div id="fixed_content_title" style="border-bottom: 4px solid white">
         <h1 style="text-align: center; letter-spacing: 2px">운동자세 교정</h1>
       </div>
       <select
@@ -19,8 +19,8 @@
           height: 35px;
           border-radius: 10px;
           margin: 5% 0 0 30%;
-          background-color: black;
-          color: #ffe600;
+          background-color: #ffe4e4;
+          color: #ff5b5b;
           font-weight: bold;
           letter-spacing: 1px;
           text-align: center;
@@ -47,8 +47,8 @@
         <div
           id="result_label"
           style="
-            background-color: black;
-            color: #ffe600;
+            background-color: #ffe4e4;
+            color: black;
             display: inline-block;
             letter-spacing: 2px;
             font-size: 18px;
@@ -232,13 +232,13 @@ export default {
 <style scoped>
 #fixed_all {
   display: flex;
-  background-color: black;
+  background-color: white;
   margin: 0;
   width: 100%;
   height: 100%;
 }
 #fixed_sidebar {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
@@ -253,15 +253,15 @@ export default {
   font-weight: bold;
 }
 #fixed_content {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px;
   width: 85%;
   height: 92%;
 }
 #expose option {
   text-align: center;
-  background-color: black;
-  color: #ffe600;
+  background-color: #ffe4e4;
+  color: #ff5b5b;
 }
 #fixed_content_cam {
   width: 80%;
@@ -274,14 +274,14 @@ export default {
   height: 90%;
 }
 #warning_point {
-  background-color: black;
+  background-color: #ffe4e4;
   display: inline-block;
   margin: 6% 0 0 18%;
   padding: 10px 20px;
 }
 #warning_point h2,
 h4 {
-  color: #ffe600;
+  color: black;
 }
 #warning_point h4 {
   margin-left: 15px;
