@@ -104,6 +104,7 @@ export default {
 }
 #part_sidebar {
   background-color: #ffbfbf;
+  border-radius: 15px;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
@@ -119,6 +120,7 @@ export default {
 }
 #part_content {
   background-color: #ffbfbf;
+  border-radius: 15px;
   margin: 30px;
   width: 85%;
   height: 92%;
