@@ -179,7 +179,7 @@ export default {
         // 로그인 성공 메시지를 표시
         const message = `${this.username}님 로그인 성공하셨습니다.`
         alert(message)
-        // 로그인 실패 처리
+        // 로그인 실패 처리〈오늘의 핫딜 상품들〉
       } catch (error) {
         console.error('로그인 실패:', error)
       }
@@ -266,10 +266,6 @@ export default {
   margin-top: 10px;
 }
 
-.naver-button img {
-  max-width: 100%;
-  height: auto;
-}
 #username {
   margin-left: 50px;
 }
@@ -278,7 +274,7 @@ span {
 }
 #id_span {
   padding-left: 10px;
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   padding: 20px;
   border-radius: 10px;
 }
@@ -297,12 +293,11 @@ span {
 
 .modal-content {
   width: 500px;
-  background-color: black;
+  background-color: #ffbfbf;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  border: 3px solid #ffe600;
 }
 .signup-modal {
   z-index: 20; /* 회원가입 모달이 로그인 모달 위에 보이도록 */
@@ -328,9 +323,6 @@ span {
   border: none;
   font-size: 20px;
   cursor: pointer;
-  background-color: #ffe600;
-  height: 40px;
-  width: 40px;
 }
 
 form {
@@ -340,7 +332,7 @@ form {
 }
 
 input {
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   width: 80%;
   border: none;
   text-align: center;
@@ -348,7 +340,7 @@ input {
 }
 
 button {
-  background-color: #ffe600;
+  background-color: #ffe4e4;
   color: black;
   font-weight: bolder;
   border: none;

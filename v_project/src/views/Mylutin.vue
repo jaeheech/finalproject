@@ -2,9 +2,7 @@
   <div id="mylutin_all">
     <div id="mylutin_sidebar">
       <ul>
-        <li v-for="item in sideBar" :key="item">
-          <a :href="getLink(item)" style="text-decoration: none">{{ item }}</a>
-        </li>
+        <li v-for="v in sideBar" :key="v">{{ v }}</li>
       </ul>
     </div>
     <div id="mylutin_content">
@@ -66,14 +64,7 @@
               {{ day }}요일 루틴:
               <span v-for="(routine, index) in routines" :key="index">
                 {{ index + 1 }}. {{ routine.exercises.join(', ') }}
-                <button
-                  @click="editRoutine(routine)"
-                  style="
-                    background: #ffe600;
-                    font-weight: bold;
-                    margin: 0px 30px 0px 10px;
-                  "
-                >
+                <button @click="editRoutine(routine)" class="edit_button">
                   수정
                 </button>
               </span>
@@ -122,11 +113,9 @@
           v-model="editedExercise"
           placeholder="수정할 내용 입력"
         />
-        <div id="button_content">
-          <button @click="saveEditedRoutine">저장</button>
-          <button @click="deleteRoutine">삭제</button>
-          <button @click="closeModal">취소</button>
-        </div>
+        <button @click="saveEditedRoutine" class="edit_button">저장</button>
+        <button @click="deleteRoutine" class="edit_button">삭제</button>
+        <button @click="closeModal" class="edit_button">취소</button>
       </div>
     </div>
   </div>
@@ -140,13 +129,7 @@ export default {
   },
   data() {
     return {
-      sideBar: [
-        '부위별 운동',
-        '나만의 루틴',
-        '운동자세 교정',
-        '집근처 헬스장',
-        '자유게시판'
-      ],
+      sideBar: ['부위별 운동', '나만의 루틴', '집근처 헬스장', '자유게시판'],
       user: null,
       showInputs: false,
       routineData: {
@@ -355,57 +338,33 @@ export default {
           (routine) => routine._id !== routineId
         )
       }
-    },
-    getLink(item) {
-      switch (item) {
-        case '부위별 운동':
-          return 'http://localhost:3000/part'
-        case '나만의 루틴':
-          return 'http://localhost:3000/mylutin'
-        case '운동자세 교정':
-          return 'http://localhost:3000/fixed'
-        case '집근처 헬스장':
-          return 'http://localhost:3000/neargym'
-        case '자유게시판':
-          return 'http://localhost:3000/Board'
-        default:
-          return ''
-      }
     }
   }
 }
 </script>
 <style scoped>
+.edit_button {
+  background-color: #ffbfbf;
+}
 .modal {
   /* 모달을 화면 중앙에 표시하기 위한 스타일 */
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: black;
-  color: #ffe600;
+  background-color: white;
   padding: 20px;
   z-index: 9999;
-  border: 3px solid #ffe600;
-}
-#button_content {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-#button_content button {
-  background-color: #ffe600;
-  font-weight: bold;
 }
 #mylutin_all {
   display: flex;
-  background-color: black;
+  background-color: white;
   margin: 0;
   width: 100%;
   height: 100%;
 }
 #mylutin_sidebar {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
@@ -420,7 +379,7 @@ export default {
   font-weight: bold;
 }
 #mylutin_content {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px;
   width: 85%;
   height: auto;
@@ -439,8 +398,8 @@ export default {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: black;
-  color: #ffe600;
+  background-color: #ffe4e4;
+  color: black;
   margin-right: 5px;
   cursor: pointer;
 }
@@ -471,9 +430,8 @@ export default {
   font-size: 24px;
   padding: 9px;
   width: 50%;
-  background-color: #ffe600;
-  margin-left: 40px;
-  margin-right: 50px;
+  background-color: #ffbfbf;
+  margin-left: auto;
 }
 
 .youtube {
@@ -499,11 +457,11 @@ export default {
   height: 40px;
   font-size: 18px;
   letter-spacing: 3px;
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 230, 0);
+  background-color: #ff5b5b;
+  color: black;
   border-radius: 10px;
   margin-left: auto;
-  margin-right: 30px;
+  margin-right: 10px;
 }
 .cancel-button {
   margin-top: 10px;
@@ -511,11 +469,14 @@ export default {
   height: 40px;
   font-size: 18px;
   letter-spacing: 3px;
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 230, 0);
+  background-color: #ffe4e4;
+  color: black;
   border-radius: 10px;
   margin-left: auto;
   margin-right: 10px;
+}
+.routine_button {
+  display: flex;
 }
 .routine-list ul {
   list-style: none;
@@ -527,13 +488,11 @@ export default {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: black; /* Alternate background colors */
-  color: #ffe600;
+  background-color: #ffe4e4; /* Alternate background colors */
 }
 
 .routine-list li:nth-child(even) {
-  background-color: #6d6c6c; /* Alternate background colors */
-  color: #ffe600;
+  background-color: lavenderblush; /* Alternate background colors */
 }
 
 .routine-list p {
