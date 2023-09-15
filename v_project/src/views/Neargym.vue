@@ -8,7 +8,7 @@
       </ul>
     </div>
     <div id="neargym_content">
-      <div id="neargym_content_title" style="border-bottom: 4px solid black">
+      <div id="neargym_content_title" style="border-bottom: 4px solid white">
         <h1 style="text-align: center; letter-spacing: 2px">집근처 헬스장</h1>
       </div>
       <p
@@ -30,8 +30,8 @@
           height: 35px;
           border-radius: 10px;
           margin: 0 0 5% 32%;
-          background-color: black;
-          color: #ffe600;
+          background-color: #ffe4e4;
+          color: #ff5b5b;
           font-weight: bold;
           letter-spacing: 1px;
         "
@@ -152,13 +152,13 @@ export default {
 <style scoped>
 #neargym_all {
   display: flex;
-  background-color: black;
+  background-color: white;
   margin: 0;
   width: 100%;
   height: 100%;
 }
 #neargym_sidebar {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
@@ -173,7 +173,7 @@ export default {
   font-weight: bold;
 }
 #neargym_content {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px;
   width: 85%;
   height: 92%;
@@ -184,8 +184,8 @@ export default {
 }
 #neargym_content select option {
   text-align: center;
-  background-color: black;
-  color: #ffe600;
+  background-color: #ffe4e4;
+  color: #ff5b5b;
 }
 .map-container {
   width: 1000px;
