@@ -66,7 +66,11 @@
               {{ day }}요일 루틴:
               <span v-for="(routine, index) in routines" :key="index">
                 {{ index + 1 }}. {{ routine.exercises.join(', ') }}
-                <button @click="editRoutine(routine)" class="edit_button">
+                <button
+                  @click="editRoutine(routine)"
+                  class="edit_button"
+                  style="margin-right: 30px"
+                >
                   수정
                 </button>
               </span>
