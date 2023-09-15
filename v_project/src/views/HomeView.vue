@@ -101,34 +101,39 @@
     <!-- 오늘의 건강뉴스 -->
     <p
       style="
+        font-size: 25px;
         font-weight: bold;
         color: black;
         letter-spacing: 1px;
-        margin: 80px 0 0 80px;
+        margin: 80px 0 35px 80px;
       "
     >
-      〈오늘의 건강 뉴스〉
+      📰 오늘의 건강 뉴스
     </p>
     <div>
       <div
         v-for="(article, index) in articles"
         :key="index"
         class="article"
-        style="margin: 0 0 20px 80px"
+        style="margin: 0 0 20px 80px; padding-bottom: 5px"
       >
         <a
           :href="article.articleLink"
           target="_blank"
           style="text-decoration-line: none; color: black"
         >
-          <h1>{{ article.title }}</h1>
+          <div id="article_title">{{ article.title }}</div>
           <div class="news_low1_content" style="display: flex">
             <img :src="article.imageUrl" alt="...로딩중" style="width: 300px" />
-            <p style="margin-left: 20px; font-size: 18px; width: 72%">
-              {{ article.summary }}
+            <p
+              id="article_summary"
+              style="margin-left: 20px; font-size: 18px; width: 72%"
+            >
+              {{ article.summary + '...' }}
             </p>
           </div>
         </a>
+        <hr style="width: 93.5%; margin: 2% 0 0 0; border-color: darkgray" />
       </div>
     </div>
 
@@ -137,13 +142,14 @@
     <!-- 오늘의 핫딜 상품들 -->
     <p
       style="
+        font-size: 25px;
         font-weight: bold;
         color: black;
         letter-spacing: 1px;
-        margin: 80px 0 0 80px;
+        margin: 80px 0 20px 80px;
       "
     >
-      〈오늘의 핫딜 상품들〉
+      🎉 오늘의 핫딜 상품들
     </p>
     <div id="main_row_03">
       <div id="contents">
@@ -306,23 +312,19 @@ export default {
 }
 
 /* main_row_02 */
-#main_row_02 {
+/* #main_row_02 {
   display: flex;
   margin-top: 50px;
   margin-left: 80px;
+} */
+.article #article_title {
+  font-size: 20px;
 }
-.article a :is(h1, p):hover {
+.article #article_summary {
+  font-size: 15px;
+}
+.article a :is(#article_title, #article_summary):hover {
   color: #ff5b5b;
-}
-#main_row_02 .left {
-  display: flex;
-  color: black;
-}
-#main_row_02 .right span {
-  color: black;
-}
-:is(#right_row_01, #right_row_02) {
-  margin-bottom: 5px;
 }
 
 /* main_row_03 */
