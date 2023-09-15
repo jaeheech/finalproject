@@ -109,86 +109,26 @@
     >
       〈오늘의 건강 뉴스〉
     </p>
-    <div id="main_row_02_news">
-      <div id="main_row_02_left">
-        <div>
-          <a
-            :href="articles[0].articleLink"
-            target="_blank"
-            style="text-decoration-line: none; color: black"
-          >
-            <h1>{{ articles[0].title }}</h1>
-            <div class="news_low1_content" style="display: flex">
-              <img
-                :src="articles[0].imageUrl"
-                alt="...로딩중"
-                style="width: 300px"
-              />
-              <p style="margin-left: 20px; font-size: 18px; width: 72%">
-                {{ articles[0].summary }}
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div id="main_row_02_right">
-        <div>
-          <a
-            :href="articles[1].articleLink"
-            target="_blank"
-            style="text-decoration-line: none; color: black"
-          >
-            <h1>{{ articles[1].title }}</h1>
-            <div class="news_low1_content" style="display: flex">
-              <img
-                :src="articles[1].imageUrl"
-                alt="...로딩중"
-                style="width: 300px"
-              />
-              <p style="margin-left: 20px; font-size: 18px; width: 72%">
-                {{ articles[1].summary }}
-              </p>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a
-            :href="articles[2].articleLink"
-            target="_blank"
-            style="text-decoration-line: none; color: black"
-          >
-            <h1>{{ articles[2].title }}</h1>
-            <div class="news_low1_content" style="display: flex">
-              <img
-                :src="articles[2].imageUrl"
-                alt="...로딩중"
-                style="width: 300px"
-              />
-              <p style="margin-left: 20px; font-size: 18px; width: 72%">
-                {{ articles[2].summary }}
-              </p>
-            </div>
-          </a>
-        </div>
-        <div>
-          <a
-            :href="articles[3].articleLink"
-            target="_blank"
-            style="text-decoration-line: none; color: black"
-          >
-            <h1>{{ articles[3].title }}</h1>
-            <div class="news_low1_content" style="display: flex">
-              <img
-                :src="articles[3].imageUrl"
-                alt="...로딩중"
-                style="width: 300px"
-              />
-              <p style="margin-left: 20px; font-size: 18px; width: 72%">
-                {{ articles[3].summary }}
-              </p>
-            </div>
-          </a>
-        </div>
+    <div>
+      <div
+        v-for="(article, index) in articles"
+        :key="index"
+        class="article"
+        style="margin: 0 0 20px 80px"
+      >
+        <a
+          :href="article.articleLink"
+          target="_blank"
+          style="text-decoration-line: none; color: black"
+        >
+          <h1>{{ article.title }}</h1>
+          <div class="news_low1_content" style="display: flex">
+            <img :src="article.imageUrl" alt="...로딩중" style="width: 300px" />
+            <p style="margin-left: 20px; font-size: 18px; width: 72%">
+              {{ article.summary }}
+            </p>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -366,9 +306,25 @@ export default {
 }
 
 /* main_row_02 */
-#main_row_02_news {
+#main_row_02 {
   display: flex;
+  margin-top: 50px;
+  margin-left: 80px;
 }
+.article a :is(h1, p):hover {
+  color: #ff5b5b;
+}
+#main_row_02 .left {
+  display: flex;
+  color: black;
+}
+#main_row_02 .right span {
+  color: black;
+}
+:is(#right_row_01, #right_row_02) {
+  margin-bottom: 5px;
+}
+
 /* main_row_03 */
 #contents {
   margin: 0 0 0 80px;
