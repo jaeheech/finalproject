@@ -88,11 +88,15 @@
       <button id="in" @click="showModal = true">등록</button>
       <div id="pagination">
         <!-- 페이지 네비게이션 -->
-        <button @click="changePage(-1)" :disabled="currentPage === 1">
+        <button id="prev" @click="changePage(-1)" :disabled="currentPage === 1">
           이전
         </button>
         <span>페이지 {{ currentPage }} / {{ totalPages }}</span>
-        <button @click="changePage(1)" :disabled="currentPage === totalPages">
+        <button
+          id="next"
+          @click="changePage(1)"
+          :disabled="currentPage === totalPages"
+        >
           다음
         </button>
       </div>
@@ -359,11 +363,11 @@ img {
 }
 #container {
   height: 100%;
-  background-color: black;
+  background-color: white;
   display: flex;
 }
 #side_bar {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px 0 0 30px;
   width: 13%;
   height: 20%;
@@ -378,13 +382,13 @@ li:nth-child(4) {
   font-size: 20px;
 }
 #main {
-  background-color: #ffe600;
+  background-color: #ffbfbf;
   margin: 30px;
   width: 85%;
   height: 92%;
 }
 #board {
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid white;
   margin-bottom: 40px;
   color: #000;
 }
@@ -400,15 +404,42 @@ td {
   border: 3px solid black;
   text-align: center;
 }
+#prev {
+  width: 60px;
+  height: 30px;
+  text-align: center;
+  margin: 0 10px 0 0;
+  background-color: #ff5b5b;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+#next {
+  width: 60px;
+  border: none;
+  height: 30px;
+  text-align: center;
+  margin: 0 0 0 10px;
+  background-color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #ff5b5b;
+}
 #in {
   margin-top: 10px;
   width: 100px;
   height: 40px;
   font-size: 18px;
   letter-spacing: 3px;
-  border-radius: 10px;
-  background-color: black;
-  color: #ffe600;
+  border: none;
+  border-radius: 15px;
+  background-color: #ff5b5b;
+  color: white;
+}
+:is(#in, #next, #prev):hover {
+  box-shadow: 2px 2px 2px inset black;
+  cursor: pointer;
 }
 #pagination {
   margin-top: 10px;
