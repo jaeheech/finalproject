@@ -9,7 +9,8 @@
           style="width: 100px; position: absolute; left: 0"
         />
       </a> -->
-      <img src="../public/logo.jpg" alt="logo" />
+      <img src="../public/logo_pink.jpg" alt="logo_pink" />
+      <!-- <img src="../public/logo.jpg" alt="logo_black" /> -->
       <div class="header-right-links">
         <!-- 로그인 상태에 따라 로그인 또는 로그아웃 버튼을 표시-->
         <router-link
